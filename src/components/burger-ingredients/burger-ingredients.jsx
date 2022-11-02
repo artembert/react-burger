@@ -4,7 +4,7 @@ import { BurgerParts } from "../../types/burger-parts";
 // import styles from './burger-ingredients.module.css';
 
 export const BurgerIngredients = (props) => {
-  const [current, setCurrent] = React.useState(BurgerParts.BAN);
+  const [current, setCurrent] = React.useState(BurgerParts.BUN);
   return (
     <section>
       <BurgerIngredientsNavigation current={current} onChange={setCurrent} />

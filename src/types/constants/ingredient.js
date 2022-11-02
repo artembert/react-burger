@@ -4,7 +4,7 @@ import { BurgerParts } from "../burger-parts";
 export const ingredientType = shape({
   _id: string.isRequired,
   name: string.isRequired,
-  type: oneOf([BurgerParts.MAIN, BurgerParts.SAUCE, BurgerParts.BAN]),
+  type: oneOf([BurgerParts.MAIN, BurgerParts.SAUCE, BurgerParts.BUN]),
   proteins: number.isRequired,
   fat: number.isRequired,
   carbohydrates: number.isRequired,

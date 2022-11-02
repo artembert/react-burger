@@ -1,5 +1,5 @@
 export const BurgerParts = {
-  BAN: "ban",
+  BUN: "bun",
   SAUCE: "sauce",
   MAIN: "main",
 };

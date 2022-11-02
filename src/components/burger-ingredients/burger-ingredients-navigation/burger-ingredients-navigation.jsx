@@ -7,7 +7,7 @@ export const BurgerIngredientsNavigation = (props) => {
   const { current, onChange } = props;
   return (
     <div style={{ display: "flex" }}>
-      <Tab value={BurgerParts.BAN} active={current === BurgerParts.BAN} onClick={onChange}>
+      <Tab value={BurgerParts.BUN} active={current === BurgerParts.BUN} onClick={onChange}>
         Булки
       </Tab>
       <Tab value={BurgerParts.SAUCE} active={current === BurgerParts.SAUCE} onClick={onChange}>
