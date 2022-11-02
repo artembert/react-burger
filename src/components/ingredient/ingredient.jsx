@@ -1,10 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./ingredient.module.css";
 import { ingredientType } from "../../types/constants/ingredient";
 
-export const Ingredient = (props) => {
+const Component = (props) => {
   const { ingredient, amount } = props;
   const { name, price, image } = ingredient;
   return (
@@ -26,7 +26,9 @@ export const Ingredient = (props) => {
   );
 };
 
-Ingredient.propTypes = {
+Component.propTypes = {
   ingredient: ingredientType.isRequired,
   amount: PropTypes.number,
 };
+
+export const Ingredient = memo(Component);
