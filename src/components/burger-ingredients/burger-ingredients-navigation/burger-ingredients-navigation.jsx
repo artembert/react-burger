@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { BurgerParts } from "../constants/burger-parts";
+import { BurgerParts } from "../../../types/burger-parts";
 
 export const BurgerIngredientsNavigation = (props) => {
   const { current, onChange } = props;
@@ -13,7 +13,7 @@ export const BurgerIngredientsNavigation = (props) => {
       <Tab value={BurgerParts.SAUCE} active={current === BurgerParts.SAUCE} onClick={onChange}>
         Соусы
       </Tab>
-      <Tab value={BurgerParts.FILLING} active={current === BurgerParts.FILLING} onClick={onChange}>
+      <Tab value={BurgerParts.MAIN} active={current === BurgerParts.MAIN} onClick={onChange}>
         Начинки
       </Tab>
     </div>
