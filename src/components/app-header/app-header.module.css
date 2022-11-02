@@ -19,10 +19,12 @@
 .startActions {
     display: flex;
     align-items: stretch;
+    margin-left: -20px;
 }
 
 .endActions {
     display: flex;
     align-items: stretch;
     justify-content: flex-end;
+    margin-right: -20px;
 }

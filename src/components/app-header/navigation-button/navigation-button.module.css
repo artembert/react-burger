@@ -9,6 +9,7 @@
     border: 2px solid transparent;
     border-radius: 4px;
     color: var(--text-inactive-color);
+    white-space: nowrap;
 }
 
 .navigationButton:not(.active) svg {
