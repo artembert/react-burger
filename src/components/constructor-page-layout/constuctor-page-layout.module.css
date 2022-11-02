@@ -1,0 +1,24 @@
+.main {
+    display: grid;
+    grid-template-columns: minmax(400px, 600px) 1fr 600px;
+    grid-template-rows: min-content 1fr;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.title {
+    padding: 40px 0 20px;
+    grid-column: 1/3;
+    grid-row: 1;
+    margin: 0;
+}
+
+.leftColumn {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.rightColumn {
+    grid-column: 3;
+    grid-row: 2;
+}
