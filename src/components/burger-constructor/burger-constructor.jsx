@@ -1,9 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { OrderSummary } from "./order-summary/order-summary";
 // import styles from './burger-constructor.module.css';
 
-export const BurgerConstructor = (props) => {
-  return <div>burger-constructor</div>;
+export const BurgerConstructor = () => {
+  return (
+    <div>
+      burger-constructor
+      <OrderSummary price={610} />
+    </div>
+  );
 };
-
-BurgerConstructor.propTypes = {};
