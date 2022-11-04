@@ -4,6 +4,7 @@ import { BurgerParts } from "../../types/burger-parts";
 import { ingredientType } from "../../types/constants/ingredient";
 import PropTypes from "prop-types";
 import { IngredientsTypeSection } from "./ingredients-type-section/ingredients-type-section";
+import styles from "./burger-ingredients.module.css";
 
 export const BurgerIngredients = (props) => {
   const { ingredients } = props;
@@ -15,9 +16,11 @@ export const BurgerIngredients = (props) => {
   return (
     <section>
       <BurgerIngredientsNavigation current={current} onChange={setCurrent} />
-      <IngredientsTypeSection title="Булки" ingredients={banIngredients} />
-      <IngredientsTypeSection title="Соусы" ingredients={sauceIngredients} />
-      <IngredientsTypeSection title="Начинки" ingredients={mainIngredients} />
+      <div className={`${styles.list} custom-scroll`}>
+        <IngredientsTypeSection title="Булки" ingredients={banIngredients} />
+        <IngredientsTypeSection title="Соусы" ingredients={sauceIngredients} />
+        <IngredientsTypeSection title="Начинки" ingredients={mainIngredients} />
+      </div>
     </section>
   );
 };
