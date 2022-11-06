@@ -26,11 +26,11 @@ export const BurgerConstructor = (props) => {
       <div className={`${styles.list} pr-1 custom-scroll`}>
         {notFixedIngredients.map((item) => {
           return (
-            <div className={styles.draggableItemContainer}>
+            <div className={styles.draggableItemContainer} key={item._id}>
               <div className="mr-2">
                 <DragIcon type="primary" />
               </div>
-              <ConstructorElement key={item._id} text={item.name} price={item.price} thumbnail={item.image} />
+              <ConstructorElement text={item.name} price={item.price} thumbnail={item.image} />
             </div>
           );
         })}
