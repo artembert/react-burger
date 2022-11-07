@@ -4,7 +4,6 @@ import { BurgerConstructor } from "../../components/burger-constructor/burger-co
 import { BurgerIngredients } from "../../components/burger-ingredients/burger-ingredients";
 import { ConstructorPageLayout } from "../../components/constructor-page-layout/constructor-page-layout";
 import { Layout } from "../../components/layout/layout";
-import selectedIngredients from "../../mocks/selected-ingredients.json";
 import { LoadingState } from "../../types/loading-state";
 
 const ingredientsEndpoint = "https://norma.nomoreparties.space/api/ingredients";
@@ -36,7 +35,7 @@ export const ConstructorPage = () => {
       <AppHeader />
       <ConstructorPageLayout
         leftColumn={<BurgerIngredients ingredients={ingredients} loadingState={ingredientsLoadingState} />}
-        rightColumn={<BurgerConstructor ingredients={selectedIngredients} />}
+        rightColumn={<BurgerConstructor ingredients={ingredients} loadingState={ingredientsLoadingState} />}
       />
     </Layout>
   );
