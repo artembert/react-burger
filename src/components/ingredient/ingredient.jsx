@@ -5,10 +5,13 @@ import styles from "./ingredient.module.css";
 import { ingredientType } from "../../types/constants/ingredient";
 
 const Component = (props) => {
-  const { ingredient, amount } = props;
+  const { ingredient, amount, onClick } = props;
   const { name, price, image } = ingredient;
+
+  const handleClick = () => onClick(ingredient);
+
   return (
-    <div className={styles.ingredient}>
+    <div className={styles.ingredient} onClick={handleClick}>
       {amount ? (
         <div className={styles.counterContainer}>
           <Counter count={amount} size="default" />
@@ -29,6 +32,7 @@ const Component = (props) => {
 Component.propTypes = {
   ingredient: ingredientType.isRequired,
   amount: PropTypes.number,
+  onClick: PropTypes.func,
 };
 
 export const Ingredient = memo(Component);

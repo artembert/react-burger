@@ -39,7 +39,7 @@ export const Modal = (props) => {
       <div className={styles.window} onClick={handleModalClick}>
         <div>
           <div className={`${styles.header} pt-10 pr-9 pl-10`}>
-            <div className={styles.title}>{title}</div>
+            <h2 className={`${styles.title} text text_type_main-large`}>{title}</h2>
             <button className={styles.closeButton} type="button" onClick={onRequestClose}>
               <CloseIcon type="primary" />
             </button>
@@ -53,7 +53,7 @@ export const Modal = (props) => {
 };
 
 Modal.propTypes = {
-  title: PropTypes.element,
+  title: PropTypes.string,
   children: PropTypes.element.isRequired,
   onRequestClose: PropTypes.func.isRequired,
 };
