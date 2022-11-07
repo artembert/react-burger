@@ -1,20 +1,28 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import PropTypes, { oneOf } from "prop-types";
 import { OrderSummary } from "./order-summary/order-summary";
-import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button, ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ingredientType } from "../../types/constants/ingredient";
 import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
 import { LoadingState } from "../../types/loading-state";
+import { Modal } from "../modal/modal";
+import { OrderDetails } from "../order-details/order-details";
 import styles from "./burger-constructor.module.css";
 
 export const BurgerConstructor = (props) => {
   const { ingredients, loadingState } = props;
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const openPopup = useCallback(() => setIsPopupOpen(true), []);
+  const closePopup = useCallback(() => setIsPopupOpen(false), []);
+
   if (!ingredients.length) {
     return null;
   }
   const topElement = ingredients.at(0);
   const bottomElement = ingredients.at(-1);
   const notFixedIngredients = ingredients.slice(1, ingredients.length - 1);
+
   if (loadingState === LoadingState.LOADING) {
     return <div>Загрузка...</div>;
   }
@@ -56,8 +64,17 @@ export const BurgerConstructor = (props) => {
         />
       </div>
       <div className={styles.orderSummaryContainer}>
-        <OrderSummary price={610} />
+        <OrderSummary price={610}>
+          <Button type="primary" size="large" htmlType="button" onClick={openPopup}>
+            Оформить заказ
+          </Button>
+        </OrderSummary>
       </div>
+      {isPopupOpen ? (
+        <Modal onRequestClose={closePopup}>
+          <OrderDetails />
+        </Modal>
+      ) : null}
     </div>
   );
 };
