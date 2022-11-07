@@ -8,6 +8,9 @@ import styles from "./burger-constructor.module.css";
 
 export const BurgerConstructor = (props) => {
   const { ingredients } = props;
+  if (!ingredients.length) {
+    return null;
+  }
   const topElement = ingredients.at(0);
   const bottomElement = ingredients.at(-1);
   const notFixedIngredients = ingredients.slice(1, ingredients.length - 1);
