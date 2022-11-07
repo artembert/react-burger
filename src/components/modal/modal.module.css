@@ -1,0 +1,38 @@
+.window {
+  margin: 0 auto;
+  min-width: 720px;
+  box-sizing: border-box;
+  border-radius: 40px;
+  background: #1c1c21;
+}
+
+.header {
+  padding-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.closeButton {
+  border: none;
+  padding: 8px;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.closeButton svg {
+  fill: var(--text-inactive-color);
+}
+
+.closeButton:hover {
+  background-color: #8585ad40;
+}
