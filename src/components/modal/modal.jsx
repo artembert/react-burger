@@ -18,9 +18,9 @@ export const Modal = (props) => {
     },
     [onRequestClose]
   );
-  const handleModalClick = useCallback((e) => {
+  const handleModalClick = (e) => {
     e.stopPropagation();
-  }, []);
+  };
 
   useEffect(() => {
     const element = document.body;
