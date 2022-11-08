@@ -7,6 +7,7 @@ import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
 import { LoadingState } from "../../types/loading-state";
 import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
+import { BurgerParts } from "../../types/burger-parts";
 import styles from "./burger-constructor.module.css";
 
 export const BurgerConstructor = (props) => {
@@ -19,9 +20,12 @@ export const BurgerConstructor = (props) => {
   if (!ingredients.length) {
     return null;
   }
-  const topElement = ingredients.at(0);
-  const bottomElement = ingredients.at(-1);
-  const notFixedIngredients = ingredients.slice(1, ingredients.length - 1);
+  const buns = ingredients.filter((item) => item.type === BurgerParts.BUN);
+  const topElement = buns[0];
+  const bottomElement = buns[0];
+  const notFixedIngredients = ingredients
+    .filter((item) => item.type !== BurgerParts.BUN)
+    .slice(1, ingredients.length - 1);
 
   if (loadingState === LoadingState.LOADING) {
     return <div>Загрузка...</div>;
@@ -36,7 +40,7 @@ export const BurgerConstructor = (props) => {
           key={topElement._id}
           type="top"
           isLocked={true}
-          text={topElement.name}
+          text={topElement.name + " (верх)"}
           price={topElement.price}
           thumbnail={topElement.image}
         />
@@ -58,7 +62,7 @@ export const BurgerConstructor = (props) => {
           key={bottomElement._id}
           type="bottom"
           isLocked={true}
-          text={bottomElement.name}
+          text={bottomElement.name + " (низ)"}
           price={bottomElement.price}
           thumbnail={bottomElement.image}
         />
