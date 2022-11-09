@@ -1,0 +1,30 @@
+.appHeader {
+    background-color: var(--interface_modal-bg);
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr min-content 1fr;
+}
+
+.logoContainer {
+    min-height: calc(calc(19px + 19px) + 50px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.startActions {
+    display: flex;
+    align-items: stretch;
+    margin-left: -20px;
+}
+
+.endActions {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-end;
+    margin-right: -20px;
+}
