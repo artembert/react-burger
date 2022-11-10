@@ -1,0 +1,18 @@
+.skeleton {
+  background-color: var(--background-element);
+  animation: pulsate 1.2s cubic-bezier(.5, 0, .5, 1) .6s infinite;
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .4;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

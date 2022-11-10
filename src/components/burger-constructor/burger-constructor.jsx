@@ -8,6 +8,7 @@ import { LoadingState } from "../../types/loading-state";
 import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
 import { BurgerParts } from "../../types/burger-parts";
+import { BurgerConstructorSkeleton } from "./burger-constructor-skeleton/burger-constructor-skeleton";
 import styles from "./burger-constructor.module.css";
 
 export const BurgerConstructor = (props) => {
@@ -28,7 +29,7 @@ export const BurgerConstructor = (props) => {
     .slice(1, ingredients.length - 1);
 
   if (loadingState === LoadingState.LOADING) {
-    return <div>Загрузка...</div>;
+    return <BurgerConstructorSkeleton />;
   }
   if (loadingState === LoadingState.ERROR) {
     return <div>Не удалось загрузить меню. Перезагрузите страницу</div>;
