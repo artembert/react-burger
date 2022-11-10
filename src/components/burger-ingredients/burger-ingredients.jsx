@@ -4,7 +4,7 @@ import { BurgerIngredientsNavigation } from "./burger-ingredients-navigation/bur
 import { BurgerParts } from "../../types/burger-parts";
 import { ingredientType } from "../../types/constants/ingredient";
 import { LoadingState } from "../../types/loading-state";
-import { Ingredient } from "../ingredient/ingredient";
+import { BurgerIngredientsGroup } from "./burger-ingredients-group/burger-ingredients-group";
 import { Modal } from "../modal/modal";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import styles from "./burger-ingredients.module.css";
@@ -28,42 +28,27 @@ export const BurgerIngredients = (props) => {
   return (
     <section>
       <BurgerIngredientsNavigation current={current} onChange={setCurrent} />
-      {loadingState === LoadingState.LOADING ? <div>Загрузка...</div> : null}
       {loadingState === LoadingState.ERROR ? <div>Не удалось загрузить меню. Перезагрузите страницу</div> : null}
-      {loadingState === LoadingState.SUCCESSFUL ? (
-        <div className={`${styles.list} custom-scroll`}>
-          <section>
-            <h3 className="text text_type_main-medium mt-10 mb-6">Булки</h3>
-            <ul className={styles.ingredientsList}>
-              {banIngredients.map((item) => (
-                <li className={styles.ingredient} key={item._id}>
-                  <Ingredient ingredient={item} onClick={openIngredientsDetail} />
-                </li>
-              ))}
-            </ul>
-          </section>
-          <section>
-            <h3 className="text text_type_main-medium mt-10 mb-6">Соусы</h3>
-            <ul className={styles.ingredientsList}>
-              {sauceIngredients.map((item) => (
-                <li className={styles.ingredient} key={item._id}>
-                  <Ingredient ingredient={item} onClick={openIngredientsDetail} />
-                </li>
-              ))}
-            </ul>
-          </section>
-          <section>
-            <h3 className="text text_type_main-medium mt-10 mb-6">Начинки</h3>
-            <ul className={styles.ingredientsList}>
-              {mainIngredients.map((item) => (
-                <li className={styles.ingredient} key={item._id}>
-                  <Ingredient ingredient={item} onClick={openIngredientsDetail} />
-                </li>
-              ))}
-            </ul>
-          </section>
-        </div>
-      ) : null}
+      <div className={`${styles.list} custom-scroll`}>
+        <BurgerIngredientsGroup
+          title="Булки"
+          ingredients={banIngredients}
+          loadingState={loadingState}
+          onClickByIngredient={openIngredientsDetail}
+        />
+        <BurgerIngredientsGroup
+          title="Соусы"
+          ingredients={sauceIngredients}
+          loadingState={loadingState}
+          onClickByIngredient={openIngredientsDetail}
+        />
+        <BurgerIngredientsGroup
+          title="Начинки"
+          ingredients={mainIngredients}
+          loadingState={loadingState}
+          onClickByIngredient={openIngredientsDetail}
+        />
+      </div>
       {selectedIngredient ? (
         <Modal title="Детали ингредиента" onRequestClose={closeIngredientsDetail}>
           <IngredientDetails ingredient={selectedIngredient} />

@@ -31,8 +31,8 @@ const Component = (props) => {
 
 Component.propTypes = {
   ingredient: ingredientType.isRequired,
+  onClick: PropTypes.func.isRequired,
   amount: PropTypes.number,
-  onClick: PropTypes.func,
 };
 
 export const Ingredient = memo(Component);
