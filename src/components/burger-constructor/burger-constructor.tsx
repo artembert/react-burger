@@ -1,17 +1,21 @@
 import React, { useCallback, useState } from "react";
-import PropTypes, { oneOf } from "prop-types";
 import { OrderSummary } from "./order-summary/order-summary";
 import { Button, ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { ingredientType } from "../../types/constants/ingredient";
-import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
 import { LoadingState } from "../../types/loading-state";
 import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
 import { BurgerParts } from "../../types/burger-parts";
 import { BurgerConstructorSkeleton } from "./burger-constructor-skeleton/burger-constructor-skeleton";
+import { BurgerIngredient } from "../../types/BurgerIngredient";
+import { ValueOf } from "../../types";
 import styles from "./burger-constructor.module.css";
 
-export const BurgerConstructor = (props) => {
+type Props = {
+  ingredients: BurgerIngredient[];
+  loadingState: ValueOf<typeof LoadingState>;
+};
+
+export const BurgerConstructor = (props: Props) => {
   const { ingredients, loadingState } = props;
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -82,10 +86,4 @@ export const BurgerConstructor = (props) => {
       ) : null}
     </div>
   );
-};
-
-BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientType).isRequired,
-  loadingState: oneOf([LoadingState.IDLE, LoadingState.LOADING, LoadingState.SUCCESSFUL, LoadingState.ERROR])
-    .isRequired,
 };
