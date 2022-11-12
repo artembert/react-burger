@@ -32,7 +32,8 @@
       "react-app/jest"
     ],
     "rules": {
-      "react/jsx-uses-react": "error"
+      "react/jsx-uses-react": "error",
+      "react-hooks/exhaustive-deps": "error"
     }
   },
   "browserslist": {

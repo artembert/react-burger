@@ -1,23 +1,29 @@
 import React, { useCallback, useMemo } from "react";
-import PropTypes, { oneOf } from "prop-types";
+import { useIngredientsContext } from "../../services/ingredients.context";
 import { BurgerIngredientsNavigation } from "./burger-ingredients-navigation/burger-ingredients-navigation";
 import { BurgerParts } from "../../types/burger-parts";
-import { ingredientType } from "../../types/constants/ingredient";
+import { ValueOf } from "../../types";
+import { BurgerIngredient } from "../../types/BurgerIngredient";
 import { LoadingState } from "../../types/loading-state";
 import { BurgerIngredientsGroup } from "./burger-ingredients-group/burger-ingredients-group";
 import { Modal } from "../modal/modal";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import styles from "./burger-ingredients.module.css";
 
-export const BurgerIngredients = (props) => {
-  const { ingredients, loadingState } = props;
+type Props = {
+  loadingState: ValueOf<typeof LoadingState>;
+};
+
+export const BurgerIngredients = (props: Props) => {
+  const { loadingState } = props;
+  const [ingredients] = useIngredientsContext();
   const [current, setCurrent] = React.useState(BurgerParts.BUN);
-  const [selectedIngredient, setSelectedIngredient] = React.useState(null);
+  const [selectedIngredient, setSelectedIngredient] = React.useState<BurgerIngredient | null>(null);
   const banIngredients = useMemo(() => ingredients.filter((item) => item.type === BurgerParts.BUN), [ingredients]);
   const sauceIngredients = useMemo(() => ingredients.filter((item) => item.type === BurgerParts.SAUCE), [ingredients]);
   const mainIngredients = useMemo(() => ingredients.filter((item) => item.type === BurgerParts.MAIN), [ingredients]);
 
-  const openIngredientsDetail = useCallback((ingredient) => {
+  const openIngredientsDetail = useCallback((ingredient: BurgerIngredient) => {
     setSelectedIngredient(ingredient);
   }, []);
 
@@ -56,10 +62,4 @@ export const BurgerIngredients = (props) => {
       ) : null}
     </section>
   );
-};
-
-BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientType).isRequired,
-  loadingState: oneOf([LoadingState.IDLE, LoadingState.LOADING, LoadingState.SUCCESSFUL, LoadingState.ERROR])
-    .isRequired,
 };

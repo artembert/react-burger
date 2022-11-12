@@ -5,11 +5,14 @@ import { BurgerIngredients } from "../../components/burger-ingredients/burger-in
 import { ConstructorPageLayout } from "../../components/constructor-page-layout/constructor-page-layout";
 import { Layout } from "../../components/layout/layout";
 import { LoadingState } from "../../types/loading-state";
+import { IngredientsContext } from "../../services/ingredients.context";
+import { BurgerIngredient } from "../../types/BurgerIngredient";
 
 const ingredientsEndpoint = "https://norma.nomoreparties.space/api/ingredients";
 
 export const ConstructorPage = () => {
-  const [ingredients, setIngredients] = useState([]);
+  const ingredientsState = useState<BurgerIngredient[]>([]);
+  const [, setIngredients] = ingredientsState;
   const [ingredientsLoadingState, setIngredientsLoadingState] = useState(LoadingState.IDLE);
 
   const fetchIngredients = useCallback(() => {
@@ -28,15 +31,17 @@ export const ConstructorPage = () => {
       .catch(() => {
         setIngredientsLoadingState(LoadingState.ERROR);
       });
-  }, [fetchIngredients]);
+  }, [fetchIngredients, setIngredients]);
 
   return (
     <Layout>
       <AppHeader />
-      <ConstructorPageLayout
-        leftColumn={<BurgerIngredients ingredients={ingredients} loadingState={ingredientsLoadingState} />}
-        rightColumn={<BurgerConstructor ingredients={ingredients} loadingState={ingredientsLoadingState} />}
-      />
+      <IngredientsContext.Provider value={ingredientsState}>
+        <ConstructorPageLayout
+          leftColumn={<BurgerIngredients loadingState={ingredientsLoadingState} />}
+          rightColumn={<BurgerConstructor loadingState={ingredientsLoadingState} />}
+        />
+      </IngredientsContext.Provider>
     </Layout>
   );
 };

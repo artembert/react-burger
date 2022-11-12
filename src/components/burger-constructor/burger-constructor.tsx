@@ -6,17 +6,17 @@ import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
 import { BurgerParts } from "../../types/burger-parts";
 import { BurgerConstructorSkeleton } from "./burger-constructor-skeleton/burger-constructor-skeleton";
-import { BurgerIngredient } from "../../types/BurgerIngredient";
+import { useIngredientsContext } from "../../services/ingredients.context";
 import { ValueOf } from "../../types";
 import styles from "./burger-constructor.module.css";
 
 type Props = {
-  ingredients: BurgerIngredient[];
   loadingState: ValueOf<typeof LoadingState>;
 };
 
 export const BurgerConstructor = (props: Props) => {
-  const { ingredients, loadingState } = props;
+  const { loadingState } = props;
+  const [ingredients] = useIngredientsContext();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const openPopup = useCallback(() => setIsPopupOpen(true), []);
