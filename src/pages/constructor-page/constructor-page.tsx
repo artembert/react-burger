@@ -1,47 +1,23 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { AppHeader } from "../../components/app-header/app-header";
-import { BurgerConstructor } from "../../components/burger-constructor/burger-constructor";
-import { BurgerIngredients } from "../../components/burger-ingredients/burger-ingredients";
+import { BurgerConstructorContainer } from "../../containers/burger-constructor-container";
+import { BurgerIngredientsContainer } from "../../containers/burger-ingredients-container";
 import { ConstructorPageLayout } from "../../components/constructor-page-layout/constructor-page-layout";
 import { Layout } from "../../components/layout/layout";
-import { LoadingState } from "../../types/loading-state";
-import { IngredientsContext } from "../../services/ingredients.context";
-import { BurgerIngredient } from "../../types/BurgerIngredient";
-
-const ingredientsEndpoint = "https://norma.nomoreparties.space/api/ingredients";
+import { useAppDispatch } from "../../services/store";
+import { fetchIngredients } from "../../services/ingredients";
 
 export const ConstructorPage = () => {
-  const ingredientsState = useState<BurgerIngredient[]>([]);
-  const [, setIngredients] = ingredientsState;
-  const [ingredientsLoadingState, setIngredientsLoadingState] = useState(LoadingState.IDLE);
-
-  const fetchIngredients = useCallback(() => {
-    return fetch(ingredientsEndpoint)
-      .then((res) => res.json())
-      .then((res) => res.data);
-  }, []);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setIngredientsLoadingState(LoadingState.LOADING);
-    fetchIngredients()
-      .then((data) => {
-        setIngredients(data);
-        setIngredientsLoadingState(LoadingState.SUCCESSFUL);
-      })
-      .catch(() => {
-        setIngredientsLoadingState(LoadingState.ERROR);
-      });
-  }, [fetchIngredients, setIngredients]);
+    dispatch(fetchIngredients());
+  }, [dispatch]);
 
   return (
     <Layout>
       <AppHeader />
-      <IngredientsContext.Provider value={ingredientsState}>
-        <ConstructorPageLayout
-          leftColumn={<BurgerIngredients loadingState={ingredientsLoadingState} />}
-          rightColumn={<BurgerConstructor loadingState={ingredientsLoadingState} />}
-        />
-      </IngredientsContext.Provider>
+      <ConstructorPageLayout leftColumn={<BurgerIngredientsContainer />} rightColumn={<BurgerConstructorContainer />} />
     </Layout>
   );
 };

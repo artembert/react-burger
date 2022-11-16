@@ -1,8 +1,7 @@
 import React, { useCallback, useMemo } from "react";
-import { useIngredientsContext } from "../../services/ingredients.context";
 import { BurgerIngredientsNavigation } from "./burger-ingredients-navigation/burger-ingredients-navigation";
 import { BurgerParts } from "../../types/burger-parts";
-import { ValueOf } from "../../types";
+import { LoadingStatus } from "../../types/loading-status";
 import { BurgerIngredient } from "../../types/BurgerIngredient";
 import { LoadingState } from "../../types/loading-state";
 import { BurgerIngredientsGroup } from "./burger-ingredients-group/burger-ingredients-group";
@@ -11,12 +10,12 @@ import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import styles from "./burger-ingredients.module.css";
 
 type Props = {
-  loadingState: ValueOf<typeof LoadingState>;
+  loadingState: LoadingStatus;
+  ingredients: BurgerIngredient[];
 };
 
 export const BurgerIngredients = (props: Props) => {
-  const { loadingState } = props;
-  const [ingredients] = useIngredientsContext();
+  const { loadingState, ingredients } = props;
   const [current, setCurrent] = React.useState(BurgerParts.BUN);
   const [selectedIngredient, setSelectedIngredient] = React.useState<BurgerIngredient | null>(null);
   const banIngredients = useMemo(() => ingredients.filter((item) => item.type === BurgerParts.BUN), [ingredients]);
