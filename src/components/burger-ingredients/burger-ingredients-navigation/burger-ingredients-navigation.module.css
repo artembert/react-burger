@@ -1,0 +1,11 @@
+.root {
+  display: flex;
+}
+
+.tagContainer {
+  flex-grow: 1;
+}
+
+.tagContainer > * {
+  min-width: auto;
+}
