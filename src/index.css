@@ -3,6 +3,7 @@
   --interface_bg: #131316;
   --interface_modal-bg: #1C1C21;
   --interface_modal-bg-backdrop: #00000099;
+  --constructor_drop-area: #CCCCCC;
 
   /* Sizes */
   --container-width: 1240px;

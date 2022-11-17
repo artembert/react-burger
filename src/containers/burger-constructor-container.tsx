@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import { selectIngredients, selectIngredientsLoadingSate } from "../services/ingredients/selectors";
 import { BurgerConstructor } from "../components/burger-constructor/burger-constructor";
+import { LoadingState } from "../types/loading-state";
+import { selectConstructorIngredients } from "../services/constructor/selectors";
 
 export const BurgerConstructorContainer = () => {
-  const loadingState = useSelector(selectIngredientsLoadingSate);
-  const ingredients = useSelector(selectIngredients);
+  const ingredients = useSelector(selectConstructorIngredients);
 
-  return <BurgerConstructor loadingState={loadingState} ingredients={ingredients} />;
+  return <BurgerConstructor loadingState={LoadingState.SUCCESSFUL} ingredients={ingredients} />;
 };

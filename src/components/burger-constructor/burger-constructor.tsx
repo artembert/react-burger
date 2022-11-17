@@ -8,6 +8,7 @@ import { BurgerParts } from "../../types/burger-parts";
 import { BurgerConstructorSkeleton } from "./burger-constructor-skeleton/burger-constructor-skeleton";
 import { BurgerIngredient } from "../../types/BurgerIngredient";
 import { LoadingStatus } from "../../types/loading-status";
+import { ConstructorPlaceholder } from "./constructor-placeholder/constructor-placeholder";
 import styles from "./burger-constructor.module.css";
 
 type Props = {
@@ -22,8 +23,8 @@ export const BurgerConstructor = (props: Props) => {
   const openPopup = useCallback(() => setIsPopupOpen(true), []);
   const closePopup = useCallback(() => setIsPopupOpen(false), []);
 
-  if (!ingredients.length) {
-    return null;
+  if (!ingredients?.length) {
+    return <ConstructorPlaceholder />;
   }
   const buns = ingredients.filter((item) => item.type === BurgerParts.BUN);
   const topElement = buns[0];
