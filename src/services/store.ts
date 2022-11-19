@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { ingredients } from "./ingredients";
+import { burgerConstructor } from "./burger-constructor";
 
 const rootReducer = combineReducers({
   ingredients,
+  burgerConstructor,
 });
 
 export const store = configureStore({
