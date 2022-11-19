@@ -1,10 +1,15 @@
-import React, { memo } from "react";
-import PropTypes from "prop-types";
+import { memo } from "react";
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { BurgerIngredient } from "../../types/BurgerIngredient";
 import styles from "./ingredient.module.css";
-import { ingredientType } from "../../types/constants/ingredient";
 
-const Component = (props) => {
+type Props = {
+  ingredient: BurgerIngredient;
+  onClick: (ingredient: BurgerIngredient) => void;
+  amount?: number;
+};
+
+const Component = (props: Props) => {
   const { ingredient, amount, onClick } = props;
   const { name, price, image } = ingredient;
 
@@ -27,12 +32,6 @@ const Component = (props) => {
       <div className={`${styles.name} mt-2 text text_type_main-default`}>{name}</div>
     </div>
   );
-};
-
-Component.propTypes = {
-  ingredient: ingredientType.isRequired,
-  onClick: PropTypes.func.isRequired,
-  amount: PropTypes.number,
 };
 
 export const Ingredient = memo(Component);
