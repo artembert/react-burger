@@ -20,7 +20,7 @@ type Props = {
 };
 
 export const BurgerConstructor = (props: Props) => {
-  const { loadingState, ingredients, bun } = props;
+  const { loadingState, ingredients, bun, totalPrice } = props;
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const openPopup = useCallback(() => setIsPopupOpen(true), []);
@@ -54,7 +54,7 @@ export const BurgerConstructor = (props: Props) => {
         <Bun bun={null} placement="bottom" />
       </div>
       <div className={styles.orderSummaryContainer}>
-        <OrderSummary price={610}>
+        <OrderSummary price={totalPrice}>
           <Button type="primary" size="large" htmlType="button" onClick={openPopup}>
             Оформить заказ
           </Button>
