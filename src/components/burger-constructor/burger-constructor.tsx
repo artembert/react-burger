@@ -8,7 +8,7 @@ import { BurgerConstructorSkeleton } from "./burger-constructor-skeleton/burger-
 import { BurgerIngredient } from "../../types/BurgerIngredient";
 import { LoadingStatus } from "../../types/loading-status";
 import { MainPlaceholder } from "./main-placeholder/main-placeholder";
-import { BunPlaceholder } from "./bun-placeholder/bun-placeholder";
+import { Bun } from "./bun/bun";
 import styles from "./burger-constructor.module.css";
 
 type Props = {
@@ -33,18 +33,7 @@ export const BurgerConstructor = (props: Props) => {
   return (
     <div className={`${styles.burgerConstructor} pl-4`}>
       <div className={`${styles.fixedElement} mb-4 pr-4 pl-4`}>
-        {bun ? (
-          <ConstructorElement
-            key={bun._id}
-            type="top"
-            isLocked={true}
-            text={bun.name + " (верх)"}
-            price={bun.price}
-            thumbnail={bun.image}
-          />
-        ) : (
-          <BunPlaceholder placement="top" />
-        )}
+        <Bun bun={bun} placement="top" />
       </div>
       <div className={`${styles.list} pr-1 custom-scroll`}>
         {!ingredients.length ? <MainPlaceholder /> : null}
@@ -60,18 +49,7 @@ export const BurgerConstructor = (props: Props) => {
         })}
       </div>
       <div className={`${styles.fixedElement} mt-4`}>
-        {bun ? (
-          <ConstructorElement
-            key={bun._id}
-            type="bottom"
-            isLocked={true}
-            text={bun.name + " (низ)"}
-            price={bun.price}
-            thumbnail={bun.image}
-          />
-        ) : (
-          <BunPlaceholder placement="bottom" />
-        )}
+        <Bun bun={null} placement="bottom" />
       </div>
       <div className={styles.orderSummaryContainer}>
         <OrderSummary price={610}>
