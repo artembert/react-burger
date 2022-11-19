@@ -1,7 +1,7 @@
 .bun {
   height: 74px;
   background: #1C1C21;
-  border: 3px dashed var(--constructor_drop-area);
+  border: var(--border-empty-constructor-element);
 }
 
 .bun_top {

@@ -4,6 +4,6 @@
   justify-content: center;
   background: #1C1C21;
   height: 100%;
-  border: 3px dashed var(--constructor_drop-area);
+  border: var(--border-empty-constructor-element);
   border-radius: 40px;
 }
