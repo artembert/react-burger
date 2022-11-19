@@ -9,12 +9,14 @@ import { BurgerIngredient } from "../../types/BurgerIngredient";
 import { LoadingStatus } from "../../types/loading-status";
 import { MainPlaceholder } from "./main-placeholder/main-placeholder";
 import { Bun } from "./bun/bun";
+import { ConstructorIngredient } from "../../types/constructor-ingredient";
 import styles from "./burger-constructor.module.css";
 
 type Props = {
   loadingState: LoadingStatus;
-  ingredients: BurgerIngredient[];
+  ingredients: ConstructorIngredient[];
   bun: null | BurgerIngredient;
+  totalPrice: number;
 };
 
 export const BurgerConstructor = (props: Props) => {
@@ -39,7 +41,7 @@ export const BurgerConstructor = (props: Props) => {
         {!ingredients.length ? <MainPlaceholder /> : null}
         {ingredients.map((item) => {
           return (
-            <div className={styles.draggableItemContainer} key={item._id}>
+            <div className={styles.draggableItemContainer} key={item.pieceId}>
               <div className="mr-2">
                 <DragIcon type="primary" />
               </div>

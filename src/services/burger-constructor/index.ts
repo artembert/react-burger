@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from "uuid";
 import { BurgerIngredient } from "../../types/BurgerIngredient";
 import { BurgerParts } from "../../types/burger-parts";
+import { ConstructorIngredient } from "../../types/constructor-ingredient";
 
 export type ConstructorSliceState = {
-  bun: null | BurgerIngredient;
-  ingredients: BurgerIngredient[];
+  bun: null | ConstructorIngredient;
+  ingredients: ConstructorIngredient[];
 };
 
 const initialState: ConstructorSliceState = {
@@ -17,10 +19,11 @@ const burgerConstructorSlice = createSlice({
   initialState,
   reducers: {
     addIngredient(state, action: PayloadAction<BurgerIngredient>) {
+      const ingredient: ConstructorIngredient = { ...action.payload, pieceId: uuidv4() };
       if (action.payload.type === BurgerParts.BUN) {
-        state.bun = action.payload;
+        state.bun = ingredient;
       } else {
-        state.ingredients.push(action.payload);
+        state.ingredients.push(ingredient);
       }
     },
   },
