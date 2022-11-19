@@ -8,7 +8,8 @@ import { BurgerParts } from "../../types/burger-parts";
 import { BurgerConstructorSkeleton } from "./burger-constructor-skeleton/burger-constructor-skeleton";
 import { BurgerIngredient } from "../../types/BurgerIngredient";
 import { LoadingStatus } from "../../types/loading-status";
-import { ConstructorPlaceholder } from "./constructor-placeholder/constructor-placeholder";
+import { MainPlaceholder } from "./main-placeholder/main-placeholder";
+import { BunPlaceholder } from "./bun-placeholder/bun-placeholder";
 import styles from "./burger-constructor.module.css";
 
 type Props = {
@@ -23,9 +24,6 @@ export const BurgerConstructor = (props: Props) => {
   const openPopup = useCallback(() => setIsPopupOpen(true), []);
   const closePopup = useCallback(() => setIsPopupOpen(false), []);
 
-  if (!ingredients?.length) {
-    return <ConstructorPlaceholder />;
-  }
   const buns = ingredients.filter((item) => item.type === BurgerParts.BUN);
   const topElement = buns[0];
   const bottomElement = buns[0];
@@ -42,16 +40,21 @@ export const BurgerConstructor = (props: Props) => {
   return (
     <div className={`${styles.burgerConstructor} pl-4`}>
       <div className={`${styles.fixedElement} mb-4 pr-4 pl-4`}>
-        <ConstructorElement
-          key={topElement._id}
-          type="top"
-          isLocked={true}
-          text={topElement.name + " (верх)"}
-          price={topElement.price}
-          thumbnail={topElement.image}
-        />
+        {topElement ? (
+          <ConstructorElement
+            key={topElement._id}
+            type="top"
+            isLocked={true}
+            text={topElement.name + " (верх)"}
+            price={topElement.price}
+            thumbnail={topElement.image}
+          />
+        ) : (
+          <BunPlaceholder placement="top" />
+        )}
       </div>
       <div className={`${styles.list} pr-1 custom-scroll`}>
+        {!notFixedIngredients.length ? <MainPlaceholder /> : null}
         {notFixedIngredients.map((item) => {
           return (
             <div className={styles.draggableItemContainer} key={item._id}>
@@ -64,14 +67,18 @@ export const BurgerConstructor = (props: Props) => {
         })}
       </div>
       <div className={`${styles.fixedElement} mt-4`}>
-        <ConstructorElement
-          key={bottomElement._id}
-          type="bottom"
-          isLocked={true}
-          text={bottomElement.name + " (низ)"}
-          price={bottomElement.price}
-          thumbnail={bottomElement.image}
-        />
+        {bottomElement ? (
+          <ConstructorElement
+            key={bottomElement._id}
+            type="bottom"
+            isLocked={true}
+            text={bottomElement.name + " (низ)"}
+            price={bottomElement.price}
+            thumbnail={bottomElement.image}
+          />
+        ) : (
+          <BunPlaceholder placement="bottom" />
+        )}
       </div>
       <div className={styles.orderSummaryContainer}>
         <OrderSummary price={610}>

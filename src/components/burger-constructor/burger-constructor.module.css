@@ -11,7 +11,7 @@
   flex-direction: column;
   gap: 16px;
   overflow-y: scroll;
-  max-height: calc(100vh - calc(88px + calc(100px + calc(56px + 292px))));
+  height: calc(100vh - calc(88px + calc(100px + calc(56px + 292px))));
 }
 
 .draggableItemContainer {
