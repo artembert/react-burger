@@ -4,6 +4,9 @@
   box-sizing: border-box;
   border-radius: 40px;
   background: #1c1c21;
+  position: relative;
+  transform: translate(0, -50%);
+  top: 50%;
 }
 
 .header {
