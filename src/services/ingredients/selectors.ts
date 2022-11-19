@@ -5,3 +5,5 @@ export const selectIngredientsLoadingSate = (store: RootState): IngredientsSlice
   store.ingredients.loadingState;
 
 export const selectIngredients = (store: RootState) => store.ingredients.ingredients;
+
+export const selectIngredientPreview = (store: RootState) => store.ingredients.ingredientPreview;

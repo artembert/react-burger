@@ -5,33 +5,24 @@ import { LoadingStatus } from "../../types/loading-status";
 import { BurgerIngredient } from "../../types/BurgerIngredient";
 import { LoadingState } from "../../types/loading-state";
 import { BurgerIngredientsGroup } from "./burger-ingredients-group/burger-ingredients-group";
-import { Modal } from "../modal/modal";
-import { IngredientDetails } from "../ingredient-details/ingredient-details";
+import { IngredientDetailsModalContainer } from "../../containers/ingredient-details-modal-container";
 import styles from "./burger-ingredients.module.css";
 
 type Props = {
   loadingState: LoadingStatus;
   ingredients: BurgerIngredient[];
+  onClickIngredient: (ingredient: BurgerIngredient) => void;
 };
 
 export const BurgerIngredients = (props: Props) => {
-  const { loadingState, ingredients } = props;
+  const { loadingState, ingredients, onClickIngredient } = props;
   const [current, setCurrent] = React.useState(BurgerParts.BUN);
-  const [selectedIngredient, setSelectedIngredient] = React.useState<BurgerIngredient | null>(null);
   const banIngredients = useMemo(() => ingredients.filter((item) => item.type === BurgerParts.BUN), [ingredients]);
   const sauceIngredients = useMemo(() => ingredients.filter((item) => item.type === BurgerParts.SAUCE), [ingredients]);
   const mainIngredients = useMemo(() => ingredients.filter((item) => item.type === BurgerParts.MAIN), [ingredients]);
   const bunsSectionRef = useRef<HTMLDivElement>(null);
   const saucesSectionRef = useRef<HTMLDivElement>(null);
   const mainSectionRef = useRef<HTMLDivElement>(null);
-
-  const openIngredientsDetail = useCallback((ingredient: BurgerIngredient) => {
-    setSelectedIngredient(ingredient);
-  }, []);
-
-  const closeIngredientsDetail = useCallback(() => {
-    setSelectedIngredient(null);
-  }, []);
 
   const scrollToGroup = useCallback(
     (group: BurgerPart) => {
@@ -61,28 +52,24 @@ export const BurgerIngredients = (props: Props) => {
           title="Булки"
           ingredients={banIngredients}
           loadingState={loadingState}
-          onClickByIngredient={openIngredientsDetail}
+          onClickByIngredient={onClickIngredient}
         />
         <BurgerIngredientsGroup
           ref={saucesSectionRef}
           title="Соусы"
           ingredients={sauceIngredients}
           loadingState={loadingState}
-          onClickByIngredient={openIngredientsDetail}
+          onClickByIngredient={onClickIngredient}
         />
         <BurgerIngredientsGroup
           ref={mainSectionRef}
           title="Начинки"
           ingredients={mainIngredients}
           loadingState={loadingState}
-          onClickByIngredient={openIngredientsDetail}
+          onClickByIngredient={onClickIngredient}
         />
       </div>
-      {selectedIngredient ? (
-        <Modal title="Детали ингредиента" onRequestClose={closeIngredientsDetail}>
-          <IngredientDetails ingredient={selectedIngredient} />
-        </Modal>
-      ) : null}
+      <IngredientDetailsModalContainer />
     </section>
   );
 };
