@@ -25,6 +25,7 @@ export const BurgerConstructor = (props: Props) => {
 
   const openPopup = useCallback(() => setIsPopupOpen(true), []);
   const closePopup = useCallback(() => setIsPopupOpen(false), []);
+  const isOrderEnabled = bun && ingredients.length;
 
   if (loadingState === LoadingState.LOADING) {
     return <BurgerConstructorSkeleton />;
@@ -55,7 +56,7 @@ export const BurgerConstructor = (props: Props) => {
       </div>
       <div className={styles.orderSummaryContainer}>
         <OrderSummary price={totalPrice}>
-          <Button type="primary" size="large" htmlType="button" onClick={openPopup}>
+          <Button disabled={!isOrderEnabled} type="primary" size="large" htmlType="button" onClick={openPopup}>
             Оформить заказ
           </Button>
         </OrderSummary>
