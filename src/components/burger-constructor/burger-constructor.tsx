@@ -51,7 +51,7 @@ export const BurgerConstructor = (props: Props) => {
         })}
       </div>
       <div className={`${styles.fixedElement} mt-4`}>
-        <Bun bun={null} placement="bottom" />
+        <Bun bun={bun} placement="bottom" />
       </div>
       <div className={styles.orderSummaryContainer}>
         <OrderSummary price={totalPrice}>
