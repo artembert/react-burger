@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { BurgerConstructor } from "../components/burger-constructor/burger-constructor";
 import { LoadingState } from "../types/loading-state";
@@ -8,26 +9,38 @@ import {
   selectConstructorTotalPrice,
 } from "../services/burger-constructor/selectors";
 import { useAppDispatch } from "../services/store";
-import { useCallback } from "react";
 import { makeOrder } from "../services/order-details";
+import { addIngredient } from "../services/burger-constructor";
+import { selectIngredients } from "../services/ingredients/selectors";
 
 export const BurgerConstructorContainer = () => {
   const dispatch = useAppDispatch();
   const bun = useSelector(selectConstructorBun);
-  const ingredients = useSelector(selectConstructorIngredients);
+  const constructorIngredients = useSelector(selectConstructorIngredients);
+  const allIngredients = useSelector(selectIngredients);
   const totalPrice = useSelector(selectConstructorTotalPrice);
   const ingredientsIds = useSelector(selectConstructorIngredientsIds);
   const handleNewOrder = useCallback(() => {
     dispatch(makeOrder({ ingredients: ingredientsIds }));
   }, [dispatch, ingredientsIds]);
+  const handleAddIngredient = useCallback(
+    (id: string) => {
+      const ingredient = allIngredients.find((item) => item._id === id);
+      if (ingredient) {
+        dispatch(addIngredient(ingredient));
+      }
+    },
+    [dispatch, allIngredients]
+  );
 
   return (
     <BurgerConstructor
       loadingState={LoadingState.SUCCESSFUL}
-      ingredients={ingredients}
+      ingredients={constructorIngredients}
       bun={bun}
       totalPrice={totalPrice}
       onMakeOrder={handleNewOrder}
+      onAddIngredient={handleAddIngredient}
     />
   );
 };

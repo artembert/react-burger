@@ -20,14 +20,16 @@ type Props = {
   bun: null | BurgerIngredient;
   totalPrice: number;
   onMakeOrder: VoidFunction;
+  onAddIngredient: (id: string) => void;
 };
 
 type DropTarget = { isHover: boolean; availableToDrop: boolean };
+type DropItem = { id: string };
 
 export const BurgerConstructor = (props: Props) => {
-  const { loadingState, ingredients, bun, totalPrice, onMakeOrder } = props;
+  const { loadingState, ingredients, bun, totalPrice, onMakeOrder, onAddIngredient } = props;
   const isOrderEnabled = bun && ingredients.length;
-  const [{ isHover, availableToDrop }, dropTargetRef] = useDrop<{ id: number }, unknown, DropTarget>({
+  const [{ isHover, availableToDrop }, dropTargetRef] = useDrop<DropItem, unknown, DropTarget>({
     accept: DndType.INGREDIENT,
     drop(item) {
       onDropHandler(item);
@@ -38,8 +40,8 @@ export const BurgerConstructor = (props: Props) => {
     }),
   });
 
-  const onDropHandler = (droppedItem: { id: number }) => {
-    console.log(droppedItem);
+  const onDropHandler = (droppedItem: { id: string }) => {
+    onAddIngredient(droppedItem.id);
   };
 
   if (loadingState === LoadingState.LOADING) {
