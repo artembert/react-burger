@@ -4,7 +4,6 @@ import { Button, ConstructorElement, DragIcon } from "@ya.praktikum/react-develo
 import { LoadingState } from "../../types/loading-state";
 import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
-import { BurgerParts } from "../../types/burger-parts";
 import { BurgerConstructorSkeleton } from "./burger-constructor-skeleton/burger-constructor-skeleton";
 import { BurgerIngredient } from "../../types/BurgerIngredient";
 import { LoadingStatus } from "../../types/loading-status";
@@ -15,21 +14,15 @@ import styles from "./burger-constructor.module.css";
 type Props = {
   loadingState: LoadingStatus;
   ingredients: BurgerIngredient[];
+  bun: null | BurgerIngredient;
 };
 
 export const BurgerConstructor = (props: Props) => {
-  const { loadingState, ingredients } = props;
+  const { loadingState, ingredients, bun } = props;
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const openPopup = useCallback(() => setIsPopupOpen(true), []);
   const closePopup = useCallback(() => setIsPopupOpen(false), []);
-
-  const buns = ingredients.filter((item) => item.type === BurgerParts.BUN);
-  const topElement = buns[0];
-  const bottomElement = buns[0];
-  const notFixedIngredients = ingredients
-    .filter((item) => item.type !== BurgerParts.BUN)
-    .slice(1, ingredients.length - 1);
 
   if (loadingState === LoadingState.LOADING) {
     return <BurgerConstructorSkeleton />;
@@ -40,22 +33,22 @@ export const BurgerConstructor = (props: Props) => {
   return (
     <div className={`${styles.burgerConstructor} pl-4`}>
       <div className={`${styles.fixedElement} mb-4 pr-4 pl-4`}>
-        {topElement ? (
+        {bun ? (
           <ConstructorElement
-            key={topElement._id}
+            key={bun._id}
             type="top"
             isLocked={true}
-            text={topElement.name + " (верх)"}
-            price={topElement.price}
-            thumbnail={topElement.image}
+            text={bun.name + " (верх)"}
+            price={bun.price}
+            thumbnail={bun.image}
           />
         ) : (
           <BunPlaceholder placement="top" />
         )}
       </div>
       <div className={`${styles.list} pr-1 custom-scroll`}>
-        {!notFixedIngredients.length ? <MainPlaceholder /> : null}
-        {notFixedIngredients.map((item) => {
+        {!ingredients.length ? <MainPlaceholder /> : null}
+        {ingredients.map((item) => {
           return (
             <div className={styles.draggableItemContainer} key={item._id}>
               <div className="mr-2">
@@ -67,14 +60,14 @@ export const BurgerConstructor = (props: Props) => {
         })}
       </div>
       <div className={`${styles.fixedElement} mt-4`}>
-        {bottomElement ? (
+        {bun ? (
           <ConstructorElement
-            key={bottomElement._id}
+            key={bun._id}
             type="bottom"
             isLocked={true}
-            text={bottomElement.name + " (низ)"}
-            price={bottomElement.price}
-            thumbnail={bottomElement.image}
+            text={bun.name + " (низ)"}
+            price={bun.price}
+            thumbnail={bun.image}
           />
         ) : (
           <BunPlaceholder placement="bottom" />
