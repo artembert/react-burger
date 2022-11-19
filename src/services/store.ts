@@ -2,10 +2,12 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { ingredients } from "./ingredients";
 import { burgerConstructor } from "./burger-constructor";
+import { orderDetails } from "./order-details";
 
 const rootReducer = combineReducers({
   ingredients,
   burgerConstructor,
+  orderDetails,
 });
 
 export const store = configureStore({

@@ -14,3 +14,13 @@ export const selectConstructorTotalPrice = createSelector(
     return bunsPrice + ingredientsPrice;
   }
 );
+
+export const selectConstructorIngredientsIds = createSelector(
+  selectConstructorBun,
+  selectConstructorIngredients,
+  (bun, ingredients) => {
+    const bunIds = bun ? [bun._id, bun._id] : [];
+    const ingredientsIds = ingredients.reduce((accum, item) => [...accum, item._id], [] as string[]);
+    return [...ingredientsIds, ...bunIds];
+  }
+);

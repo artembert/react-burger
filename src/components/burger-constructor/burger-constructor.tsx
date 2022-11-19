@@ -1,9 +1,8 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { OrderSummary } from "./order-summary/order-summary";
 import { Button, ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { LoadingState } from "../../types/loading-state";
-import { Modal } from "../modal/modal";
-import { OrderDetails } from "../order-details/order-details";
+import { OrderDetailsModalContainer } from "../../containers/order-details-modal-container";
 import { BurgerConstructorSkeleton } from "./burger-constructor-skeleton/burger-constructor-skeleton";
 import { BurgerIngredient } from "../../types/BurgerIngredient";
 import { LoadingStatus } from "../../types/loading-status";
@@ -17,14 +16,11 @@ type Props = {
   ingredients: ConstructorIngredient[];
   bun: null | BurgerIngredient;
   totalPrice: number;
+  onMakeOrder: VoidFunction;
 };
 
 export const BurgerConstructor = (props: Props) => {
-  const { loadingState, ingredients, bun, totalPrice } = props;
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  const openPopup = useCallback(() => setIsPopupOpen(true), []);
-  const closePopup = useCallback(() => setIsPopupOpen(false), []);
+  const { loadingState, ingredients, bun, totalPrice, onMakeOrder } = props;
   const isOrderEnabled = bun && ingredients.length;
 
   if (loadingState === LoadingState.LOADING) {
@@ -56,16 +52,12 @@ export const BurgerConstructor = (props: Props) => {
       </div>
       <div className={styles.orderSummaryContainer}>
         <OrderSummary price={totalPrice}>
-          <Button disabled={!isOrderEnabled} type="primary" size="large" htmlType="button" onClick={openPopup}>
+          <Button disabled={!isOrderEnabled} type="primary" size="large" htmlType="button" onClick={onMakeOrder}>
             Оформить заказ
           </Button>
         </OrderSummary>
       </div>
-      {isPopupOpen ? (
-        <Modal onRequestClose={closePopup}>
-          <OrderDetails />
-        </Modal>
-      ) : null}
+      <OrderDetailsModalContainer />
     </div>
   );
 };
