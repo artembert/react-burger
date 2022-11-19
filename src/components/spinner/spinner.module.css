@@ -1,0 +1,45 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  animation: loader 2s infinite;
+  animation-delay: 0.3s;
+}
+
+.bun1 {
+  position: relative;
+}
+
+.bun2 {
+  position: relative;
+  rotate: 180deg;
+}
+
+
+@keyframes loader {
+  0% {
+    rotate: 0deg;
+  }
+  25% {
+    /*rotate: y 90deg;*/
+    /*scale: 0.5;*/
+  }
+  50% {
+    rotate: 180deg;
+  }
+  75% {
+    /*rotate: x 270deg;*/
+    /*border-radius: 50%;*/
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
