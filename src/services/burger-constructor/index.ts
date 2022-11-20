@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 import { BurgerIngredient } from "../../types/BurgerIngredient";
 import { BurgerParts } from "../../types/burger-parts";
-import { ConstructorIngredient } from "../../types/constructor-ingredient";
+import { ConstructorIngredient, DraggableConstructorIngredient } from "../../types/constructor-ingredient";
 
 export type ConstructorSliceState = {
   bun: null | ConstructorIngredient;
-  ingredients: ConstructorIngredient[];
+  ingredients: DraggableConstructorIngredient[];
 };
 
 const initialState: ConstructorSliceState = {
@@ -23,7 +23,8 @@ const burgerConstructorSlice = createSlice({
       if (action.payload.type === BurgerParts.BUN) {
         state.bun = ingredient;
       } else {
-        state.ingredients.push(ingredient);
+        const orderIndex = state.ingredients.length;
+        state.ingredients.push({ ...ingredient, orderIndex });
       }
     },
   },
