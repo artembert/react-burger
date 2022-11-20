@@ -48,11 +48,6 @@
   height: calc(100vh - calc(88px + calc(100px + calc(56px + 292px))));
 }
 
-.draggableItemContainer {
-  display: flex;
-  align-items: center;
-}
-
 .orderSummaryContainer {
   margin-top: 40px;
   margin-bottom: 52px;
