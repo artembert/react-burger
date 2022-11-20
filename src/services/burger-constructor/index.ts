@@ -9,6 +9,11 @@ export type ConstructorSliceState = {
   ingredients: DraggableConstructorIngredient[];
 };
 
+type DndConstructorIngredient = {
+  dragIndex: number;
+  hoverIndex: number;
+};
+
 const initialState: ConstructorSliceState = {
   bun: null,
   ingredients: [],
@@ -27,8 +32,14 @@ const burgerConstructorSlice = createSlice({
         state.ingredients.push({ ...ingredient, orderIndex });
       }
     },
+    reorderConstructorIngredients(state, action: PayloadAction<DndConstructorIngredient>) {
+      const newListIngredients = [...state.ingredients];
+      const dragIngredient = newListIngredients.splice(action.payload.dragIndex, 1)[0];
+      newListIngredients.splice(action.payload.hoverIndex, 0, dragIngredient);
+      state.ingredients = newListIngredients;
+    },
   },
 });
 
-export const { addIngredient } = burgerConstructorSlice.actions;
+export const { addIngredient, reorderConstructorIngredients } = burgerConstructorSlice.actions;
 export const burgerConstructor = burgerConstructorSlice.reducer;
