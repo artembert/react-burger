@@ -7,6 +7,7 @@ import { MenuIngredient } from "../../types/menu-ingredient";
 import { LoadingState } from "../../types/loading-state";
 import { BurgerIngredientsGroup } from "./burger-ingredients-group/burger-ingredients-group";
 import { IngredientDetailsModalContainer } from "../../containers/ingredient-details-modal-container";
+import { Spinner } from "../spinner/spinner";
 import styles from "./burger-ingredients.module.css";
 
 type Props = {
@@ -85,10 +86,23 @@ export const BurgerIngredients = (props: Props) => {
     }
   }, [inViewBuns, inViewSauces, inViewMain]);
 
+  if (loadingState === LoadingState.ERROR) {
+    return (
+      <div className={`${styles.error} text text_type_main-default`}>
+        ⚠️ Не удалось загрузить меню.
+        <br />
+        Перезагрузите страницу
+      </div>
+    );
+  }
+
+  if (loadingState === LoadingState.LOADING) {
+    return <Spinner />;
+  }
+
   return (
     <section>
       <BurgerIngredientsNavigation current={current} onChange={scrollToGroup} />
-      {loadingState === LoadingState.ERROR ? <div>Не удалось загрузить меню. Перезагрузите страницу</div> : null}
       <div className={`${styles.list} custom-scroll pb-10`}>
         <BurgerIngredientsGroup
           ref={setBunsRefs}
