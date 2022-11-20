@@ -9,6 +9,7 @@ type Props = {
   item: ConstructorIngredient;
   index: number;
   onMoveItem: (dragIndex: number, hoverIndex: number) => void;
+  onDelete: (ingredient: ConstructorIngredient) => void;
 };
 
 type DropTarget = { isHover: boolean; availableToDrop: boolean };
@@ -16,8 +17,12 @@ type DragTarget = { isDragging: boolean };
 type DropItem = { id: string; index: number };
 
 const Component = (props: Props) => {
-  const { item, index, onMoveItem } = props;
+  const { item, index, onMoveItem, onDelete } = props;
   const ref = useRef<HTMLDivElement>(null);
+
+  const handleDelete = () => {
+    onDelete(item);
+  };
 
   const [, drop] = useDrop<DropItem, unknown, DropTarget>({
     accept: DndType.CONSTRUCTOR_ITEM,
@@ -64,7 +69,7 @@ const Component = (props: Props) => {
       <div className="mr-2">
         <DragIcon type="primary" />
       </div>
-      <ConstructorElement text={item.name} price={item.price} thumbnail={item.image} />
+      <ConstructorElement text={item.name} price={item.price} thumbnail={item.image} handleClose={handleDelete} />
     </div>
   );
 };

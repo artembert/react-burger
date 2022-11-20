@@ -10,8 +10,13 @@ import {
 } from "../services/burger-constructor/selectors";
 import { useAppDispatch } from "../services/store";
 import { makeOrder } from "../services/order-details";
-import { addIngredient, reorderConstructorIngredients } from "../services/burger-constructor";
+import {
+  addIngredient,
+  deleteIngredientFromConstructor,
+  reorderConstructorIngredients,
+} from "../services/burger-constructor";
 import { selectIngredients } from "../services/ingredients/selectors";
+import { ConstructorIngredient } from "../types/constructor-ingredient";
 
 export const BurgerConstructorContainer = () => {
   const dispatch = useAppDispatch();
@@ -43,6 +48,12 @@ export const BurgerConstructorContainer = () => {
     },
     [dispatch]
   );
+  const handleDeleteIngredient = useCallback(
+    (ingredient: ConstructorIngredient) => {
+      dispatch(deleteIngredientFromConstructor(ingredient));
+    },
+    [dispatch]
+  );
 
   return (
     <BurgerConstructor
@@ -53,6 +64,7 @@ export const BurgerConstructorContainer = () => {
       onMakeOrder={handleNewOrder}
       onAddIngredient={handleAddIngredient}
       onMoveItem={handleMoveItem}
+      onDeleteIngredient={handleDeleteIngredient}
     />
   );
 };

@@ -23,13 +23,15 @@ type Props = {
   onMakeOrder: VoidFunction;
   onAddIngredient: (id: string) => void;
   onMoveItem: (dragIndex: number, hoverIndex: number) => void;
+  onDeleteIngredient: (ingredient: ConstructorIngredient) => void;
 };
 
 type DropTarget = { isHover: boolean; availableToDrop: boolean };
 type DropItem = { id: string };
 
 export const BurgerConstructor = (props: Props) => {
-  const { loadingState, ingredients, bun, totalPrice, onMakeOrder, onAddIngredient, onMoveItem } = props;
+  const { loadingState, ingredients, bun, totalPrice, onMakeOrder, onAddIngredient, onMoveItem, onDeleteIngredient } =
+    props;
   const isOrderEnabled = bun && ingredients.length;
   const [{ isHover, availableToDrop }, dropTargetRef] = useDrop<DropItem, unknown, DropTarget>({
     accept: DndType.INGREDIENT,
@@ -67,7 +69,13 @@ export const BurgerConstructor = (props: Props) => {
         <div className={`${styles.list} pr-1 custom-scroll`}>
           {!ingredients.length ? <MainPlaceholder /> : null}
           {ingredients.map((item, index) => (
-            <ConstructorItem key={item.pieceId} item={item} index={index} onMoveItem={onMoveItem} />
+            <ConstructorItem
+              key={item.pieceId}
+              item={item}
+              index={index}
+              onMoveItem={onMoveItem}
+              onDelete={onDeleteIngredient}
+            />
           ))}
         </div>
         <div className={`${styles.fixedElement} mt-4`}>

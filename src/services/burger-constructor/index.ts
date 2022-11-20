@@ -31,6 +31,13 @@ const burgerConstructorSlice = createSlice({
         state.ingredients.push({ ...ingredient });
       }
     },
+    deleteIngredientFromConstructor(state, action: PayloadAction<ConstructorIngredient>) {
+      if (action.payload.type === BurgerParts.BUN) {
+        state.bun = null;
+      } else {
+        state.ingredients = state.ingredients.filter((item) => item.pieceId !== action.payload.pieceId);
+      }
+    },
     reorderConstructorIngredients(state, action: PayloadAction<DndConstructorIngredient>) {
       const newListIngredients = [...state.ingredients];
       const dragIngredient = newListIngredients.splice(action.payload.dragIndex, 1)[0];
@@ -40,5 +47,6 @@ const burgerConstructorSlice = createSlice({
   },
 });
 
-export const { addIngredient, reorderConstructorIngredients } = burgerConstructorSlice.actions;
+export const { addIngredient, reorderConstructorIngredients, deleteIngredientFromConstructor } =
+  burgerConstructorSlice.actions;
 export const burgerConstructor = burgerConstructorSlice.reducer;
