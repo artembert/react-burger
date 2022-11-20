@@ -1,4 +1,5 @@
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import { useInView } from "react-intersection-observer";
 import { BurgerIngredientsNavigation } from "./burger-ingredients-navigation/burger-ingredients-navigation";
 import { BurgerPart, BurgerParts } from "../../types/burger-parts";
 import { LoadingStatus } from "../../types/loading-status";
@@ -17,12 +18,44 @@ type Props = {
 export const BurgerIngredients = (props: Props) => {
   const { loadingState, ingredients, onClickIngredient } = props;
   const [current, setCurrent] = React.useState(BurgerParts.BUN);
-  const banIngredients = useMemo(() => ingredients.filter((item) => item.type === BurgerParts.BUN), [ingredients]);
+  const bunIngredients = useMemo(() => ingredients.filter((item) => item.type === BurgerParts.BUN), [ingredients]);
   const sauceIngredients = useMemo(() => ingredients.filter((item) => item.type === BurgerParts.SAUCE), [ingredients]);
   const mainIngredients = useMemo(() => ingredients.filter((item) => item.type === BurgerParts.MAIN), [ingredients]);
-  const bunsSectionRef = useRef<HTMLDivElement>(null);
-  const saucesSectionRef = useRef<HTMLDivElement>(null);
-  const mainSectionRef = useRef<HTMLDivElement>(null);
+  const bunsSectionRef = useRef<HTMLDivElement>();
+  const saucesSectionRef = useRef<HTMLDivElement>();
+  const mainSectionRef = useRef<HTMLDivElement>();
+
+  const [bunsInViewRef, inViewBuns] = useInView({
+    threshold: 0,
+  });
+  const [saucesInViewRef, inViewSauces] = useInView({
+    threshold: 0,
+  });
+  const [mainInViewRef, inViewMain] = useInView({
+    threshold: 0,
+  });
+
+  const setBunsRefs = useCallback(
+    (node: HTMLDivElement) => {
+      bunsSectionRef.current = node;
+      bunsInViewRef(node);
+    },
+    [bunsInViewRef]
+  );
+  const setSaucesRefs = useCallback(
+    (node: HTMLDivElement) => {
+      saucesSectionRef.current = node;
+      saucesInViewRef(node);
+    },
+    [saucesInViewRef]
+  );
+  const setMainRefs = useCallback(
+    (node: HTMLDivElement) => {
+      mainSectionRef.current = node;
+      mainInViewRef(node);
+    },
+    [mainInViewRef]
+  );
 
   const scrollToGroup = useCallback(
     (group: BurgerPart) => {
@@ -42,27 +75,37 @@ export const BurgerIngredients = (props: Props) => {
     [bunsSectionRef, saucesSectionRef, mainSectionRef]
   );
 
+  useEffect(() => {
+    if (inViewBuns) {
+      setCurrent(BurgerParts.BUN);
+    } else if (inViewSauces) {
+      setCurrent(BurgerParts.SAUCE);
+    } else if (inViewMain) {
+      setCurrent(BurgerParts.MAIN);
+    }
+  }, [inViewBuns, inViewSauces, inViewMain]);
+
   return (
     <section>
       <BurgerIngredientsNavigation current={current} onChange={scrollToGroup} />
       {loadingState === LoadingState.ERROR ? <div>Не удалось загрузить меню. Перезагрузите страницу</div> : null}
-      <div className={`${styles.list} custom-scroll`}>
+      <div className={`${styles.list} custom-scroll pb-10`}>
         <BurgerIngredientsGroup
-          ref={bunsSectionRef}
+          ref={setBunsRefs}
           title="Булки"
-          ingredients={banIngredients}
+          ingredients={bunIngredients}
           loadingState={loadingState}
           onClickByIngredient={onClickIngredient}
         />
         <BurgerIngredientsGroup
-          ref={saucesSectionRef}
+          ref={setSaucesRefs}
           title="Соусы"
           ingredients={sauceIngredients}
           loadingState={loadingState}
           onClickByIngredient={onClickIngredient}
         />
         <BurgerIngredientsGroup
-          ref={mainSectionRef}
+          ref={setMainRefs}
           title="Начинки"
           ingredients={mainIngredients}
           loadingState={loadingState}

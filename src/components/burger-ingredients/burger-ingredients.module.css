@@ -1,4 +1,4 @@
 .list {
   overflow-y: scroll;
-  max-height: calc(100vh - calc(88px + calc(100px + 56px)));
+  max-height: calc(100vh - calc(88px + calc(100px + 96px)));
 }

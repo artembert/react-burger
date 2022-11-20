@@ -16,8 +16,8 @@ type Props = {
 export const BurgerIngredientsGroup = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const { ingredients, title, loadingState, onClickByIngredient } = props;
   return (
-    <section ref={ref}>
-      <h3 className="text text_type_main-medium pt-10 pb-6">{title}</h3>
+    <section ref={ref} className="mt-5">
+      <h3 className="text text_type_main-medium pt-5 pb-6">{title}</h3>
       <ul className={styles.ingredientsList}>
         {loadingState === LoadingState.SUCCESSFUL
           ? ingredients.map((item) => (
