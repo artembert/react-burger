@@ -1,16 +1,16 @@
 import React, { forwardRef } from "react";
 import { Ingredient } from "../../ingredient/ingredient";
-import { BurgerIngredient } from "../../../types/BurgerIngredient";
+import { MenuIngredient } from "../../../types/menu-ingredient";
 import styles from "./burger-ingredients-group.module.css";
 import { ValueOf } from "../../../types";
 import { LoadingState } from "../../../types/loading-state";
 import { Skeleton } from "../../skeleton";
 
 type Props = {
-  ingredients: BurgerIngredient[];
+  ingredients: MenuIngredient[];
   title: string;
   loadingState: ValueOf<typeof LoadingState>;
-  onClickByIngredient: (ingredient: BurgerIngredient) => void;
+  onClickByIngredient: (ingredient: MenuIngredient) => void;
 };
 
 export const BurgerIngredientsGroup = forwardRef<HTMLDivElement, Props>((props, ref) => {

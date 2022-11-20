@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useRef } from "react";
 import { BurgerIngredientsNavigation } from "./burger-ingredients-navigation/burger-ingredients-navigation";
 import { BurgerPart, BurgerParts } from "../../types/burger-parts";
 import { LoadingStatus } from "../../types/loading-status";
-import { BurgerIngredient } from "../../types/BurgerIngredient";
+import { MenuIngredient } from "../../types/menu-ingredient";
 import { LoadingState } from "../../types/loading-state";
 import { BurgerIngredientsGroup } from "./burger-ingredients-group/burger-ingredients-group";
 import { IngredientDetailsModalContainer } from "../../containers/ingredient-details-modal-container";
@@ -10,8 +10,8 @@ import styles from "./burger-ingredients.module.css";
 
 type Props = {
   loadingState: LoadingStatus;
-  ingredients: BurgerIngredient[];
-  onClickIngredient: (ingredient: BurgerIngredient) => void;
+  ingredients: MenuIngredient[];
+  onClickIngredient: (ingredient: MenuIngredient) => void;
 };
 
 export const BurgerIngredients = (props: Props) => {

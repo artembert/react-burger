@@ -2,19 +2,19 @@ import { memo } from "react";
 import classnames from "classnames";
 import { useDrag } from "react-dnd";
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { BurgerIngredient } from "../../types/BurgerIngredient";
+import { MenuIngredient } from "../../types/menu-ingredient";
 import { DndType } from "../../app/constants";
 import styles from "./ingredient.module.css";
 
 type Props = {
-  ingredient: BurgerIngredient;
-  onClick: (ingredient: BurgerIngredient) => void;
+  ingredient: MenuIngredient;
+  onClick: (ingredient: MenuIngredient) => void;
   amount?: number;
 };
 
 const Component = (props: Props) => {
-  const { ingredient, amount, onClick } = props;
-  const { name, price, image } = ingredient;
+  const { ingredient, onClick } = props;
+  const { name, price, image, amount } = ingredient;
 
   const [{ isDrag }, dragRef] = useDrag({
     type: DndType.INGREDIENT,

@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { BurgerIngredient } from "../../types/BurgerIngredient";
 import { BurgerParts } from "../../types/burger-parts";
 import { ConstructorIngredient } from "../../types/constructor-ingredient";
+import { MenuIngredient } from "../../types/menu-ingredient";
 
 export type ConstructorSliceState = {
   bun: null | ConstructorIngredient;
@@ -23,8 +24,12 @@ const burgerConstructorSlice = createSlice({
   name: "burger-constructor",
   initialState,
   reducers: {
-    addIngredient(state, action: PayloadAction<BurgerIngredient>) {
+    addIngredient(state, action: PayloadAction<BurgerIngredient | MenuIngredient>) {
       const ingredient: ConstructorIngredient = { ...action.payload, pieceId: uuidv4() };
+      if ("amount" in ingredient) {
+        delete (ingredient as MenuIngredient).amount;
+      }
+
       if (action.payload.type === BurgerParts.BUN) {
         state.bun = ingredient;
       } else {
