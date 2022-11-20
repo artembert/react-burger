@@ -25,3 +25,10 @@
 .loader {
   height: 548px;
 }
+
+.error {
+  height: 548px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,9 +1,9 @@
 import React from "react";
 import markDoneImgSrc from "../../images/mark-done.svg";
-import styles from "./order-details.module.css";
 import { LoadingStatus } from "../../types/loading-status";
 import { LoadingState } from "../../types/loading-state";
 import { Spinner } from "../spinner/spinner";
+import styles from "./order-details.module.css";
 
 type Props = {
   loadingStatus: LoadingStatus;
@@ -15,10 +15,20 @@ type Props = {
 
 export const OrderDetails = (props: Props) => {
   const { details, loadingStatus } = props;
-  if (!details || loadingStatus !== LoadingState.SUCCESSFUL) {
+  if (loadingStatus === LoadingState.LOADING) {
     return (
       <div className={`${styles.loader} pb-20 pt-4 pr-20 pl-20`}>
         <Spinner />
+      </div>
+    );
+  }
+
+  if (loadingStatus === LoadingState.ERROR || !details) {
+    return (
+      <div className={`${styles.error} pb-20 pt-4 pr-20 pl-20 text text_type_main-default`}>
+        ⚠️ Не удалось оформить заказ.
+        <br />
+        Перезагрузите страницу и попробуйте снова
       </div>
     );
   }
