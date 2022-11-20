@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { memo, useRef } from "react";
 import { useDrag, useDrop, XYCoord } from "react-dnd";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorIngredient } from "../../../types/constructor-ingredient";
@@ -15,7 +15,7 @@ type DropTarget = { isHover: boolean; availableToDrop: boolean };
 type DragTarget = { isDragging: boolean };
 type DropItem = { id: string; index: number };
 
-export const ConstructorItem = (props: Props) => {
+const Component = (props: Props) => {
   const { item, index, onMoveItem } = props;
   const ref = useRef<HTMLDivElement>(null);
 
@@ -68,3 +68,5 @@ export const ConstructorItem = (props: Props) => {
     </div>
   );
 };
+
+export const ConstructorItem = memo(Component);
