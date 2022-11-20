@@ -10,7 +10,7 @@ import {
 } from "../services/burger-constructor/selectors";
 import { useAppDispatch } from "../services/store";
 import { makeOrder } from "../services/order-details";
-import { addIngredient } from "../services/burger-constructor";
+import { addIngredient, reorderConstructorIngredients } from "../services/burger-constructor";
 import { selectIngredients } from "../services/ingredients/selectors";
 
 export const BurgerConstructorContainer = () => {
@@ -32,6 +32,17 @@ export const BurgerConstructorContainer = () => {
     },
     [dispatch, allIngredients]
   );
+  const handleMoveItem = useCallback(
+    (dragIndex: number, hoverIndex: number) => {
+      dispatch(
+        reorderConstructorIngredients({
+          dragIndex,
+          hoverIndex,
+        })
+      );
+    },
+    [dispatch]
+  );
 
   return (
     <BurgerConstructor
@@ -41,6 +52,7 @@ export const BurgerConstructorContainer = () => {
       totalPrice={totalPrice}
       onMakeOrder={handleNewOrder}
       onAddIngredient={handleAddIngredient}
+      onMoveItem={handleMoveItem}
     />
   );
 };

@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
 import { useDrag, useDrop, XYCoord } from "react-dnd";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { DraggableConstructorIngredient } from "../../../types/constructor-ingredient";
+import { ConstructorIngredient } from "../../../types/constructor-ingredient";
 import { DndType } from "../../../app/constants";
 import styles from "./constructor-item.module.css";
 
 type Props = {
-  item: DraggableConstructorIngredient;
+  item: ConstructorIngredient;
   index: number;
   onMoveItem: (dragIndex: number, hoverIndex: number) => void;
 };

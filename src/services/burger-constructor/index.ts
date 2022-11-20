@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 import { BurgerIngredient } from "../../types/BurgerIngredient";
 import { BurgerParts } from "../../types/burger-parts";
-import { ConstructorIngredient, DraggableConstructorIngredient } from "../../types/constructor-ingredient";
+import { ConstructorIngredient } from "../../types/constructor-ingredient";
 
 export type ConstructorSliceState = {
   bun: null | ConstructorIngredient;
-  ingredients: DraggableConstructorIngredient[];
+  ingredients: ConstructorIngredient[];
 };
 
 type DndConstructorIngredient = {
@@ -28,8 +28,7 @@ const burgerConstructorSlice = createSlice({
       if (action.payload.type === BurgerParts.BUN) {
         state.bun = ingredient;
       } else {
-        const orderIndex = state.ingredients.length;
-        state.ingredients.push({ ...ingredient, orderIndex });
+        state.ingredients.push({ ...ingredient });
       }
     },
     reorderConstructorIngredients(state, action: PayloadAction<DndConstructorIngredient>) {
