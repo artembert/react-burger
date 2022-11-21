@@ -1,4 +1,5 @@
 import { handleFetchResponse } from "../../../app/helpers/handle-fetch-response";
+import { API_ENDPOINT } from "../../../app/constants";
 
 export type NewOrderReqBody = {
   ingredients: string[];
@@ -15,7 +16,7 @@ type NewOrderRes = NewOrderDto & {
   success: boolean;
 };
 
-const newOrderDetailsEndpoint = "https://norma.nomoreparties.space/api/orders";
+const newOrderDetailsEndpoint = `${API_ENDPOINT}/orders`;
 
 export const makeNewOrderRequest = async (body: NewOrderReqBody): Promise<NewOrderDto> => {
   const response = await fetch(newOrderDetailsEndpoint, {
