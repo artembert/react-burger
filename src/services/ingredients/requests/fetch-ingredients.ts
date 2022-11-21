@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { handleFetchResponse } from "../../../app/helpers/handle-fetch-response";
+import { request } from "../../../app/helpers/request";
 import { BurgerIngredient } from "../../../types/BurgerIngredient";
 import { API_ENDPOINT } from "../../../app/constants";
 
@@ -11,10 +11,9 @@ type IngredientsRes = {
 const ingredientsEndpoint = `${API_ENDPOINT}/ingredients`;
 
 export const fetchIngredients = createAsyncThunk("ingredients/fetch", async () => {
-  const response = await fetch(ingredientsEndpoint);
-  const payload = await handleFetchResponse<IngredientsRes>(response);
-  if (payload.success) {
-    return payload.data;
+  const response = await request<IngredientsRes>(ingredientsEndpoint);
+  if (response.success) {
+    return response.data;
   }
-  return Promise.reject("Failed to detch burger ingredients");
+  return Promise.reject("Failed to fetch burger ingredients");
 });

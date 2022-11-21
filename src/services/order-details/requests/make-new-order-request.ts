@@ -1,4 +1,4 @@
-import { handleFetchResponse } from "../../../app/helpers/handle-fetch-response";
+import { HttpMethod, request } from "../../../app/helpers/request";
 import { API_ENDPOINT } from "../../../app/constants";
 
 export type NewOrderReqBody = {
@@ -19,19 +19,12 @@ type NewOrderRes = NewOrderDto & {
 const newOrderDetailsEndpoint = `${API_ENDPOINT}/orders`;
 
 export const makeNewOrderRequest = async (body: NewOrderReqBody): Promise<NewOrderDto> => {
-  const response = await fetch(newOrderDetailsEndpoint, {
-    method: "POST",
-    body: JSON.stringify(body),
-    headers: new Headers({
-      "content-type": "application/json",
-    }),
-  });
-  const payload = await handleFetchResponse<NewOrderRes>(response);
-  if (payload.success) {
+  const response = await request<NewOrderRes>(newOrderDetailsEndpoint, { method: HttpMethod.POST, body });
+  if (response.success) {
     return {
-      name: payload.name,
-      order: payload.order,
+      name: response.name,
+      order: response.order,
     };
   }
-  return Promise.reject("Failed to detch burger ingredients");
+  return Promise.reject("Failed to make a new order");
 };
