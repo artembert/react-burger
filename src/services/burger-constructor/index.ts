@@ -49,9 +49,12 @@ const burgerConstructorSlice = createSlice({
       newListIngredients.splice(action.payload.hoverIndex, 0, dragIngredient);
       state.ingredients = newListIngredients;
     },
+    clearConstructor() {
+      return initialState;
+    },
   },
 });
 
-export const { addIngredient, reorderConstructorIngredients, deleteIngredientFromConstructor } =
+export const { addIngredient, reorderConstructorIngredients, deleteIngredientFromConstructor, clearConstructor } =
   burgerConstructorSlice.actions;
 export const burgerConstructor = burgerConstructorSlice.reducer;

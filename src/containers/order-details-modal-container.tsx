@@ -8,6 +8,7 @@ import {
 } from "../services/order-details/selectors";
 import { useAppDispatch } from "../services/store";
 import { closeOrderDetailsPopup } from "../services/order-details";
+import { clearConstructor } from "../services/burger-constructor";
 
 export const OrderDetailsModalContainer = () => {
   const dispatch = useAppDispatch();
@@ -15,6 +16,7 @@ export const OrderDetailsModalContainer = () => {
   const loadingState = useSelector(selectOrderDetailsLoadingSate);
   const details = useSelector(selectOrderDetailsDetails);
   const closePopup = () => {
+    dispatch(clearConstructor());
     dispatch(closeOrderDetailsPopup());
   };
 
