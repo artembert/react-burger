@@ -1,6 +1,40 @@
 .burgerConstructor {
 }
 
+.dropTarget {
+  position: relative;
+}
+
+.dropTarget::after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  bottom: -20px;
+  right: 0;
+  background: var(--dnd-drop-target-background);
+  background-color: var(--colors-drop-target);
+  border-radius: 40px;
+}
+
+.dropHover {
+  position: relative;
+}
+
+.dropHover::after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  bottom: -20px;
+  right: 0;
+  background: var(--dnd-drop-hover-background);
+  background-color: var(--colors-drop-hover);
+  border-radius: 40px;
+}
+
 .fixedElement {
   padding-left: 32px;
   padding-right: 16px;
@@ -11,12 +45,7 @@
   flex-direction: column;
   gap: 16px;
   overflow-y: scroll;
-  max-height: calc(100vh - calc(88px + calc(100px + calc(56px + 292px))));
-}
-
-.draggableItemContainer {
-  display: flex;
-  align-items: center;
+  height: calc(100vh - calc(88px + calc(100px + calc(56px + 292px))));
 }
 
 .orderSummaryContainer {

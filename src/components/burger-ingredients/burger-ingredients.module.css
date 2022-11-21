@@ -1,20 +1,11 @@
 .list {
   overflow-y: scroll;
-  max-height: calc(100vh - calc(88px + calc(100px + 56px)));
+  max-height: calc(100vh - calc(88px + calc(100px + 96px)));
 }
 
-.ingredientsList {
-  margin: 0;
-  padding: 0 8px 0 16px;
-  list-style: none;
+.error {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  row-gap: 32px;
-}
-
-.ingredient {
-  padding: 0;
-  flex-shrink: 0;
-  flex-grow: 0;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }

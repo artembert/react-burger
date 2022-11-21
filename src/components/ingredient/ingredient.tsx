@@ -1,17 +1,39 @@
-import React, { memo } from "react";
-import PropTypes from "prop-types";
+import { memo } from "react";
+import classnames from "classnames";
+import { useDrag } from "react-dnd";
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { MenuIngredient } from "../../types/menu-ingredient";
+import { DndType } from "../../app/constants";
 import styles from "./ingredient.module.css";
-import { ingredientType } from "../../types/constants/ingredient";
 
-const Component = (props) => {
-  const { ingredient, amount, onClick } = props;
-  const { name, price, image } = ingredient;
+type Props = {
+  ingredient: MenuIngredient;
+  onClick: (ingredient: MenuIngredient) => void;
+  amount?: number;
+};
+
+const Component = (props: Props) => {
+  const { ingredient, onClick } = props;
+  const { name, price, image, amount } = ingredient;
+
+  const [{ isDrag }, dragRef] = useDrag({
+    type: DndType.INGREDIENT,
+    item: { id: ingredient._id },
+    collect: (monitor) => ({
+      isDrag: monitor.isDragging(),
+    }),
+  });
 
   const handleClick = () => onClick(ingredient);
 
   return (
-    <div className={styles.ingredient} onClick={handleClick}>
+    <div
+      ref={dragRef}
+      className={classnames(styles.ingredient, {
+        [styles.draggable]: isDrag,
+      })}
+      onClick={handleClick}
+    >
       {amount ? (
         <div className={styles.counterContainer}>
           <Counter count={amount} size="default" />
@@ -27,12 +49,6 @@ const Component = (props) => {
       <div className={`${styles.name} mt-2 text text_type_main-default`}>{name}</div>
     </div>
   );
-};
-
-Component.propTypes = {
-  ingredient: ingredientType.isRequired,
-  amount: PropTypes.number,
-  onClick: PropTypes.func,
 };
 
 export const Ingredient = memo(Component);

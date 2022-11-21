@@ -3,4 +3,4 @@ export const LoadingState = {
   LOADING: "LOADING",
   SUCCESSFUL: "SUCCESSFUL",
   ERROR: "ERROR",
-};
+} as const;

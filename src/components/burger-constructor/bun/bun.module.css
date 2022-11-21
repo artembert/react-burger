@@ -1,0 +1,13 @@
+.bun {
+  height: 74px;
+  background: #1C1C21;
+  border: var(--border-empty-constructor-element);
+}
+
+.bun_top {
+  border-radius: 88px 88px 40px 40px;
+}
+
+.bun_bottom {
+  border-radius: 40px 40px 88px 88px;
+}
