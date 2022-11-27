@@ -1,11 +1,13 @@
+:root {
+  --ingredient-width: 272px;
+}
+
 .ingredient {
-  width: 272px;
-  height: 208px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
+  display: grid;
   transition: opacity 0.3s;
+  grid-template-rows: min-content min-content;
+  grid-template-columns: min-content 1fr;
+  align-items: center;
 }
 
 .ingredient:hover {
@@ -17,15 +19,17 @@
   position: absolute;
   top: 0;
   right: 0;
+  transform: translate(0px, -5px);
 }
 
 .imageContainer {
-  width: 240px;
-  height: 120px;
-  overflow: hidden;
+  position: relative;
+  width: 120px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  grid-row: 1;
 }
 
 .image {
@@ -35,12 +39,54 @@
 
 .priceContainer {
   display: flex;
+  grid-row: 1;
+  align-items: center;
+}
+
+.price {
+  min-width: 4ch;
+  text-align: right;
 }
 
 .name {
-  text-align: center;
+  text-align: left;
+  grid-row: 1;
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
 .draggable {
   opacity: 0.5;
+}
+
+@container (inline-size > calc(8px + calc(calc(2 * 272px) + 16px))) {
+  .ingredient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: var(--ingredient-width);
+    height: 208px;
+  }
+
+  .imageContainer {
+    width: 240px;
+    height: 120px;
+  }
+
+  .name {
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .counterContainer {
+    transform: none;
+  }
+
+  .priceContainer {
+    margin-top: 8px;
+  }
+
+  .price {
+    text-align: center;
+  }
 }

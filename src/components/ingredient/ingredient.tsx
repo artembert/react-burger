@@ -34,19 +34,19 @@ const Component = (props: Props) => {
       })}
       onClick={handleClick}
     >
-      {amount ? (
-        <div className={styles.counterContainer}>
-          <Counter count={amount} size="default" />
-        </div>
-      ) : null}
       <div className={styles.imageContainer}>
         <img className={styles.image} src={image} alt={name} />
+        {amount ? (
+          <div className={styles.counterContainer}>
+            <Counter count={amount} size="default" />
+          </div>
+        ) : null}
       </div>
-      <div className={`${styles.priceContainer} mt-2`}>
-        <div className="text text_type_digits-default mr-2">{price}</div>
+      <div className={`${styles.priceContainer}`}>
+        <div className={`${styles.price} text text_type_digits-default mr-2`}>{price}</div>
         <CurrencyIcon type="primary" />
       </div>
-      <div className={`${styles.name} mt-2 text text_type_main-default`}>{name}</div>
+      <div className={`${styles.name} text text_type_main-default`}>{name}</div>
     </div>
   );
 };
