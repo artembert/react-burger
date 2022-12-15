@@ -47,7 +47,7 @@ export const LoginPage = () => {
             <div>
               <span className="text text_type_main-default text_color_inactive">Забыли пароль?</span>
               {NBSP}
-              <Link to="/">
+              <Link to="/forgot-password">
                 <TextLink>Восстановить пароль</TextLink>
               </Link>
             </div>
