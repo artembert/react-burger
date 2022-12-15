@@ -8,6 +8,7 @@ import { Layout } from "../layout/layout";
 import { RegisterPage } from "../../pages/register-page/register-page";
 import { LoginPage } from "../../pages/login-page/login-page";
 import { ForgotPasswordPage } from "../../pages/forgot-password-page/forgot-password-page";
+import { ResetPasswordPage } from "../../pages/reset-password-page/reset-password-page";
 
 export const App = () => {
   return (
@@ -24,6 +25,9 @@ export const App = () => {
             </Route>
             <Route path="/forgot-password" exact>
               <ForgotPasswordPage />
+            </Route>
+            <Route path="/reset-password" exact>
+              <ResetPasswordPage />
             </Route>
             <Route path="/">
               <ConstructorPage />
