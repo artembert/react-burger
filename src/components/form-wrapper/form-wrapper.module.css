@@ -1,0 +1,19 @@
+.root {
+  max-width: 480px;
+  width: 100%;
+}
+
+.title {
+  text-align: center;
+}
+
+.content {
+  display: grid;
+  grid-gap: 24px;
+}
+
+.footer {
+  display: grid;
+  justify-content: center;
+  gap: 16px;
+}
