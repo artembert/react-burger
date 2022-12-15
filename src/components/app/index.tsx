@@ -6,6 +6,7 @@ import { store } from "../../services/store";
 import { AppHeader } from "../app-header/app-header";
 import { Layout } from "../layout/layout";
 import { RegisterPage } from "../../pages/register-page/register-page";
+import { LoginPage } from "../../pages/login-page/login-page";
 
 export const App = () => {
   return (
@@ -16,6 +17,9 @@ export const App = () => {
           <Switch>
             <Route path="/register" exact>
               <RegisterPage />
+            </Route>
+            <Route path="/login" exact>
+              <LoginPage />
             </Route>
             <Route path="/">
               <ConstructorPage />
