@@ -5,9 +5,8 @@ import { FormPageWrapper } from "../../components/form-page-wrapper/form-page-wr
 import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
 import { TextLink } from "../../components/text-link/text-link";
 import { NBSP } from "../../components/costants";
+import { InputPasswordType } from "../../types";
 import styles from "./register-page.module.css";
-
-type InputPasswordType = "text" | "password";
 
 export const RegisterPage = () => {
   const [value, setValue] = useState({

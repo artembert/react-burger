@@ -4,10 +4,9 @@ import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-component
 import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
 import { TextLink } from "../../components/text-link/text-link";
 import { FormPageWrapper } from "../../components/form-page-wrapper/form-page-wrapper";
+import { InputPasswordType } from "../../types";
 import { NBSP } from "../../components/costants";
 import styles from "./reset-password-page.module.css";
-
-type InputPasswordType = "text" | "password";
 
 export const ResetPasswordPage = () => {
   const [value, setValue] = useState({
