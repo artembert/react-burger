@@ -10,10 +10,6 @@
   padding: 0;
 }
 
-.description {
-  margin-top: 80px;
-}
-
 @media screen and (max-width: 1240px) {
   .root {
     margin-top: 0;
@@ -24,10 +20,6 @@
     display: flex;
     gap: 32px;
     flex-direction: row;
-  }
-
-  .description {
-    margin-top: 16px;
   }
 }
 

@@ -1,11 +1,10 @@
-import { ProfileNavigation } from "../../components/profile-navigation/profile-navigation";
-import styles from "./profile-page.module.css";
+import { ProfilePageWrapper } from "../profile-page-wrapper/profile-page-wrapper";
 
 export const ProfilePage = () => {
   return (
-    <div className={styles.root}>
-      <ProfileNavigation />
-      <section>content</section>
-    </div>
+    <ProfilePageWrapper
+      pageDescription={"В этом разделе вы можете изменить свои персональные данные"}
+      content={"content"}
+    />
   );
 };

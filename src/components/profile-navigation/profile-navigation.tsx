@@ -35,9 +35,6 @@ export const ProfileNavigation = () => {
           </button>
         </li>
       </ul>
-      <p className={classNames(styles.description, "text", "text_type_main-default", "text_color_inactive")}>
-        В этом разделе вы можете изменить свои персональные данные
-      </p>
     </nav>
   );
 };
