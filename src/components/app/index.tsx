@@ -9,6 +9,7 @@ import { RegisterPage } from "../../pages/register-page/register-page";
 import { LoginPage } from "../../pages/login-page/login-page";
 import { ForgotPasswordPage } from "../../pages/forgot-password-page/forgot-password-page";
 import { ResetPasswordPage } from "../../pages/reset-password-page/reset-password-page";
+import { Routes } from "../../app/routes/constants";
 
 export const App = () => {
   return (
@@ -17,16 +18,16 @@ export const App = () => {
         <AppHeader />
         <Router>
           <Switch>
-            <Route path="/register" exact>
+            <Route path={Routes.Register} exact>
               <RegisterPage />
             </Route>
-            <Route path="/login" exact>
+            <Route path={Routes.Login} exact>
               <LoginPage />
             </Route>
-            <Route path="/forgot-password" exact>
+            <Route path={Routes.ForgotPassword} exact>
               <ForgotPasswordPage />
             </Route>
-            <Route path="/reset-password" exact>
+            <Route path={Routes.ResetPassword} exact>
               <ResetPasswordPage />
             </Route>
             <Route path="/">
