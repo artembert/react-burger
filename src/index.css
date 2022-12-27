@@ -9,6 +9,7 @@
 
   /* Sizes */
   --container-width: 1240px;
+  --profile-page-width-l: 920px;
 
   /* Shadows */
   --draggable-shadow: 0 0 16px rgba(51, 51, 255, 0.25), 0 0 8px rgba(51, 51, 255, 0.25), 0 4px 32px rgba(51, 51, 255, 0.5);
