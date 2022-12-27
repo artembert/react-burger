@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { BurgerIngredient } from "../../types/BurgerIngredient";
 import { ValueOf } from "../../types";
 import { LoadingState } from "../../types/loading-state";
-import { fetchIngredients } from "./requests/fetch-ingredients";
+import { fetchIngredients } from "./requests";
 
 export type IngredientsSliceState = {
   ingredients: BurgerIngredient[];
