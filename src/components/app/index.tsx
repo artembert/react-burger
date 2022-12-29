@@ -11,17 +11,18 @@ import { ForgotPasswordPage } from "../../pages/forgot-password-page/forgot-pass
 import { ResetPasswordPage } from "../../pages/reset-password-page/reset-password-page";
 import { ProfilePage } from "../../pages/profile-page/profile-page";
 import { Routes } from "../../app/routes/constants";
+import { ProtectedRoute } from "../protected-route/protected-route";
 
 export const App = () => {
   return (
     <Provider store={store}>
-      <Layout>
-        <AppHeader />
-        <Router>
+      <Router>
+        <Layout>
+          <AppHeader />
           <Switch>
-            <Route path={Routes.Profile} exact>
+            <ProtectedRoute path={Routes.Profile} exact>
               <ProfilePage />
-            </Route>
+            </ProtectedRoute>
             <Route path={Routes.Register} exact>
               <RegisterPage />
             </Route>
@@ -38,8 +39,8 @@ export const App = () => {
               <ConstructorPage />
             </Route>
           </Switch>
-        </Router>
-      </Layout>
+        </Layout>
+      </Router>
     </Provider>
   );
 };

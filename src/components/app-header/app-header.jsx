@@ -1,13 +1,9 @@
 import React from "react";
-import {
-  Logo,
-  ProfileIcon,
-  BurgerIcon,
-  ListIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Logo, ProfileIcon, BurgerIcon, ListIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { NavigationButton } from "./navigation-button/navigation-button";
 import { AppNavigation } from "./app-navigation/app-navigation";
 import styles from "./app-header.module.css";
+import { Routes } from "../../app/routes/constants";
 
 export const AppHeader = () => {
   return (
@@ -15,11 +11,11 @@ export const AppHeader = () => {
       <div className={styles.container}>
         <div className={styles.startActions}>
           <AppNavigation>
-            <NavigationButton active>
+            <NavigationButton href={Routes.Index} exact>
               <BurgerIcon type="primary" />
               Конструктор
             </NavigationButton>
-            <NavigationButton disabled>
+            <NavigationButton href={Routes.ProfileOrders} exact>
               <ListIcon type="primary" />
               Лента заказов
             </NavigationButton>
@@ -30,7 +26,7 @@ export const AppHeader = () => {
         </div>
         <div className={styles.endActions}>
           <AppNavigation>
-            <NavigationButton>
+            <NavigationButton href={Routes.Profile} exact>
               <ProfileIcon type="primary" />
               Личный кабинет
             </NavigationButton>

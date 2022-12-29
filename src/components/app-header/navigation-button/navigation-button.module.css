@@ -1,29 +1,30 @@
 .navigationButton {
-    padding: 0 20px;
-    background: none;
-    display: flex;
-    gap: 8px;
-    min-height: 56px;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid transparent;
-    border-radius: 4px;
-    color: var(--text-inactive-color);
-    white-space: nowrap;
+  padding: 0 20px;
+  background: none;
+  display: flex;
+  gap: 8px;
+  min-height: 56px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  color: var(--text-inactive-color);
+  white-space: nowrap;
+  text-decoration: none;
 }
 
 .navigationButton:not(.active) svg {
-    fill: var(--text-inactive-color);
+  fill: var(--text-inactive-color);
 }
 
 .navigationButton:not(.active):hover {
-    background-color: #8585ad40;
+  background-color: #8585ad40;
 }
 
 .active {
-    color: var(--text-primary-color);
+  color: var(--text-primary-color);
 }
 
 .active svg {
-    fill: var(--text-primary-color);
+  fill: var(--text-primary-color);
 }
