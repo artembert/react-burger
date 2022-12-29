@@ -1,5 +1,5 @@
 export const Routes = {
-  Index: "",
+  Index: "/",
   Profile: "/profile",
   ProfileOrders: "/profile/orders",
   Register: "/register",
