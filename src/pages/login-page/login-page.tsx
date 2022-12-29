@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useCallback, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
@@ -9,9 +10,12 @@ import { NBSP } from "../../components/costants";
 import styles from "./login-page.module.css";
 import { fetchLogin } from "../../services/auth";
 import { useAppDispatch } from "../../services/store";
+import { selectAuthLoadingState } from "../../services/auth/selectors";
+import { LoadingState } from "../../types/loading-state";
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
+  const isLoading = useSelector(selectAuthLoadingState) === LoadingState.LOADING;
   const [formFields, setFormFields] = useState({
     email: "",
     password: "",
@@ -90,7 +94,7 @@ export const LoginPage = () => {
           size="default"
         />
         <div className={styles.buttonWrapper}>
-          <Button htmlType="submit" type="primary" size="medium">
+          <Button htmlType="submit" type="primary" size="medium" disabled={isLoading}>
             Войти
           </Button>
         </div>

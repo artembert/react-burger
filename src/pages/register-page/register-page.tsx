@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useCallback, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FormPageWrapper } from "../../components/form-page-wrapper/form-page-wrapper";
@@ -9,9 +10,12 @@ import { InputPasswordType } from "../../types";
 import styles from "./register-page.module.css";
 import { useAppDispatch } from "../../services/store";
 import { fetchRegister } from "../../services/auth";
+import { selectAuthLoadingState } from "../../services/auth/selectors";
+import { LoadingState } from "../../types/loading-state";
 
 export const RegisterPage = () => {
   const dispatch = useAppDispatch();
+  const isLoading = useSelector(selectAuthLoadingState) === LoadingState.LOADING;
   const [formFields, setFormFields] = useState({
     name: "",
     email: "",
@@ -102,7 +106,7 @@ export const RegisterPage = () => {
           size="default"
         />
         <div className={styles.buttonWrapper}>
-          <Button htmlType="submit" type="primary" size="medium">
+          <Button htmlType="submit" type="primary" size="medium" disabled={isLoading}>
             Зарегистрироваться
           </Button>
         </div>
