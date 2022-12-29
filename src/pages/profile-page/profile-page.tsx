@@ -2,6 +2,7 @@ import { ChangeEvent, RefObject, useCallback, useRef, useState } from "react";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ProfilePageWrapper } from "../profile-page-wrapper/profile-page-wrapper";
 import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
+import { ProfileNavigation } from "../../components/profile-navigation/profile-navigation";
 import { InputPasswordType } from "../../types";
 import styles from "./profile-page.module.css";
 
@@ -50,21 +51,18 @@ export const ProfilePage = () => {
     }
     setTimeout(() => refs[fieldName].current?.focus(), 0);
   };
-  const handleFieldChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setFieldsHasBeenChanged(true);
-      setValue((current) => ({
-        ...current,
-        [e.target.name]: e.target.value,
-      }));
-    },
-
-    []
-  );
+  const handleFieldChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setFieldsHasBeenChanged(true);
+    setValue((current) => ({
+      ...current,
+      [e.target.name]: e.target.value,
+    }));
+  }, []);
 
   return (
     <ProfilePageWrapper
       pageDescription={"В этом разделе вы можете изменить свои персональные данные"}
+      navigation={<ProfileNavigation />}
       content={
         <div className="mt-30">
           <FormWrapper>
