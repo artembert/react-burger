@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { ConstructorPage } from "../../pages/constructor-page/constructor-page";
+import { useAppDispatch } from "../../services/store";
 import { AppHeader } from "../app-header/app-header";
 import { Layout } from "../layout/layout";
 import { RegisterPage } from "../../pages/register-page/register-page";
@@ -9,8 +11,18 @@ import { ResetPasswordPage } from "../../pages/reset-password-page/reset-passwor
 import { ProfilePage } from "../../pages/profile-page/profile-page";
 import { Routes } from "../../app/routes/constants";
 import { ProtectedRoute } from "../protected-route/protected-route";
+import { fetchUser } from "../../services/auth";
+import { getAccessToken } from "../../services/token";
 
 export const App = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (getAccessToken()) {
+      dispatch(fetchUser());
+    }
+  }, [dispatch]);
+
   return (
     <Layout>
       <AppHeader />
