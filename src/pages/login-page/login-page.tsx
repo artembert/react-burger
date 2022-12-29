@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
@@ -7,9 +7,12 @@ import { FormPageWrapper } from "../../components/form-page-wrapper/form-page-wr
 import { InputPasswordType } from "../../types";
 import { NBSP } from "../../components/costants";
 import styles from "./login-page.module.css";
+import { fetchLogin } from "../../services/auth";
+import { useAppDispatch } from "../../services/store";
 
 export const LoginPage = () => {
-  const [value, setValue] = useState({
+  const dispatch = useAppDispatch();
+  const [formFields, setFormFields] = useState({
     email: "",
     password: "",
   });
@@ -20,16 +23,20 @@ export const LoginPage = () => {
     setInputPasswordType((current) => (current === "text" ? "password" : "text"));
     setTimeout(() => inputPasswordRef.current?.focus(), 0);
   };
-  const handleFieldChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setValue((current) => ({
-        ...current,
-        [e.target.name]: e.target.value,
-      }));
+  const handleFieldChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setFormFields((current) => ({
+      ...current,
+      [e.target.name]: e.target.value,
+    }));
+  }, []);
+  const signIn = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+      dispatch(fetchLogin(formFields));
     },
-
-    []
+    [dispatch, formFields]
   );
+
   return (
     <FormPageWrapper>
       <FormWrapper
@@ -52,16 +59,18 @@ export const LoginPage = () => {
             </div>
           </>
         }
+        onSubmit={signIn}
       >
         <Input
           type="email"
           placeholder="E-mail"
           onChange={handleFieldChange}
-          value={value.email}
+          value={formFields.email}
           autoComplete="email"
           name="email"
           error={false}
           ref={inputEmailRef}
+          required
           errorText="Ошибка"
           size="default"
         />
@@ -70,17 +79,18 @@ export const LoginPage = () => {
           placeholder="Пароль"
           onChange={handleFieldChange}
           icon="ShowIcon"
-          value={value.password}
+          value={formFields.password}
           name="password"
           autoComplete="password"
           error={false}
           ref={inputPasswordRef}
           onIconClick={onPasswordIconClick}
+          required
           errorText="Ошибка"
           size="default"
         />
         <div className={styles.buttonWrapper}>
-          <Button htmlType="button" type="primary" size="medium">
+          <Button htmlType="submit" type="primary" size="medium">
             Войти
           </Button>
         </div>

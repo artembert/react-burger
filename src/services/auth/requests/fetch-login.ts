@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { HttpMethod, request } from "../../../app/helpers/request";
 import { API_ENDPOINT } from "../../../app/constants";
-import { RegisterFields } from "../../../types/register-fields";
-import { REGISTER } from "./constants";
+import { LOGIN } from "./constants";
+import { SignInFields } from "../../../types/sign-in-fields";
 
-type RegisterRes = {
+type LoginRes = {
   success: true;
   user: {
     email: string;
@@ -14,17 +14,17 @@ type RegisterRes = {
   refreshToken: string;
 };
 
-type RegisterData = {
+type LoginData = {
   email: string;
   name: string;
   accessToken: `Bearer ${string}`;
   refreshToken: string;
 };
 
-const endpoint = `${API_ENDPOINT}${REGISTER}`;
+const endpoint = `${API_ENDPOINT}${LOGIN}`;
 
-export const fetchRegister = createAsyncThunk<RegisterData, RegisterFields>("auth/register", async (payload) => {
-  const response = await request<RegisterRes>(endpoint, {
+export const fetchLogin = createAsyncThunk<LoginData, SignInFields>("auth/signIn", async (payload) => {
+  const response = await request<LoginRes>(endpoint, {
     method: HttpMethod.POST,
     body: payload,
   });
@@ -36,5 +36,5 @@ export const fetchRegister = createAsyncThunk<RegisterData, RegisterFields>("aut
       refreshToken: response.refreshToken,
     };
   }
-  return Promise.reject("Failed to register users");
+  return Promise.reject("Failed to login");
 });
