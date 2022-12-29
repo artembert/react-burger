@@ -21,7 +21,7 @@ type LoginData = {
 
 const endpoint = `${API_ENDPOINT}${LOGIN}`;
 
-export const fetchLogin = createAsyncThunk<LoginData, SignInFields>("auth/signIn", async (payload) => {
+export const fetchLogin = createAsyncThunk<LoginData, SignInFields>("auth/login", async (payload) => {
   const response = await request<LoginRes>(endpoint, {
     method: HttpMethod.POST,
     body: payload,
