@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FormPageWrapper } from "../../components/form-page-wrapper/form-page-wrapper";
@@ -7,31 +7,27 @@ import { TextLink } from "../../components/text-link/text-link";
 import { NBSP } from "../../components/costants";
 import { InputPasswordType } from "../../types";
 import styles from "./register-page.module.css";
+import { useAppDispatch } from "../../services/store";
+import { fetchRegister } from "../../services/auth";
 
 export const RegisterPage = () => {
-  const [value, setValue] = useState({
+  const dispatch = useAppDispatch();
+  const [formFields, setFormFields] = useState({
     name: "",
     email: "",
     password: "",
-    passwordRepeat: "",
   });
   const inputNameRef = useRef<HTMLInputElement>(null);
   const inputEmailRef = useRef<HTMLInputElement>(null);
   const inputPasswordRef = useRef<HTMLInputElement>(null);
-  const inputPasswordRepeatRef = useRef<HTMLInputElement>(null);
   const [inputPasswordType, setInputPasswordType] = useState<InputPasswordType>("password");
-  const [inputPasswordRepeatType, setInputPasswordRepeatType] = useState<InputPasswordType>("password");
   const onPasswordIconClick = () => {
     setInputPasswordType((current) => (current === "text" ? "password" : "text"));
     setTimeout(() => inputPasswordRef.current?.focus(), 0);
   };
-  const onPasswordRepeatIconClick = () => {
-    setInputPasswordRepeatType((current) => (current === "text" ? "password" : "text"));
-    setTimeout(() => inputPasswordRepeatRef.current?.focus(), 0);
-  };
   const handleFieldChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      setValue((current) => ({
+      setFormFields((current) => ({
         ...current,
         [e.target.name]: e.target.value,
       }));
@@ -39,6 +35,14 @@ export const RegisterPage = () => {
 
     []
   );
+  const register = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+      dispatch(fetchRegister(formFields));
+    },
+    [dispatch, formFields]
+  );
+
   return (
     <FormPageWrapper>
       <FormWrapper
@@ -54,16 +58,18 @@ export const RegisterPage = () => {
             </div>
           </>
         }
+        onSubmit={register}
       >
         <Input
           type="text"
           placeholder="Имя"
           onChange={handleFieldChange}
-          value={value.name}
+          value={formFields.name}
           autoComplete="full-name"
           name="name"
           error={false}
           ref={inputNameRef}
+          required
           errorText="Ошибка"
           size="default"
         />
@@ -71,11 +77,12 @@ export const RegisterPage = () => {
           type="email"
           placeholder="E-mail"
           onChange={handleFieldChange}
-          value={value.email}
+          value={formFields.email}
           autoComplete="email"
           name="email"
           error={false}
           ref={inputEmailRef}
+          required
           errorText="Ошибка"
           size="default"
         />
@@ -84,30 +91,18 @@ export const RegisterPage = () => {
           placeholder="Пароль"
           onChange={handleFieldChange}
           icon="ShowIcon"
-          value={value.password}
+          value={formFields.password}
           name="password"
           autoComplete="new-password"
           error={false}
           ref={inputPasswordRef}
           onIconClick={onPasswordIconClick}
-          errorText="Ошибка"
-          size="default"
-        />
-        <Input
-          type={inputPasswordRepeatType}
-          placeholder="Повтор пароля"
-          onChange={handleFieldChange}
-          icon="ShowIcon"
-          value={value.passwordRepeat}
-          name="passwordRepeat"
-          error={false}
-          ref={inputPasswordRepeatRef}
-          onIconClick={onPasswordRepeatIconClick}
+          required
           errorText="Ошибка"
           size="default"
         />
         <div className={styles.buttonWrapper}>
-          <Button htmlType="button" type="primary" size="medium">
+          <Button htmlType="submit" type="primary" size="medium">
             Зарегистрироваться
           </Button>
         </div>
