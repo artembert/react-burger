@@ -2,14 +2,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { HttpMethod, request } from "../../../app/helpers/request";
 import { API_ENDPOINT } from "../../../app/constants";
 import { RegisterFields } from "../../../types/register-fields";
+import { User } from "../../../types/user";
 import { REGISTER } from "./constants";
 
 type RegisterRes = {
   success: true;
-  user: {
-    email: string;
-    name: string;
-  };
+  user: User;
   accessToken: `Bearer ${string}`;
   refreshToken: string;
 };

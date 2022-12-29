@@ -1,15 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { HttpMethod, request } from "../../../app/helpers/request";
 import { API_ENDPOINT } from "../../../app/constants";
-import { LOGIN } from "./constants";
 import { SignInFields } from "../../../types/sign-in-fields";
+import { User } from "../../../types/user";
+import { LOGIN } from "./constants";
 
 type LoginRes = {
   success: true;
-  user: {
-    email: string;
-    name: string;
-  };
+  user: User;
   accessToken: `Bearer ${string}`;
   refreshToken: string;
 };
