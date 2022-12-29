@@ -13,6 +13,7 @@ import { Routes } from "../../app/routes/constants";
 import { ProtectedRoute } from "../protected-route/protected-route";
 import { fetchUser } from "../../services/auth";
 import { getAccessToken } from "../../services/token";
+import { AuthRoute } from "../auth-router/auth-route";
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -30,18 +31,18 @@ export const App = () => {
         <ProtectedRoute path={Routes.Profile} exact>
           <ProfilePage />
         </ProtectedRoute>
-        <Route path={Routes.Register} exact>
+        <AuthRoute path={Routes.Register} exact>
           <RegisterPage />
-        </Route>
-        <Route path={Routes.Login} exact>
+        </AuthRoute>
+        <AuthRoute path={Routes.Login} exact>
           <LoginPage />
-        </Route>
-        <Route path={Routes.ForgotPassword} exact>
+        </AuthRoute>
+        <AuthRoute path={Routes.ForgotPassword} exact>
           <ForgotPasswordPage />
-        </Route>
-        <Route path={Routes.ResetPassword} exact>
+        </AuthRoute>
+        <AuthRoute path={Routes.ResetPassword} exact>
           <ResetPasswordPage />
-        </Route>
+        </AuthRoute>
         <Route path="/">
           <ConstructorPage />
         </Route>
