@@ -2,9 +2,15 @@ import { NavLink } from "react-router-dom";
 import classNames from "classnames";
 import { Routes } from "../../app/routes/constants";
 import styles from "./profile-navigation.module.css";
+import { fetchLogout } from "../../services/auth";
+import { useAppDispatch } from "../../services/store";
+import { getRefreshToken } from "../../services/token";
 
 export const ProfileNavigation = () => {
-  const logout = () => {};
+  const dispatch = useAppDispatch();
+  const logout = () => {
+    dispatch(fetchLogout({ token: getRefreshToken() }));
+  };
 
   return (
     <nav className={classNames(styles.root)}>

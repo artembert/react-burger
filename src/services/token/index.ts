@@ -9,3 +9,12 @@ export const setTokens = (accessToken: string, refreshToken: string) => {
   Cookies.set(ACCESS_TOKEN, bearerToken, { expires: expTime });
   localStorage.setItem(REFRESH_TOKEN, refreshToken);
 };
+
+export const getAccessToken = (): string => Cookies.get(ACCESS_TOKEN) || "";
+
+export const getRefreshToken = (): string => localStorage.getItem(REFRESH_TOKEN) || "";
+
+export const clearTokens = () => {
+  Cookies.remove(ACCESS_TOKEN);
+  localStorage.removeItem(REFRESH_TOKEN);
+};
