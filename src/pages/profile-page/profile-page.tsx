@@ -1,8 +1,10 @@
 import { ChangeEvent, RefObject, useCallback, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ProfilePageWrapper } from "../../components/profile-page-wrapper/profile-page-wrapper";
 import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
 import { ProfileNavigation } from "../../components/profile-navigation/profile-navigation";
+import { selectAuthUserEmail, selectAuthUserName } from "../../services/auth/selectors";
 import { InputPasswordType } from "../../types";
 import styles from "./profile-page.module.css";
 
@@ -16,9 +18,9 @@ const editableFieldsInitial = {
 
 export const ProfilePage = () => {
   const [value, setValue] = useState<Record<FieldName, string>>({
-    name: "Alex Fincher",
-    email: "alex-fincher@yahoo.com",
-    password: "jjfsef$%^&(!3^sdfsf",
+    name: useSelector(selectAuthUserName) || "",
+    email: useSelector(selectAuthUserEmail) || "",
+    password: "",
   });
   const [editable, setEditable] = useState<Record<FieldName, boolean>>({
     ...editableFieldsInitial,

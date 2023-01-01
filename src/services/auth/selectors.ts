@@ -5,3 +5,7 @@ export const selectAuthLoadingState = (store: RootState): AuthSliceState["loadin
 
 export const selectAuthIsAuthorized = (store: RootState) =>
   store.auth.isAuthorized && store.auth.name && store.auth.email;
+
+export const selectAuthUserName = (store: RootState) => store.auth.name;
+
+export const selectAuthUserEmail = (store: RootState) => store.auth.email;
