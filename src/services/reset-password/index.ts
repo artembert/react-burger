@@ -20,17 +20,17 @@ const resetPasswordSlice = createSlice({
     clearWasPasswordReset: (state) => ({ ...state, wasReset: false }),
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchForgetPassword.pending, (state) => ({ ...state, loadingState: LoadingState.LOADING }));
-    builder.addCase(fetchForgetPassword.fulfilled, (state) => ({
-      ...state,
-      loadingState: LoadingState.SUCCESSFUL,
-      wasForget: true,
-    }));
-    builder.addCase(fetchForgetPassword.rejected, (state) => ({
-      ...state,
-      loadingState: LoadingState.ERROR,
-      wasForget: false,
-    }));
+    builder.addCase(fetchForgetPassword.pending, (state) => {
+      state.loadingState = LoadingState.LOADING;
+    });
+    builder.addCase(fetchForgetPassword.fulfilled, (state) => {
+      state.loadingState = LoadingState.SUCCESSFUL;
+      state.wasForget = true;
+    });
+    builder.addCase(fetchForgetPassword.rejected, (state) => {
+      state.wasForget = false;
+      state.loadingState = LoadingState.ERROR;
+    });
   },
 });
 
