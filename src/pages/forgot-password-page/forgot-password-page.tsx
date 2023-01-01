@@ -9,7 +9,7 @@ import { clearWasPasswordReset, fetchForgetPassword } from "../../services/reset
 import { NBSP } from "../../components/costants";
 import styles from "./forgot-password-page.module.css";
 import { useSelector } from "react-redux";
-import { selectResetPasswordLoadingState, selectResetPasswordWasReset } from "../../services/reset-password/selectors";
+import { selectResetPasswordLoadingState, selectResetPasswordWasForget } from "../../services/reset-password/selectors";
 import { LoadingState } from "../../types/loading-state";
 import { Routes } from "../../app/routes/constants";
 
@@ -20,7 +20,7 @@ export const ForgotPasswordPage = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const isLoading = useSelector(selectResetPasswordLoadingState) === LoadingState.LOADING;
-  const wasForget = useSelector(selectResetPasswordWasReset);
+  const wasForget = useSelector(selectResetPasswordWasForget);
   const inputEmailRef = useRef<HTMLInputElement>(null);
   const handleFieldChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {

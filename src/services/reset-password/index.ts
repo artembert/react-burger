@@ -5,12 +5,12 @@ import { LoadingState } from "../../types/loading-state";
 
 export type ResetPasswordSliceState = {
   loadingState: ValueOf<typeof LoadingState>;
-  wasReset: boolean;
+  wasForget: boolean;
 };
 
 const initialState: ResetPasswordSliceState = {
   loadingState: LoadingState.IDLE,
-  wasReset: false,
+  wasForget: false,
 };
 
 const resetPasswordSlice = createSlice({
@@ -24,12 +24,12 @@ const resetPasswordSlice = createSlice({
     builder.addCase(fetchForgetPassword.fulfilled, (state) => ({
       ...state,
       loadingState: LoadingState.SUCCESSFUL,
-      wasReset: true,
+      wasForget: true,
     }));
     builder.addCase(fetchForgetPassword.rejected, (state) => ({
       ...state,
       loadingState: LoadingState.ERROR,
-      wasReset: false,
+      wasForget: false,
     }));
   },
 });
