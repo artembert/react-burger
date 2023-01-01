@@ -1,16 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchForgetPassword } from "./requests";
+import { fetchForgetPassword, fetchResetPassword } from "./requests";
 import { ValueOf } from "../../types";
 import { LoadingState } from "../../types/loading-state";
 
 export type ResetPasswordSliceState = {
   loadingState: ValueOf<typeof LoadingState>;
   wasForget: boolean;
+  wasReset: boolean;
 };
 
 const initialState: ResetPasswordSliceState = {
   loadingState: LoadingState.IDLE,
   wasForget: false,
+  wasReset: false,
 };
 
 const resetPasswordSlice = createSlice({
@@ -28,12 +30,23 @@ const resetPasswordSlice = createSlice({
       state.wasForget = true;
     });
     builder.addCase(fetchForgetPassword.rejected, (state) => {
-      state.wasForget = false;
       state.loadingState = LoadingState.ERROR;
+      state.wasForget = false;
+    });
+    builder.addCase(fetchResetPassword.pending, (state) => {
+      state.loadingState = LoadingState.LOADING;
+    });
+    builder.addCase(fetchResetPassword.fulfilled, (state) => {
+      state.loadingState = LoadingState.SUCCESSFUL;
+      state.wasReset = true;
+    });
+    builder.addCase(fetchResetPassword.rejected, (state) => {
+      state.loadingState = LoadingState.ERROR;
+      state.wasReset = false;
     });
   },
 });
 
 export const resetPassword = resetPasswordSlice.reducer;
 export const { clearWasPasswordReset } = resetPasswordSlice.actions;
-export { fetchForgetPassword };
+export { fetchForgetPassword, fetchResetPassword };
