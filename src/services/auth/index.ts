@@ -84,13 +84,15 @@ const authSlice = createSlice({
         name: action.payload.name,
       };
     });
-    builder.addCase(fetchUser.rejected, (state) => ({
-      ...state,
-      email: null,
-      name: null,
-      isAuthorized: false,
-      loadingState: LoadingState.ERROR,
-    }));
+    builder.addCase(fetchUser.rejected, (state) => {
+      return {
+        ...state,
+        email: null,
+        name: null,
+        isAuthorized: false,
+        loadingState: LoadingState.ERROR,
+      };
+    });
   },
 });
 
