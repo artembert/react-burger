@@ -1,20 +1,30 @@
-import { ChangeEvent, useCallback, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { ChangeEvent, FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
 import { TextLink } from "../../components/text-link/text-link";
 import { FormPageWrapper } from "../../components/form-page-wrapper/form-page-wrapper";
+import { useAppDispatch } from "../../services/store";
+import { clearWasPasswordReset, fetchForgetPassword } from "../../services/reset-password";
 import { NBSP } from "../../components/costants";
 import styles from "./forgot-password-page.module.css";
+import { useSelector } from "react-redux";
+import { selectResetPasswordLoadingState, selectResetPasswordWasReset } from "../../services/reset-password/selectors";
+import { LoadingState } from "../../types/loading-state";
+import { Routes } from "../../app/routes/constants";
 
 export const ForgotPasswordPage = () => {
-  const [value, setValue] = useState({
+  const [formFields, setFormFields] = useState({
     email: "",
   });
+  const dispatch = useAppDispatch();
+  const history = useHistory();
+  const isLoading = useSelector(selectResetPasswordLoadingState) === LoadingState.LOADING;
+  const wasForget = useSelector(selectResetPasswordWasReset);
   const inputEmailRef = useRef<HTMLInputElement>(null);
   const handleFieldChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      setValue((current) => ({
+      setFormFields((current) => ({
         ...current,
         [e.target.name]: e.target.value,
       }));
@@ -22,6 +32,23 @@ export const ForgotPasswordPage = () => {
 
     []
   );
+  const forgetPassword = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+      dispatch(fetchForgetPassword(formFields));
+    },
+    [dispatch, formFields]
+  );
+  useEffect(() => {
+    dispatch(clearWasPasswordReset());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (wasForget) {
+      history.push(Routes.ResetPassword);
+    }
+  }, [history, wasForget]);
+
   return (
     <FormPageWrapper>
       <FormWrapper
@@ -37,21 +64,23 @@ export const ForgotPasswordPage = () => {
             </div>
           </>
         }
+        onSubmit={forgetPassword}
       >
         <Input
           type="email"
           placeholder="Укажите e-mail"
           onChange={handleFieldChange}
-          value={value.email}
+          value={formFields.email}
           autoComplete="email"
           name="email"
           error={false}
           ref={inputEmailRef}
+          required
           errorText="Ошибка"
           size="default"
         />
         <div className={styles.buttonWrapper}>
-          <Button htmlType="button" type="primary" size="medium">
+          <Button htmlType="submit" type="primary" size="medium" disabled={isLoading}>
             Восстановить
           </Button>
         </div>
