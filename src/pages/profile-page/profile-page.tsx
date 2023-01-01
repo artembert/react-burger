@@ -1,6 +1,6 @@
 import { ChangeEvent, RefObject, useCallback, useRef, useState } from "react";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { ProfilePageWrapper } from "../profile-page-wrapper/profile-page-wrapper";
+import { ProfilePageWrapper } from "../../components/profile-page-wrapper/profile-page-wrapper";
 import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
 import { ProfileNavigation } from "../../components/profile-navigation/profile-navigation";
 import { InputPasswordType } from "../../types";
