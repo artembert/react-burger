@@ -1,11 +1,14 @@
 import { ChangeEvent, useCallback, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
 import { TextLink } from "../../components/text-link/text-link";
 import { FormPageWrapper } from "../../components/form-page-wrapper/form-page-wrapper";
 import { InputPasswordType } from "../../types";
 import { NBSP } from "../../components/costants";
+import { selectResetPasswordWasReset } from "../../services/reset-password/selectors";
+import { Routes } from "../../app/routes/constants";
 import styles from "./reset-password-page.module.css";
 
 export const ResetPasswordPage = () => {
@@ -13,6 +16,8 @@ export const ResetPasswordPage = () => {
     confirmationCode: "",
     password: "",
   });
+  const history = useHistory();
+  const wasReset = useSelector(selectResetPasswordWasReset);
   const inputPasswordRef = useRef<HTMLInputElement>(null);
   const [inputPasswordType, setInputPasswordType] = useState<InputPasswordType>("password");
   const onPasswordIconClick = () => {
@@ -29,6 +34,10 @@ export const ResetPasswordPage = () => {
 
     []
   );
+  if (!wasReset) {
+    history.push(Routes.ForgotPassword);
+  }
+
   return (
     <FormPageWrapper>
       <FormWrapper
