@@ -17,6 +17,11 @@
 .aside {
 }
 
+.contentFullWidth {
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+
 .description {
   margin-top: 80px;
 }

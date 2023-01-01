@@ -6,10 +6,11 @@ type Props = {
   pageDescription: ReactNode;
   content: ReactNode;
   navigation: ReactNode;
+  isContentFillWidth?: boolean;
 };
 
 export const ProfilePageWrapper = (props: Props) => {
-  const { pageDescription, content, navigation } = props;
+  const { pageDescription, content, navigation, isContentFillWidth } = props;
 
   return (
     <div className={styles.root}>
@@ -20,7 +21,13 @@ export const ProfilePageWrapper = (props: Props) => {
         </p>
       </aside>
 
-      <section>{content}</section>
+      <section
+        className={classNames({
+          [styles.contentFullWidth]: isContentFillWidth,
+        })}
+      >
+        {content}
+      </section>
     </div>
   );
 };

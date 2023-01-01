@@ -14,6 +14,7 @@ import { ProtectedRoute } from "../protected-route/protected-route";
 import { fetchUser } from "../../services/auth";
 import { getAccessToken } from "../../services/token";
 import { AuthRoute } from "../auth-router/auth-route";
+import { ProfileOrdersPage } from "../../pages/profile-orders-page/profile-orders-page";
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -30,6 +31,9 @@ export const App = () => {
       <Switch>
         <ProtectedRoute path={Routes.Profile} exact>
           <ProfilePage />
+        </ProtectedRoute>
+        <ProtectedRoute path={Routes.ProfileOrders} exact>
+          <ProfileOrdersPage />
         </ProtectedRoute>
         <AuthRoute path={Routes.Register} exact>
           <RegisterPage />
