@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ValueOf } from "../../types";
 import { LoadingState } from "../../types/loading-state";
-import { fetchLogin, fetchLogout, fetchRegister, fetchUser } from "./requests";
+import { fetchLogin, fetchLogout, fetchRegister, fetchUpdateUser, fetchUser } from "./requests";
 import { clearTokens, setTokens } from "../token";
 
 export type AuthSliceState = {
@@ -83,8 +83,19 @@ const authSlice = createSlice({
       state.isAuthorized = false;
       state.loadingState = LoadingState.ERROR;
     });
+    builder.addCase(fetchUpdateUser.pending, (state) => {
+      state.loadingState = LoadingState.LOADING;
+    });
+    builder.addCase(fetchUpdateUser.fulfilled, (state, action) => {
+      state.loadingState = LoadingState.SUCCESSFUL;
+      state.email = action.payload.email;
+      state.name = action.payload.name;
+    });
+    builder.addCase(fetchUpdateUser.rejected, (state) => {
+      state.loadingState = LoadingState.ERROR;
+    });
   },
 });
 
 export const auth = authSlice.reducer;
-export { fetchRegister, fetchLogin, fetchLogout, fetchUser };
+export { fetchRegister, fetchLogin, fetchLogout, fetchUser, fetchUpdateUser };

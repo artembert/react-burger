@@ -1,10 +1,13 @@
-import { ChangeEvent, RefObject, useCallback, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, RefObject, useCallback, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ProfilePageWrapper } from "../../components/profile-page-wrapper/profile-page-wrapper";
 import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
 import { ProfileNavigation } from "../../components/profile-navigation/profile-navigation";
-import { selectAuthUserEmail, selectAuthUserName } from "../../services/auth/selectors";
+import { selectAuthLoadingState, selectAuthUserEmail, selectAuthUserName } from "../../services/auth/selectors";
+import { fetchUpdateUser } from "../../services/auth";
+import { useAppDispatch } from "../../services/store";
+import { LoadingState } from "../../types/loading-state";
 import { InputPasswordType } from "../../types";
 import styles from "./profile-page.module.css";
 
@@ -17,9 +20,13 @@ const editableFieldsInitial = {
 };
 
 export const ProfilePage = () => {
-  const [value, setValue] = useState<Record<FieldName, string>>({
-    name: useSelector(selectAuthUserName) || "",
-    email: useSelector(selectAuthUserEmail) || "",
+  const dispatch = useAppDispatch();
+  const isLoading = useSelector(selectAuthLoadingState) === LoadingState.LOADING;
+  const savedUserName = useSelector(selectAuthUserName) || "";
+  const savedUserEmail = useSelector(selectAuthUserEmail) || "";
+  const [formFields, setFormFields] = useState<Record<FieldName, string>>({
+    name: savedUserName,
+    email: savedUserEmail,
     password: "",
   });
   const [editable, setEditable] = useState<Record<FieldName, boolean>>({
@@ -55,11 +62,31 @@ export const ProfilePage = () => {
   };
   const handleFieldChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setFieldsHasBeenChanged(true);
-    setValue((current) => ({
+    setFormFields((current) => ({
       ...current,
       [e.target.name]: e.target.value,
     }));
   }, []);
+  const updateUser = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+      dispatch(fetchUpdateUser(formFields));
+    },
+    [dispatch, formFields]
+  );
+  const resetForm = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+      setFormFields({
+        name: savedUserName,
+        email: savedUserEmail,
+        password: "",
+      });
+      setEditable(editableFieldsInitial);
+      setFieldsHasBeenChanged(false);
+    },
+    [savedUserEmail, savedUserName]
+  );
 
   return (
     <ProfilePageWrapper
@@ -67,14 +94,14 @@ export const ProfilePage = () => {
       navigation={<ProfileNavigation />}
       content={
         <div className="mt-30">
-          <FormWrapper>
+          <FormWrapper onSubmit={updateUser} onReset={resetForm}>
             <Input
               type="text"
               placeholder="Имя"
               onChange={handleFieldChange}
               icon={editable["name"] ? "CheckMarkIcon" : "EditIcon"}
               readOnly={!editable["name"]}
-              value={value.name}
+              value={formFields.name}
               autoComplete="full-name"
               name="name"
               error={false}
@@ -89,7 +116,7 @@ export const ProfilePage = () => {
               onChange={handleFieldChange}
               icon={editable["email"] ? "CheckMarkIcon" : "EditIcon"}
               readOnly={!editable["email"]}
-              value={value.email}
+              value={formFields.email}
               autoComplete="email"
               name="email"
               error={false}
@@ -104,7 +131,7 @@ export const ProfilePage = () => {
               onChange={handleFieldChange}
               icon={editable["password"] ? "CheckMarkIcon" : "EditIcon"}
               readOnly={!editable["password"]}
-              value={value.password}
+              value={formFields.password}
               name="password"
               autoComplete="new-password"
               error={false}
@@ -115,10 +142,10 @@ export const ProfilePage = () => {
             />
             {fieldsHasBeenChanged ? (
               <div className={styles.buttonWrapper}>
-                <Button htmlType="button" type="secondary" size="medium">
+                <Button htmlType="reset" type="secondary" size="medium" disabled={isLoading}>
                   Отменить
                 </Button>
-                <Button htmlType="button" type="primary" size="medium">
+                <Button htmlType="submit" type="primary" size="medium" disabled={isLoading}>
                   Сохранить
                 </Button>
               </div>
