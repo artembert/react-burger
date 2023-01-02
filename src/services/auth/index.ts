@@ -23,75 +23,65 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchRegister.pending, (state) => ({ ...state, loadingState: LoadingState.LOADING }));
+    builder.addCase(fetchRegister.pending, (state) => {
+      state.loadingState = LoadingState.LOADING;
+    });
     builder.addCase(fetchRegister.fulfilled, (state, action) => {
       setTokens(action.payload.accessToken, action.payload.refreshToken);
-      return {
-        ...state,
-        loadingState: LoadingState.SUCCESSFUL,
-        isAuthorized: true,
-        email: action.payload.email,
-        name: action.payload.name,
-      };
+      state.loadingState = LoadingState.SUCCESSFUL;
+      state.isAuthorized = true;
+      state.email = action.payload.email;
+      state.name = action.payload.name;
     });
-    builder.addCase(fetchRegister.rejected, (state) => ({
-      ...state,
-      email: null,
-      name: null,
-      isAuthorized: false,
-      loadingState: LoadingState.ERROR,
-    }));
-    builder.addCase(fetchLogin.pending, (state) => ({ ...state, loadingState: LoadingState.LOADING }));
+    builder.addCase(fetchRegister.rejected, (state) => {
+      state.email = null;
+      state.name = null;
+      state.isAuthorized = false;
+      state.loadingState = LoadingState.ERROR;
+    });
+    builder.addCase(fetchLogin.pending, (state) => {
+      state.loadingState = LoadingState.LOADING;
+    });
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       setTokens(action.payload.accessToken, action.payload.refreshToken);
-      return {
-        ...state,
-        loadingState: LoadingState.SUCCESSFUL,
-        isAuthorized: true,
-        email: action.payload.email,
-        name: action.payload.name,
-      };
+      state.loadingState = LoadingState.SUCCESSFUL;
+      state.isAuthorized = true;
+      state.email = action.payload.email;
+      state.name = action.payload.name;
     });
-    builder.addCase(fetchLogin.rejected, (state) => ({
-      ...state,
-      email: null,
-      name: null,
-      isAuthorized: false,
-      loadingState: LoadingState.ERROR,
-    }));
-    builder.addCase(fetchLogout.pending, (state) => ({ ...state, loadingState: LoadingState.LOADING }));
+    builder.addCase(fetchLogin.rejected, (state) => {
+      state.email = null;
+      state.name = null;
+      state.isAuthorized = false;
+      state.loadingState = LoadingState.ERROR;
+    });
+    builder.addCase(fetchLogout.pending, (state) => {
+      state.loadingState = LoadingState.LOADING;
+    });
     builder.addCase(fetchLogout.fulfilled, (state) => {
       clearTokens();
-      return {
-        ...state,
-        loadingState: LoadingState.SUCCESSFUL,
-        isAuthorized: false,
-        email: null,
-        name: null,
-      };
+      state.loadingState = LoadingState.SUCCESSFUL;
+      state.isAuthorized = false;
+      state.email = null;
+      state.name = null;
     });
-    builder.addCase(fetchLogout.rejected, (state) => ({
-      ...state,
-      loadingState: LoadingState.ERROR,
-    }));
-    builder.addCase(fetchUser.pending, (state) => ({ ...state, loadingState: LoadingState.LOADING }));
+    builder.addCase(fetchLogout.rejected, (state) => {
+      state.loadingState = LoadingState.ERROR;
+    });
+    builder.addCase(fetchUser.pending, (state) => {
+      state.loadingState = LoadingState.LOADING;
+    });
     builder.addCase(fetchUser.fulfilled, (state, action) => {
-      return {
-        ...state,
-        loadingState: LoadingState.SUCCESSFUL,
-        isAuthorized: true,
-        email: action.payload.email,
-        name: action.payload.name,
-      };
+      state.loadingState = LoadingState.SUCCESSFUL;
+      state.isAuthorized = true;
+      state.email = action.payload.email;
+      state.name = action.payload.name;
     });
     builder.addCase(fetchUser.rejected, (state) => {
-      return {
-        ...state,
-        email: null,
-        name: null,
-        isAuthorized: false,
-        loadingState: LoadingState.ERROR,
-      };
+      state.email = null;
+      state.name = null;
+      state.isAuthorized = false;
+      state.loadingState = LoadingState.ERROR;
     });
   },
 });
