@@ -1,6 +1,6 @@
-import styles from "./profile-page-wrapper.module.css";
-import classNames from "classnames";
 import { ReactNode } from "react";
+import classNames from "classnames";
+import styles from "./profile-page-wrapper.module.css";
 
 type Props = {
   pageDescription: ReactNode;
@@ -22,7 +22,7 @@ export const ProfilePageWrapper = (props: Props) => {
       </aside>
 
       <section
-        className={classNames({
+        className={classNames(styles.content, {
           [styles.contentFullWidth]: isContentFillWidth,
         })}
       >

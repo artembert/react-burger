@@ -11,7 +11,8 @@
 @media screen and (max-width: 920px) {
   .root {
     grid-template-columns: 1fr;
-    grid-template-rows: min-content;
+    grid-template-rows: max-content;
+    margin: 0;
   }
 }
 
@@ -21,6 +22,13 @@
 .contentFullWidth {
   grid-column-start: 2;
   grid-column-end: 4;
+}
+
+@media screen and (max-width: 920px) {
+  .contentFullWidth {
+    grid-column-start: 1;
+    grid-column-end: 1;
+  }
 }
 
 .description {
