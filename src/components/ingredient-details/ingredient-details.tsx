@@ -1,8 +1,12 @@
 import React from "react";
-import { ingredientType } from "../../types/constants/ingredient";
+import { BurgerIngredient } from "../../types/BurgerIngredient";
 import styles from "./ingredient-details.module.css";
 
-export const IngredientDetails = (props) => {
+type Props = {
+  ingredient: BurgerIngredient;
+};
+
+export const IngredientDetails = (props: Props) => {
   const { ingredient } = props;
   const { name, image_large, proteins, fat, carbohydrates, calories } = ingredient;
 
@@ -30,8 +34,4 @@ export const IngredientDetails = (props) => {
       </div>
     </div>
   );
-};
-
-IngredientDetails.propTypes = {
-  ingredient: ingredientType.isRequired,
 };
