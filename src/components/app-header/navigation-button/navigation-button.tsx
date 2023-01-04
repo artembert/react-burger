@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
+import { NavLink } from "react-router-dom";
 import classNames from "classnames";
 import styles from "./navigation-button.module.css";
-import { NavLink } from "react-router-dom";
 
 type Props = {
   href: string;

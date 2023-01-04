@@ -19,13 +19,13 @@
 
 .startActions {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   margin-left: -20px;
 }
 
 .endActions {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: flex-end;
   overflow: hidden;
 }
