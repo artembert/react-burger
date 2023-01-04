@@ -9,6 +9,7 @@ import { getRefreshToken } from "../../services/token";
 import { useSelector } from "react-redux";
 import { selectAuthLoadingState } from "../../services/auth/selectors";
 import { LoadingState } from "../../types/loading-state";
+import { Spinner } from "../spinner/spinner";
 
 export const ProfileNavigation = () => {
   const dispatch = useAppDispatch();
@@ -46,7 +47,7 @@ export const ProfileNavigation = () => {
             onClick={logout}
             className={classNames(styles.link, "text_color_inactive", { [styles.linkLoading]: isLoading })}
           >
-            <LogoutIcon type="secondary" />
+            {isLoading ? <Spinner size="s" /> : <LogoutIcon type="secondary" />}
             <p className={classNames(styles.text, "text", "text_type_main-medium", "ml-2")}>Выход</p>
           </button>
         </li>

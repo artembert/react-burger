@@ -1,0 +1,85 @@
+/*.content {*/
+/*display: flex;*/
+/*align-items: center;*/
+/*justify-content: center;*/
+/*flex-direction: column;*/
+/*animation: loader 2s infinite;*/
+/*animation-delay: 0.3s;*/
+/*animation-timing-function: linear;*/
+/*}*/
+
+.content {
+  display: inline-block;
+  position: relative;
+  vertical-align: text-bottom;
+}
+
+.contentSizeS {
+  width: 24px;
+  height: 24px;
+}
+
+.contentSizeM {
+  width: 80px;
+  height: 80px;
+}
+
+.contentSizeL {
+  width: 120px;
+  height: 120px;
+}
+
+.contentSizeS .element {
+  border-width: 2px;
+}
+
+.contentSizeM .element {
+  border-width: 4px;
+}
+
+.contentSizeL .element {
+  border-width: 4px;
+}
+
+.element {
+  position: absolute;
+  border: 4px solid #fff;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.element2 {
+  animation-delay: -0.5s;
+}
+
+@keyframes lds-ripple {
+  0% {
+    top: 45%;
+    left: 45%;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  4.9% {
+    top: 45%;
+    left: 45%;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  5% {
+    top: 45%;
+    left: 45%;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 90%;
+    opacity: 0;
+  }
+}

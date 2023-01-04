@@ -7,11 +7,12 @@ import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
 import { TextLink } from "../../components/text-link/text-link";
 import { NBSP } from "../../components/costants";
 import { InputPasswordType } from "../../types";
-import styles from "./register-page.module.css";
 import { useAppDispatch } from "../../services/store";
 import { fetchRegister } from "../../services/auth";
 import { selectAuthLoadingState } from "../../services/auth/selectors";
 import { LoadingState } from "../../types/loading-state";
+import { ButtonSpinnerInsert } from "../../components/button-spinner-insert/button-spinner-insert";
+import styles from "./register-page.module.css";
 
 export const RegisterPage = () => {
   const dispatch = useAppDispatch();
@@ -107,7 +108,7 @@ export const RegisterPage = () => {
         />
         <div className={styles.buttonWrapper}>
           <Button htmlType="submit" type="primary" size="medium" disabled={isLoading}>
-            Зарегистрироваться
+            <ButtonSpinnerInsert isLoading={isLoading}>Зарегистрироваться</ButtonSpinnerInsert>
           </Button>
         </div>
       </FormWrapper>

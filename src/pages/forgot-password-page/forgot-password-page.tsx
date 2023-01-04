@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { selectResetPasswordLoadingState, selectResetPasswordWasForget } from "../../services/reset-password/selectors";
 import { LoadingState } from "../../types/loading-state";
 import { Routes } from "../../app/routes/constants";
+import { ButtonSpinnerInsert } from "../../components/button-spinner-insert/button-spinner-insert";
 
 export const ForgotPasswordPage = () => {
   const [formFields, setFormFields] = useState({
@@ -81,7 +82,7 @@ export const ForgotPasswordPage = () => {
         />
         <div className={styles.buttonWrapper}>
           <Button htmlType="submit" type="primary" size="medium" disabled={isLoading}>
-            Восстановить
+            <ButtonSpinnerInsert isLoading={isLoading}>Восстановить</ButtonSpinnerInsert>
           </Button>
         </div>
       </FormWrapper>
