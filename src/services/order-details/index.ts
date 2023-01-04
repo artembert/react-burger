@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { LoadingState } from "../../types/loading-state";
-import { makeNewOrderRequest, NewOrderReqBody } from "./requests/make-new-order-request";
-import { LoadingStatus } from "../../types/loading-status";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {LoadingState} from "../../types/loading-state";
+import {makeNewOrderRequest, NewOrderReqBody} from "./requests/make-new-order-request";
+import {LoadingStatus} from "../../types/loading-status";
 
 export type OrderDetailsSliceState = {
   isPopupOpen: boolean;
@@ -30,7 +30,7 @@ const orderDetailsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(makeOrder.pending, (state) => ({ ...state, loadingState: LoadingState.LOADING }));
+    builder.addCase(makeOrder.pending, (state) => ({...state, loadingState: LoadingState.LOADING}));
     builder.addCase(makeOrder.fulfilled, (state, action) => ({
       ...state,
       loadingState: LoadingState.SUCCESSFUL,
@@ -47,10 +47,11 @@ const orderDetailsSlice = createSlice({
   },
 });
 
-export const makeOrder = createAsyncThunk("orderDetails/makeOrder", async (body: NewOrderReqBody, { dispatch }) => {
+export const makeOrder = createAsyncThunk("orderDetails/makeOrder", async (body: NewOrderReqBody, {dispatch}) => {
+
   dispatch(openOrderDetailsPopup());
   return makeNewOrderRequest(body);
 });
 
-export const { openOrderDetailsPopup, closeOrderDetailsPopup } = orderDetailsSlice.actions;
+export const {openOrderDetailsPopup, closeOrderDetailsPopup} = orderDetailsSlice.actions;
 export const orderDetails = orderDetailsSlice.reducer;
