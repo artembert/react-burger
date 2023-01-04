@@ -1,15 +1,36 @@
+.root {
+  padding-left: 8px;
+}
+
 .ingredientsList {
   margin: 0;
-  padding: 0 8px 0 16px;
+  padding: 0 8px 0 0;
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  row-gap: 32px;
+  flex-direction: column;
+  row-gap: 16px;
 }
 
 .ingredient {
   padding: 0;
   flex-shrink: 0;
-  flex-grow: 0;
+  flex-grow: 1;
+}
+
+@container (inline-size > calc(8px + calc(calc(2 * 272px) + 16px))) {
+  .root {
+    padding-left: 0;
+  }
+
+  .ingredient {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  .ingredientsList {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 32px;
+  }
 }

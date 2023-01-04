@@ -3,11 +3,15 @@ import { useDispatch } from "react-redux";
 import { ingredients } from "./ingredients";
 import { burgerConstructor } from "./burger-constructor";
 import { orderDetails } from "./order-details";
+import { auth } from "./auth";
+import { resetPassword } from "./reset-password";
 
 const rootReducer = combineReducers({
   ingredients,
   burgerConstructor,
   orderDetails,
+  auth,
+  resetPassword,
 });
 
 export const store = configureStore({

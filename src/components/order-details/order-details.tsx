@@ -18,7 +18,7 @@ export const OrderDetails = (props: Props) => {
   if (loadingStatus === LoadingState.LOADING) {
     return (
       <div className={`${styles.loader} pb-20 pt-4 pr-20 pl-20`}>
-        <Spinner />
+        <Spinner size="l" />
       </div>
     );
   }

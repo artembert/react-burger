@@ -3,7 +3,8 @@
 }
 
 .container {
-  max-width: var(--container-width);
+  max-width: calc(32px + var(--container-width));
+  padding: 0 16px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr min-content 1fr;
@@ -18,13 +19,13 @@
 
 .startActions {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   margin-left: -20px;
 }
 
 .endActions {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: flex-end;
   overflow: hidden;
 }

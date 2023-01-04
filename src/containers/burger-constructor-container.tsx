@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { BurgerConstructor } from "../components/burger-constructor/burger-constructor";
 import { LoadingState } from "../types/loading-state";
 import {
@@ -17,17 +18,25 @@ import {
 } from "../services/burger-constructor";
 import { selectIngredients } from "../services/ingredients/selectors";
 import { ConstructorIngredient } from "../types/constructor-ingredient";
+import { selectAuthIsAuthorized } from "../services/auth/selectors";
+import { Routes } from "../app/routes/constants";
 
 export const BurgerConstructorContainer = () => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const bun = useSelector(selectConstructorBun);
+  const isAuthorized = useSelector(selectAuthIsAuthorized);
   const constructorIngredients = useSelector(selectConstructorIngredients);
   const allIngredients = useSelector(selectIngredients);
   const totalPrice = useSelector(selectConstructorTotalPrice);
   const ingredientsIds = useSelector(selectConstructorIngredientsIds);
   const handleNewOrder = useCallback(() => {
-    dispatch(makeOrder({ ingredients: ingredientsIds }));
-  }, [dispatch, ingredientsIds]);
+    if (isAuthorized) {
+      dispatch(makeOrder({ ingredients: ingredientsIds }));
+    } else {
+      history.push(Routes.Login);
+    }
+  }, [dispatch, ingredientsIds, history, isAuthorized]);
   const handleAddIngredient = useCallback(
     (id: string) => {
       const ingredient = allIngredients.find((item) => item._id === id);

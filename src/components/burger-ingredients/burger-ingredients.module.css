@@ -1,6 +1,7 @@
 .list {
   overflow-y: scroll;
   max-height: calc(100vh - calc(88px + calc(100px + 96px)));
+  container-type: inline-size;
 }
 
 .error {

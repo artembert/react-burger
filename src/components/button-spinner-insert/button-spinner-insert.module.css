@@ -1,0 +1,9 @@
+.root {
+  margin-left: -24px;
+  margin-right: -24px;
+  padding: 0 24px;
+}
+
+.rootLoading {
+  padding: 0 24px 0 0;
+}
