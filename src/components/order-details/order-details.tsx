@@ -2,7 +2,7 @@ import React from "react";
 import markDoneImgSrc from "../../images/mark-done.svg";
 import { LoadingStatus } from "../../types/loading-status";
 import { LoadingState } from "../../types/loading-state";
-import { SpinnerBurger } from "../spinner-burger/spinner-burger";
+import { Spinner } from "../spinner/spinner";
 import styles from "./order-details.module.css";
 
 type Props = {
@@ -18,7 +18,7 @@ export const OrderDetails = (props: Props) => {
   if (loadingStatus === LoadingState.LOADING) {
     return (
       <div className={`${styles.loader} pb-20 pt-4 pr-20 pl-20`}>
-        <SpinnerBurger />
+        <Spinner size="l" />
       </div>
     );
   }
