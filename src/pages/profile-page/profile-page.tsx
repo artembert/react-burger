@@ -71,6 +71,8 @@ export const ProfilePage = () => {
     (e: FormEvent) => {
       e.preventDefault();
       dispatch(fetchUpdateUser(formFields));
+      setEditable(editableFieldsInitial);
+      setFieldsHasBeenChanged(false);
     },
     [dispatch, formFields]
   );
