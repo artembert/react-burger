@@ -15,6 +15,7 @@ import { fetchUser } from "../../services/auth";
 import { getAccessToken } from "../../services/token";
 import { AuthRoute } from "../auth-router/auth-route";
 import { ProfileOrdersPage } from "../../pages/profile-orders-page/profile-orders-page";
+import { IngredientPage } from "../../pages/ingredient-page/ingredient-page";
 import { fetchIngredients } from "../../services/ingredients";
 
 export const App = () => {
@@ -52,6 +53,9 @@ export const App = () => {
         <AuthRoute path={Routes.ResetPassword} exact>
           <ResetPasswordPage />
         </AuthRoute>
+        <Route path={Routes.Ingredients}>
+          <IngredientPage />
+        </Route>
         <Route path="/">
           <ConstructorPage />
         </Route>
