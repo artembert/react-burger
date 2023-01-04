@@ -15,6 +15,7 @@ import { fetchUser } from "../../services/auth";
 import { getAccessToken } from "../../services/token";
 import { AuthRoute } from "../auth-router/auth-route";
 import { ProfileOrdersPage } from "../../pages/profile-orders-page/profile-orders-page";
+import { fetchIngredients } from "../../services/ingredients";
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -23,6 +24,10 @@ export const App = () => {
     if (getAccessToken()) {
       dispatch(fetchUser());
     }
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchIngredients());
   }, [dispatch]);
 
   return (
