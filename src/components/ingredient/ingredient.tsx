@@ -8,7 +8,7 @@ import styles from "./ingredient.module.css";
 
 type Props = {
   ingredient: MenuIngredient;
-  onClick: (ingredient: MenuIngredient) => void;
+  onClick?: (ingredient: MenuIngredient) => void;
   amount?: number;
 };
 
@@ -24,7 +24,11 @@ const Component = (props: Props) => {
     }),
   });
 
-  const handleClick = () => onClick(ingredient);
+  const handleClick = () => {
+    if (onClick) {
+      onClick(ingredient);
+    }
+  };
 
   return (
     <div

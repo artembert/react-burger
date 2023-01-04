@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import { ConstructorPage } from "../../pages/constructor-page/constructor-page";
 import { useAppDispatch } from "../../services/store";
 import { AppHeader } from "../app-header/app-header";
@@ -17,9 +17,13 @@ import { AuthRoute } from "../auth-router/auth-route";
 import { ProfileOrdersPage } from "../../pages/profile-orders-page/profile-orders-page";
 import { IngredientPage } from "../../pages/ingredient-page/ingredient-page";
 import { fetchIngredients } from "../../services/ingredients";
+import { LocationStateBackground } from "../../types/location-state-background";
+import { IngredientDetailsModalContainer } from "../../containers/ingredient-details-modal-container";
 
 export const App = () => {
   const dispatch = useAppDispatch();
+  const location = useLocation<LocationStateBackground>();
+  const background = location.state?.background;
 
   useEffect(() => {
     if (getAccessToken()) {
@@ -34,7 +38,7 @@ export const App = () => {
   return (
     <Layout>
       <AppHeader />
-      <Switch>
+      <Switch location={background || location}>
         <ProtectedRoute path={Routes.Profile} exact>
           <ProfilePage />
         </ProtectedRoute>
@@ -53,13 +57,20 @@ export const App = () => {
         <AuthRoute path={Routes.ResetPassword} exact>
           <ResetPasswordPage />
         </AuthRoute>
-        <Route path={Routes.Ingredients}>
+        <Route path={Routes.IngredientWithId}>
           <IngredientPage />
         </Route>
         <Route path="/">
           <ConstructorPage />
         </Route>
       </Switch>
+      {background && (
+        <Switch>
+          <Route path={Routes.IngredientWithId}>
+            <IngredientDetailsModalContainer />
+          </Route>
+        </Switch>
+      )}
     </Layout>
   );
 };

@@ -1,15 +1,17 @@
 import { useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import { Modal } from "../components/modal/modal";
-import { useAppDispatch } from "../services/store";
 import { IngredientDetails } from "../components/ingredient-details/ingredient-details";
-import { selectIngredientPreview } from "../services/ingredients/selectors";
-import { closeIngredientDetailsPopup } from "../services/ingredients";
+import { selectIngredients } from "../services/ingredients/selectors";
 
 export const IngredientDetailsModalContainer = () => {
-  const dispatch = useAppDispatch();
-  const ingredientPreview = useSelector(selectIngredientPreview);
+  const history = useHistory();
+  const { ingredientId } = useParams<any>();
+  const ingredients = useSelector(selectIngredients);
+  const ingredientPreview = ingredients.find((ingredient) => ingredient._id === ingredientId);
+
   const closePopup = () => {
-    dispatch(closeIngredientDetailsPopup());
+    history.goBack();
   };
 
   return ingredientPreview ? (
