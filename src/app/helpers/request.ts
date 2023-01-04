@@ -29,6 +29,5 @@ export const request = async <T>(url: string, options: Options = { method: HttpM
     body: shouldHaveBody ? JSON.stringify(options.body) : undefined,
     headers,
   });
-  // TODO: check if token expired
   return handleFetchResponse<T>(res);
 };
