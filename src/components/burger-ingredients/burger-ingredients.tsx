@@ -7,7 +7,7 @@ import { MenuIngredient } from "../../types/menu-ingredient";
 import { LoadingState } from "../../types/loading-state";
 import { BurgerIngredientsGroup } from "./burger-ingredients-group/burger-ingredients-group";
 import { IngredientDetailsModalContainer } from "../../containers/ingredient-details-modal-container";
-import { Spinner } from "../spinner/spinner";
+import { SpinnerBurger } from "../spinner-burger/spinner-burger";
 import styles from "./burger-ingredients.module.css";
 
 type Props = {
@@ -96,7 +96,7 @@ export const BurgerIngredients = (props: Props) => {
   }
 
   if (loadingState === LoadingState.LOADING) {
-    return <Spinner />;
+    return <SpinnerBurger />;
   }
 
   return (

@@ -1,9 +1,9 @@
 import React from "react";
 import bunBlueImgSrc from "../../images/buns/bun-blue-normal.png";
 import bunPinkImgSrc from "../../images/buns/bun-pink-normal.png";
-import styles from "./spinner.module.css";
+import styles from "./spinner-burger.module.css";
 
-export const Spinner = () => {
+export const SpinnerBurger = () => {
   return (
     <div className={styles.root}>
       <div className={styles.wrapper}>

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import classNames from "classnames";
 import { selectIngredients } from "../../services/ingredients/selectors";
 import { IngredientDetails } from "../../components/ingredient-details/ingredient-details";
-import { Spinner } from "../../components/spinner/spinner";
+import { SpinnerBurger } from "../../components/spinner-burger/spinner-burger";
 import styles from "./ingredient-page.module.css";
 
 export const IngredientPage = () => {
@@ -18,7 +18,7 @@ export const IngredientPage = () => {
         <IngredientDetails ingredient={ingredientPreview} />
       ) : (
         <div className={styles.spinnerContainer}>
-          <Spinner />
+          <SpinnerBurger />
         </div>
       )}
     </section>
