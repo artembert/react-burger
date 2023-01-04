@@ -1,29 +1,19 @@
-import React, { forwardRef } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { forwardRef } from "react";
 import { Ingredient } from "../../ingredient/ingredient";
 import { MenuIngredient } from "../../../types/menu-ingredient";
 import { ValueOf } from "../../../types";
 import { LoadingState } from "../../../types/loading-state";
 import { Skeleton } from "../../skeleton";
-import { Routes } from "../../../app/routes/constants";
 import styles from "./burger-ingredients-group.module.css";
 
 type Props = {
   ingredients: MenuIngredient[];
   title: string;
   loadingState: ValueOf<typeof LoadingState>;
-  onClickByIngredient: (ingredient: MenuIngredient) => void;
 };
 
 export const BurgerIngredientsGroup = forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const { ingredients, title, loadingState, onClickByIngredient } = props;
-  const history = useHistory();
-
-  const location = useLocation();
-
-  const handleClick = (ingredient: MenuIngredient) => {
-    history.push(`${Routes.Ingredients}/${ingredient._id}`, { background: location });
-  };
+  const { ingredients, title, loadingState } = props;
 
   return (
     <section ref={ref} className={`${styles.root} mt-5`}>
@@ -32,7 +22,7 @@ export const BurgerIngredientsGroup = forwardRef<HTMLDivElement, Props>((props, 
         {loadingState === LoadingState.SUCCESSFUL
           ? ingredients.map((item) => (
               <li className={styles.ingredient} key={item._id}>
-                <Ingredient ingredient={item} onClick={handleClick} />
+                <Ingredient ingredient={item} />
               </li>
             ))
           : null}

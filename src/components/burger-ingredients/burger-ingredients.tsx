@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { BurgerIngredientsNavigation } from "./burger-ingredients-navigation/burger-ingredients-navigation";
 import { BurgerPart, BurgerParts } from "../../types/burger-parts";
@@ -13,12 +13,11 @@ import styles from "./burger-ingredients.module.css";
 type Props = {
   loadingState: LoadingStatus;
   ingredients: MenuIngredient[];
-  onClickIngredient: (ingredient: MenuIngredient) => void;
 };
 
 export const BurgerIngredients = (props: Props) => {
-  const { loadingState, ingredients, onClickIngredient } = props;
-  const [current, setCurrent] = React.useState(BurgerParts.BUN);
+  const { loadingState, ingredients } = props;
+  const [current, setCurrent] = useState(BurgerParts.BUN);
   const bunIngredients = useMemo(() => ingredients.filter((item) => item.type === BurgerParts.BUN), [ingredients]);
   const sauceIngredients = useMemo(() => ingredients.filter((item) => item.type === BurgerParts.SAUCE), [ingredients]);
   const mainIngredients = useMemo(() => ingredients.filter((item) => item.type === BurgerParts.MAIN), [ingredients]);
@@ -109,21 +108,18 @@ export const BurgerIngredients = (props: Props) => {
           title="Булки"
           ingredients={bunIngredients}
           loadingState={loadingState}
-          onClickByIngredient={onClickIngredient}
         />
         <BurgerIngredientsGroup
           ref={setSaucesRefs}
           title="Соусы"
           ingredients={sauceIngredients}
           loadingState={loadingState}
-          onClickByIngredient={onClickIngredient}
         />
         <BurgerIngredientsGroup
           ref={setMainRefs}
           title="Начинки"
           ingredients={mainIngredients}
           loadingState={loadingState}
-          onClickByIngredient={onClickIngredient}
         />
       </div>
       <IngredientDetailsModalContainer />
