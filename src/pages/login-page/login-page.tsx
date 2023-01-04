@@ -1,7 +1,8 @@
-import { ChangeEvent, FormEvent, useCallback, useRef, useState } from "react";
+import { FormEvent, useCallback, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useForm } from "../../app/hooks/use-form";
 import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
 import { TextLink } from "../../components/text-link/text-link";
 import { FormPageWrapper } from "../../components/form-page-wrapper/form-page-wrapper";
@@ -17,7 +18,7 @@ import styles from "./login-page.module.css";
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
   const isLoading = useSelector(selectAuthLoadingState) === LoadingState.LOADING;
-  const [formFields, setFormFields] = useState({
+  const { formFields, handleFieldChange } = useForm({
     email: "",
     password: "",
   });
@@ -28,12 +29,6 @@ export const LoginPage = () => {
     setInputPasswordType((current) => (current === "text" ? "password" : "text"));
     setTimeout(() => inputPasswordRef.current?.focus(), 0);
   };
-  const handleFieldChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setFormFields((current) => ({
-      ...current,
-      [e.target.name]: e.target.value,
-    }));
-  }, []);
   const signIn = useCallback(
     (e: FormEvent) => {
       e.preventDefault();

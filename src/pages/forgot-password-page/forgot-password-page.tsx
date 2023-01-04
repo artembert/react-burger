@@ -1,21 +1,22 @@
-import { ChangeEvent, FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import { FormEvent, useCallback, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useForm } from "../../app/hooks/use-form";
 import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
 import { TextLink } from "../../components/text-link/text-link";
 import { FormPageWrapper } from "../../components/form-page-wrapper/form-page-wrapper";
 import { useAppDispatch } from "../../services/store";
 import { clearWasPasswordReset, fetchForgetPassword } from "../../services/reset-password";
 import { NBSP } from "../../components/costants";
-import styles from "./forgot-password-page.module.css";
-import { useSelector } from "react-redux";
 import { selectResetPasswordLoadingState, selectResetPasswordWasForget } from "../../services/reset-password/selectors";
 import { LoadingState } from "../../types/loading-state";
 import { Routes } from "../../app/routes/constants";
 import { ButtonSpinnerInsert } from "../../components/button-spinner-insert/button-spinner-insert";
+import styles from "./forgot-password-page.module.css";
 
 export const ForgotPasswordPage = () => {
-  const [formFields, setFormFields] = useState({
+  const { formFields, handleFieldChange } = useForm({
     email: "",
   });
   const dispatch = useAppDispatch();
@@ -23,16 +24,6 @@ export const ForgotPasswordPage = () => {
   const isLoading = useSelector(selectResetPasswordLoadingState) === LoadingState.LOADING;
   const wasForget = useSelector(selectResetPasswordWasForget);
   const inputEmailRef = useRef<HTMLInputElement>(null);
-  const handleFieldChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setFormFields((current) => ({
-        ...current,
-        [e.target.name]: e.target.value,
-      }));
-    },
-
-    []
-  );
   const forgetPassword = useCallback(
     (e: FormEvent) => {
       e.preventDefault();

@@ -1,7 +1,8 @@
-import { ChangeEvent, FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useForm } from "../../app/hooks/use-form";
 import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
 import { TextLink } from "../../components/text-link/text-link";
 import { FormPageWrapper } from "../../components/form-page-wrapper/form-page-wrapper";
@@ -14,7 +15,7 @@ import { useAppDispatch } from "../../services/store";
 import styles from "./reset-password-page.module.css";
 
 export const ResetPasswordPage = () => {
-  const [formFields, setFormFields] = useState({
+  const { formFields, handleFieldChange } = useForm({
     confirmationCode: "",
     password: "",
   });
@@ -34,16 +35,6 @@ export const ResetPasswordPage = () => {
       dispatch(fetchResetPassword({ password: formFields.password, token: formFields.confirmationCode }));
     },
     [dispatch, formFields.password, formFields.confirmationCode]
-  );
-  const handleFieldChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setFormFields((current) => ({
-        ...current,
-        [e.target.name]: e.target.value,
-      }));
-    },
-
-    []
   );
 
   useEffect(() => {
