@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { ConstructorPage } from "../../pages/constructor-page/constructor-page";
 import { useAppDispatch } from "../../services/store";
-import { AppHeader } from "../app-header/app-header";
+import { HeaderContainer } from "../../containers/header-container";
 import { Layout } from "../layout/layout";
 import { RegisterPage } from "../../pages/register-page/register-page";
 import { LoginPage } from "../../pages/login-page/login-page";
@@ -37,7 +37,7 @@ export const App = () => {
 
   return (
     <Layout>
-      <AppHeader />
+      <HeaderContainer />
       <Switch location={background || location}>
         <ProtectedRoute path={Routes.Profile} exact>
           <ProfilePage />
