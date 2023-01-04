@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, RefObject, useCallback, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useForm } from "../../app/hooks/use-form";
 import { ProfilePageWrapper } from "../../components/profile-page-wrapper/profile-page-wrapper";
 import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
 import { ProfileNavigation } from "../../components/profile-navigation/profile-navigation";
@@ -24,7 +25,7 @@ export const ProfilePage = () => {
   const isLoading = useSelector(selectAuthLoadingState) === LoadingState.LOADING;
   const savedUserName = useSelector(selectAuthUserName) || "";
   const savedUserEmail = useSelector(selectAuthUserEmail) || "";
-  const [formFields, setFormFields] = useState<Record<FieldName, string>>({
+  const { formFields, setFormFields, handleFieldChange } = useForm({
     name: savedUserName,
     email: savedUserEmail,
     password: "",
@@ -37,7 +38,7 @@ export const ProfilePage = () => {
     email: useRef<HTMLInputElement>(null),
     password: useRef<HTMLInputElement>(null),
   };
-  const [fieldsHasBeenChanged, setFieldsHasBeenChanged] = useState<boolean>(false);
+  const isEditMode = Object.values(editable).some(Boolean);
 
   const [inputPasswordType, setInputPasswordType] = useState<InputPasswordType>("password");
   const onEditIconClick = (fieldName: FieldName) => () => {
@@ -60,19 +61,17 @@ export const ProfilePage = () => {
     }
     setTimeout(() => refs[fieldName].current?.focus(), 0);
   };
-  const handleFieldChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setFieldsHasBeenChanged(true);
-    setFormFields((current) => ({
-      ...current,
-      [e.target.name]: e.target.value,
-    }));
-  }, []);
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      handleFieldChange(e);
+    },
+    [handleFieldChange]
+  );
   const updateUser = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
       dispatch(fetchUpdateUser(formFields));
       setEditable(editableFieldsInitial);
-      setFieldsHasBeenChanged(false);
     },
     [dispatch, formFields]
   );
@@ -85,9 +84,8 @@ export const ProfilePage = () => {
         password: "",
       });
       setEditable(editableFieldsInitial);
-      setFieldsHasBeenChanged(false);
     },
-    [savedUserEmail, savedUserName]
+    [savedUserEmail, savedUserName, setFormFields]
   );
 
   return (
@@ -100,7 +98,7 @@ export const ProfilePage = () => {
             <Input
               type="text"
               placeholder="Имя"
-              onChange={handleFieldChange}
+              onChange={handleChange}
               icon={editable["name"] ? "CheckMarkIcon" : "EditIcon"}
               readOnly={!editable["name"]}
               value={formFields.name}
@@ -115,7 +113,7 @@ export const ProfilePage = () => {
             <Input
               type="email"
               placeholder="E-mail"
-              onChange={handleFieldChange}
+              onChange={handleChange}
               icon={editable["email"] ? "CheckMarkIcon" : "EditIcon"}
               readOnly={!editable["email"]}
               value={formFields.email}
@@ -130,7 +128,7 @@ export const ProfilePage = () => {
             <Input
               type={inputPasswordType}
               placeholder="Пароль"
-              onChange={handleFieldChange}
+              onChange={handleChange}
               icon={editable["password"] ? "CheckMarkIcon" : "EditIcon"}
               readOnly={!editable["password"]}
               value={formFields.password}
@@ -142,7 +140,7 @@ export const ProfilePage = () => {
               errorText="Ошибка"
               size="default"
             />
-            {fieldsHasBeenChanged ? (
+            {isEditMode ? (
               <div className={styles.buttonWrapper}>
                 <Button htmlType="reset" type="secondary" size="medium" disabled={isLoading}>
                   Отменить
