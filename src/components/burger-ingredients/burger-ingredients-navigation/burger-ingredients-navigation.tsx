@@ -1,10 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { BurgerParts } from "../../../types/burger-parts";
+import { BurgerPart, BurgerParts } from "../../../types/burger-parts";
 import styles from "./burger-ingredients-navigation.module.css";
 
-export const BurgerIngredientsNavigation = (props) => {
+type Props = {
+  current: BurgerPart;
+  onChange: (group: BurgerPart) => void;
+};
+
+export const BurgerIngredientsNavigation = (props: Props) => {
   const { current, onChange } = props;
   return (
     <div className={styles.root}>
@@ -25,9 +28,4 @@ export const BurgerIngredientsNavigation = (props) => {
       </div>
     </div>
   );
-};
-
-BurgerIngredientsNavigation.propTypes = {
-  current: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
 };

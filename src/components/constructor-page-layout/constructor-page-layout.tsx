@@ -1,8 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { ReactNode } from "react";
 import styles from "./constuctor-page-layout.module.css";
 
-export const ConstructorPageLayout = (props) => {
+type Props = {
+  leftColumn: ReactNode;
+  rightColumn: ReactNode;
+};
+
+export const ConstructorPageLayout = (props: Props) => {
   const { leftColumn, rightColumn } = props;
   return (
     <main className={styles.main}>
@@ -11,9 +15,4 @@ export const ConstructorPageLayout = (props) => {
       <div className={styles.rightColumn}>{rightColumn}</div>
     </main>
   );
-};
-
-ConstructorPageLayout.propTypes = {
-  leftColumn: PropTypes.node.isRequired,
-  rightColumn: PropTypes.node.isRequired,
 };

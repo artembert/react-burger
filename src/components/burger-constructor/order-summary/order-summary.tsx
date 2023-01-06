@@ -1,9 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { ReactNode } from "react";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./order-summary.module.css";
 
-export const OrderSummary = (props) => {
+type Props = {
+  price: number;
+  children: ReactNode;
+};
+
+export const OrderSummary = (props: Props) => {
   const { price, children } = props;
   return (
     <div className={`${styles.container} pr-4`}>
@@ -16,9 +20,4 @@ export const OrderSummary = (props) => {
       <div className="ml-10">{children}</div>
     </div>
   );
-};
-
-OrderSummary.propTypes = {
-  price: PropTypes.number.isRequired,
-  children: PropTypes.element.isRequired,
 };
