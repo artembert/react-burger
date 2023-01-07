@@ -1,5 +1,4 @@
 import { FormEvent, useCallback, useRef, useState } from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useForm } from "../../app/hooks/use-form";
@@ -9,7 +8,7 @@ import { FormPageWrapper } from "../../components/form-page-wrapper/form-page-wr
 import { InputPasswordType } from "../../types";
 import { NBSP } from "../../components/costants";
 import { fetchLogin } from "../../services/auth";
-import { useAppDispatch } from "../../services/store";
+import { useAppDispatch, useAppSelector } from "../../services/store";
 import { selectAuthLoadingState } from "../../services/auth/selectors";
 import { LoadingState } from "../../types/loading-state";
 import { ButtonSpinnerInsert } from "../../components/button-spinner-insert/button-spinner-insert";
@@ -17,7 +16,7 @@ import styles from "./login-page.module.css";
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
-  const isLoading = useSelector(selectAuthLoadingState) === LoadingState.LOADING;
+  const isLoading = useAppSelector(selectAuthLoadingState) === LoadingState.LOADING;
   const { formFields, handleFieldChange } = useForm({
     email: "",
     password: "",

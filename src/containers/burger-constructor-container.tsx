@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { BurgerConstructor } from "../components/burger-constructor/burger-constructor";
 import { LoadingState } from "../types/loading-state";
@@ -9,7 +8,7 @@ import {
   selectConstructorIngredientsIds,
   selectConstructorTotalPrice,
 } from "../services/burger-constructor/selectors";
-import { useAppDispatch } from "../services/store";
+import { useAppDispatch, useAppSelector } from "../services/store";
 import { makeOrder } from "../services/order-details";
 import {
   addIngredient,
@@ -24,12 +23,12 @@ import { Routes } from "../app/routes/constants";
 export const BurgerConstructorContainer = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const bun = useSelector(selectConstructorBun);
-  const isAuthorized = useSelector(selectAuthIsAuthorized);
-  const constructorIngredients = useSelector(selectConstructorIngredients);
-  const allIngredients = useSelector(selectIngredients);
-  const totalPrice = useSelector(selectConstructorTotalPrice);
-  const ingredientsIds = useSelector(selectConstructorIngredientsIds);
+  const bun = useAppSelector(selectConstructorBun);
+  const isAuthorized = useAppSelector(selectAuthIsAuthorized);
+  const constructorIngredients = useAppSelector(selectConstructorIngredients);
+  const allIngredients = useAppSelector(selectIngredients);
+  const totalPrice = useAppSelector(selectConstructorTotalPrice);
+  const ingredientsIds = useAppSelector(selectConstructorIngredientsIds);
   const handleNewOrder = useCallback(() => {
     if (isAuthorized) {
       dispatch(makeOrder({ ingredients: ingredientsIds }));

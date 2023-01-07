@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, RefObject, useCallback, useRef, useState } from "react";
-import { useSelector } from "react-redux";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useForm } from "../../app/hooks/use-form";
 import { ProfilePageWrapper } from "../../components/profile-page-wrapper/profile-page-wrapper";
@@ -7,7 +6,7 @@ import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
 import { ProfileNavigation } from "../../components/profile-navigation/profile-navigation";
 import { selectAuthLoadingState, selectAuthUserEmail, selectAuthUserName } from "../../services/auth/selectors";
 import { fetchUpdateUser } from "../../services/auth";
-import { useAppDispatch } from "../../services/store";
+import { useAppDispatch, useAppSelector } from "../../services/store";
 import { LoadingState } from "../../types/loading-state";
 import { InputPasswordType } from "../../types";
 import styles from "./profile-page.module.css";
@@ -22,9 +21,9 @@ const editableFieldsInitial = {
 
 export const ProfilePage = () => {
   const dispatch = useAppDispatch();
-  const isLoading = useSelector(selectAuthLoadingState) === LoadingState.LOADING;
-  const savedUserName = useSelector(selectAuthUserName) || "";
-  const savedUserEmail = useSelector(selectAuthUserEmail) || "";
+  const isLoading = useAppSelector(selectAuthLoadingState) === LoadingState.LOADING;
+  const savedUserName = useAppSelector(selectAuthUserName) || "";
+  const savedUserEmail = useAppSelector(selectAuthUserEmail) || "";
   const { formFields, setFormFields, handleFieldChange } = useForm({
     name: savedUserName,
     email: savedUserEmail,
