@@ -1,5 +1,4 @@
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useForm } from "../../app/hooks/use-form";
@@ -11,7 +10,7 @@ import { NBSP } from "../../components/costants";
 import { selectResetPasswordWasForget, selectResetPasswordWasReset } from "../../services/reset-password/selectors";
 import { Routes } from "../../app/routes/constants";
 import { fetchResetPassword } from "../../services/reset-password";
-import { useAppDispatch } from "../../services/store";
+import { useAppDispatch, useAppSelector } from "../../services/store";
 import styles from "./reset-password-page.module.css";
 
 export const ResetPasswordPage = () => {
@@ -21,8 +20,8 @@ export const ResetPasswordPage = () => {
   });
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const wasForget = useSelector(selectResetPasswordWasForget);
-  const wasReset = useSelector(selectResetPasswordWasReset);
+  const wasForget = useAppSelector(selectResetPasswordWasForget);
+  const wasReset = useAppSelector(selectResetPasswordWasReset);
   const inputPasswordRef = useRef<HTMLInputElement>(null);
   const [inputPasswordType, setInputPasswordType] = useState<InputPasswordType>("password");
   const onPasswordIconClick = () => {

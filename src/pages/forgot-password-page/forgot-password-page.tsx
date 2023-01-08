@@ -1,12 +1,11 @@
 import { FormEvent, useCallback, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useForm } from "../../app/hooks/use-form";
 import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
 import { TextLink } from "../../components/text-link/text-link";
 import { FormPageWrapper } from "../../components/form-page-wrapper/form-page-wrapper";
-import { useAppDispatch } from "../../services/store";
+import { useAppDispatch, useAppSelector } from "../../services/store";
 import { clearWasPasswordReset, fetchForgetPassword } from "../../services/reset-password";
 import { NBSP } from "../../components/costants";
 import { selectResetPasswordLoadingState, selectResetPasswordWasForget } from "../../services/reset-password/selectors";
@@ -21,8 +20,8 @@ export const ForgotPasswordPage = () => {
   });
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const isLoading = useSelector(selectResetPasswordLoadingState) === LoadingState.LOADING;
-  const wasForget = useSelector(selectResetPasswordWasForget);
+  const isLoading = useAppSelector(selectResetPasswordLoadingState) === LoadingState.LOADING;
+  const wasForget = useAppSelector(selectResetPasswordWasForget);
   const inputEmailRef = useRef<HTMLInputElement>(null);
   const forgetPassword = useCallback(
     (e: FormEvent) => {

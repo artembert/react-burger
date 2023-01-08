@@ -1,5 +1,4 @@
 import { FormEvent, useCallback, useRef, useState } from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useForm } from "../../app/hooks/use-form";
@@ -8,7 +7,7 @@ import { FormWrapper } from "../../components/form-wrapper/form-wrapper";
 import { TextLink } from "../../components/text-link/text-link";
 import { NBSP } from "../../components/costants";
 import { InputPasswordType } from "../../types";
-import { useAppDispatch } from "../../services/store";
+import { useAppDispatch, useAppSelector } from "../../services/store";
 import { fetchRegister } from "../../services/auth";
 import { selectAuthLoadingState } from "../../services/auth/selectors";
 import { LoadingState } from "../../types/loading-state";
@@ -17,7 +16,7 @@ import styles from "./register-page.module.css";
 
 export const RegisterPage = () => {
   const dispatch = useAppDispatch();
-  const isLoading = useSelector(selectAuthLoadingState) === LoadingState.LOADING;
+  const isLoading = useAppSelector(selectAuthLoadingState) === LoadingState.LOADING;
   const { formFields, handleFieldChange } = useForm({
     name: "",
     email: "",

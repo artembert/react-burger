@@ -1,7 +1,7 @@
-import { selectAuthIsAuthorized } from "../../services/auth/selectors";
-import { useSelector } from "react-redux";
-import { Redirect, Route, useLocation } from "react-router-dom";
 import { ReactNode } from "react";
+import { selectAuthIsAuthorized } from "../../services/auth/selectors";
+import { useAppSelector } from "../../services/store";
+import { Redirect, Route, useLocation } from "react-router-dom";
 import { Routes } from "../../app/routes/constants";
 
 type Props = {
@@ -18,7 +18,7 @@ type LocationWithFrom = Location & {
 
 export const ProtectedRoute = (props: Props) => {
   const { children, ...rest } = props;
-  const isAuthorized = useSelector(selectAuthIsAuthorized);
+  const isAuthorized = useAppSelector(selectAuthIsAuthorized);
   const location = useLocation<LocationWithFrom>();
   const to = {
     pathname: location.state?.from ? location.state?.from.pathname : Routes.Login,

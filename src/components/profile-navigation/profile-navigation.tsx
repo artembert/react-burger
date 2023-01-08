@@ -4,16 +4,15 @@ import { LogoutIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Routes } from "../../app/routes/constants";
 import styles from "./profile-navigation.module.css";
 import { fetchLogout } from "../../services/auth";
-import { useAppDispatch } from "../../services/store";
+import { useAppDispatch, useAppSelector } from "../../services/store";
 import { getRefreshToken } from "../../services/token";
-import { useSelector } from "react-redux";
 import { selectAuthLoadingState } from "../../services/auth/selectors";
 import { LoadingState } from "../../types/loading-state";
 import { Spinner } from "../spinner/spinner";
 
 export const ProfileNavigation = () => {
   const dispatch = useAppDispatch();
-  const isLoading = useSelector(selectAuthLoadingState) === LoadingState.LOADING;
+  const isLoading = useAppSelector(selectAuthLoadingState) === LoadingState.LOADING;
   const logout = () => {
     dispatch(fetchLogout({ token: getRefreshToken() }));
   };

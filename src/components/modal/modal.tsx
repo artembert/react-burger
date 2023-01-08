@@ -1,24 +1,29 @@
-import React, { useCallback, useEffect } from "react";
+import { ReactNode, useCallback, useEffect, MouseEvent } from "react";
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ModalOverlay } from "./modal-overlay/modal-overlay";
 import styles from "./modal.module.css";
 
+type Props = {
+  title?: string;
+  onRequestClose: VoidFunction;
+  children: ReactNode;
+};
+
 const KEY_DOWN = "keydown";
 
-export const Modal = (props) => {
-  const { title, onRequestClose, children } = props;
+export const Modal = (props: Props) => {
+  const { title, children, onRequestClose } = props;
   const modalElement = document.getElementById("modal");
   const onKeyDown = useCallback(
-    (e) => {
+    (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onRequestClose();
       }
     },
     [onRequestClose]
   );
-  const handleModalClick = (e) => {
+  const handleModalClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
 
@@ -50,10 +55,4 @@ export const Modal = (props) => {
     </ModalOverlay>,
     modalElement
   );
-};
-
-Modal.propTypes = {
-  title: PropTypes.string,
-  children: PropTypes.element.isRequired,
-  onRequestClose: PropTypes.func.isRequired,
 };
