@@ -1,4 +1,4 @@
-import { HttpMethod, request } from "../../../app/helpers/request";
+import { HttpMethod, requestOnce } from "../../../app/helpers/request";
 import { API_ENDPOINT } from "../../../app/constants";
 import { TOKEN } from "./constants";
 import { TokensPair } from "../../../types/tokens-pair";
@@ -12,7 +12,7 @@ type RefreshTokenRes = {
 };
 
 export const fetchRefreshToken: (refreshToken: string) => Promise<TokensPair> = async (refreshToken) => {
-  const response = await request<RefreshTokenRes>(endpoint, {
+  const response = await requestOnce<RefreshTokenRes>(endpoint, {
     method: HttpMethod.POST,
     body: { token: refreshToken },
   });
