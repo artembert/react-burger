@@ -3,6 +3,7 @@ import { ValueOf } from "../../types";
 import { LoadingState } from "../../types/loading-state";
 import { fetchLogin, fetchLogout, fetchRegister, fetchUpdateUser, fetchUser } from "./requests";
 import { clearTokens, setTokens } from "../token";
+import { fetchRefreshTokenThunk } from "./requests/fetch-refresh-token";
 
 export type AuthSliceState = {
   name: string | null;
@@ -92,6 +93,12 @@ const authSlice = createSlice({
       state.name = action.payload.name;
     });
     builder.addCase(fetchUpdateUser.rejected, (state) => {
+      state.loadingState = LoadingState.ERROR;
+    });
+    builder.addCase(fetchRefreshTokenThunk.rejected, (state) => {
+      state.name = null;
+      state.email = null;
+      state.isAuthorized = false;
       state.loadingState = LoadingState.ERROR;
     });
   },

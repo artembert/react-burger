@@ -21,7 +21,7 @@ export const HttpMethod = {
 
 export const request = <T>(url: string, options: Options = { method: HttpMethod.GET }) => {
   return requestOnce<T>(url, options).catch((e: unknown) => {
-    if ((e as { isJwtExpired: boolean })?.isJwtExpired && getRefreshToken()) {
+    if ((e as { isJwtExpired: boolean })?.isJwtExpired) {
       return fetchRefreshToken(getRefreshToken())
         .then((tokensPair) => {
           setTokens(tokensPair.accessToken, tokensPair.refreshToken);
