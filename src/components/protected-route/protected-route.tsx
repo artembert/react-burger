@@ -1,9 +1,10 @@
 import { ReactNode } from "react";
 import { selectAuthIsAuthorized, selectAuthIsChecked } from "../../services/auth/selectors";
-import { useAppSelector } from "../../services/store";
+import { useAppDispatch, useAppSelector } from "../../services/store";
 import { Redirect, Route, useLocation } from "react-router-dom";
 import { Routes } from "../../app/routes/constants";
-import { Spinner } from "../spinner/spinner";
+import { fetchUser } from "../../services/auth";
+import { ProtectedRouterPlug } from "./protected-router-plug/protected-router-plug";
 
 type Props = {
   path?: string | string[];
@@ -19,6 +20,7 @@ type LocationWithFrom = Location & {
 
 export const ProtectedRoute = (props: Props) => {
   const { children, ...rest } = props;
+  const dispatch = useAppDispatch();
   const isAuthChecked = useAppSelector(selectAuthIsChecked);
   const isAuthorized = useAppSelector(selectAuthIsAuthorized);
   const location = useLocation<LocationWithFrom>();
@@ -28,7 +30,8 @@ export const ProtectedRoute = (props: Props) => {
   };
 
   if (!isAuthChecked) {
-    return <Spinner />;
+    dispatch(fetchUser());
+    return <ProtectedRouterPlug />;
   }
 
   return <Route {...rest} render={() => (isAuthorized ? children : <Redirect to={to} />)} />;
