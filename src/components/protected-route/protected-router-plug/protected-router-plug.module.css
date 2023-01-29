@@ -1,0 +1,18 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  margin-top: 120px;
+  margin-right: 60px;
+}
+
+/* var(--profile-page-width-l) */
+@media screen and (max-width: 920px) {
+  .root {
+    margin-top: 0;
+    margin-right: 0;
+    display: grid;
+    gap: 32px;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

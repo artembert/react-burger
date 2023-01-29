@@ -1,7 +1,8 @@
-import { HttpMethod, request } from "../../../app/helpers/request";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { HttpMethod, requestOnce } from "../../../app/helpers/request";
 import { API_ENDPOINT } from "../../../app/constants";
-import { TOKEN } from "./constants";
 import { TokensPair } from "../../../types/tokens-pair";
+import { TOKEN } from "./constants";
 
 const endpoint = `${API_ENDPOINT}${TOKEN}`;
 
@@ -12,7 +13,10 @@ type RefreshTokenRes = {
 };
 
 export const fetchRefreshToken: (refreshToken: string) => Promise<TokensPair> = async (refreshToken) => {
-  const response = await request<RefreshTokenRes>(endpoint, {
+  if (!refreshToken) {
+    return Promise.reject("No refresh token provide");
+  }
+  const response = await requestOnce<RefreshTokenRes>(endpoint, {
     method: HttpMethod.POST,
     body: { token: refreshToken },
   });
@@ -24,3 +28,5 @@ export const fetchRefreshToken: (refreshToken: string) => Promise<TokensPair> = 
   }
   return Promise.reject("Failed to refresh token");
 };
+
+export const fetchRefreshTokenThunk = createAsyncThunk("auth/refreshToken", () => fetchRefreshToken);

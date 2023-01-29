@@ -3,19 +3,20 @@ import { ValueOf } from "../../types";
 import { LoadingState } from "../../types/loading-state";
 import { fetchLogin, fetchLogout, fetchRegister, fetchUpdateUser, fetchUser } from "./requests";
 import { clearTokens, setTokens } from "../token";
+import { fetchRefreshTokenThunk } from "./requests/fetch-refresh-token";
 
 export type AuthSliceState = {
   name: string | null;
   email: string | null;
   loadingState: ValueOf<typeof LoadingState>;
-  isAuthorized: boolean;
+  isChecked: boolean;
 };
 
 const initialState: AuthSliceState = {
   loadingState: LoadingState.IDLE,
   name: null,
   email: null,
-  isAuthorized: false,
+  isChecked: false,
 };
 
 const authSlice = createSlice({
@@ -29,14 +30,14 @@ const authSlice = createSlice({
     builder.addCase(fetchRegister.fulfilled, (state, action) => {
       setTokens(action.payload.accessToken, action.payload.refreshToken);
       state.loadingState = LoadingState.SUCCESSFUL;
-      state.isAuthorized = true;
+      state.isChecked = true;
       state.email = action.payload.email;
       state.name = action.payload.name;
     });
     builder.addCase(fetchRegister.rejected, (state) => {
       state.email = null;
       state.name = null;
-      state.isAuthorized = false;
+      state.isChecked = true;
       state.loadingState = LoadingState.ERROR;
     });
     builder.addCase(fetchLogin.pending, (state) => {
@@ -45,14 +46,14 @@ const authSlice = createSlice({
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       setTokens(action.payload.accessToken, action.payload.refreshToken);
       state.loadingState = LoadingState.SUCCESSFUL;
-      state.isAuthorized = true;
+      state.isChecked = true;
       state.email = action.payload.email;
       state.name = action.payload.name;
     });
     builder.addCase(fetchLogin.rejected, (state) => {
       state.email = null;
       state.name = null;
-      state.isAuthorized = false;
+      state.isChecked = true;
       state.loadingState = LoadingState.ERROR;
     });
     builder.addCase(fetchLogout.pending, (state) => {
@@ -61,7 +62,7 @@ const authSlice = createSlice({
     builder.addCase(fetchLogout.fulfilled, (state) => {
       clearTokens();
       state.loadingState = LoadingState.SUCCESSFUL;
-      state.isAuthorized = false;
+      state.isChecked = true;
       state.email = null;
       state.name = null;
     });
@@ -73,14 +74,14 @@ const authSlice = createSlice({
     });
     builder.addCase(fetchUser.fulfilled, (state, action) => {
       state.loadingState = LoadingState.SUCCESSFUL;
-      state.isAuthorized = true;
+      state.isChecked = true;
       state.email = action.payload.email;
       state.name = action.payload.name;
     });
     builder.addCase(fetchUser.rejected, (state) => {
       state.email = null;
       state.name = null;
-      state.isAuthorized = false;
+      state.isChecked = true;
       state.loadingState = LoadingState.ERROR;
     });
     builder.addCase(fetchUpdateUser.pending, (state) => {
@@ -92,6 +93,12 @@ const authSlice = createSlice({
       state.name = action.payload.name;
     });
     builder.addCase(fetchUpdateUser.rejected, (state) => {
+      state.loadingState = LoadingState.ERROR;
+    });
+    builder.addCase(fetchRefreshTokenThunk.rejected, (state) => {
+      state.name = null;
+      state.email = null;
+      state.isChecked = true;
       state.loadingState = LoadingState.ERROR;
     });
   },
