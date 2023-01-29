@@ -8,6 +8,7 @@
   grid-template-rows: min-content min-content;
   grid-template-columns: min-content 1fr;
   align-items: center;
+  padding: 0 16px 0 8px;
 }
 
 .ingredient:hover {
@@ -66,6 +67,7 @@
     align-items: center;
     width: var(--ingredient-width);
     height: 208px;
+    padding: 0;
   }
 
   .imageContainer {
