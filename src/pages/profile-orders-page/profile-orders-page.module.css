@@ -1,4 +1,6 @@
 .root {
   display: grid;
   gap: 24px;
+  overflow-y: scroll;
+  max-height: calc(100vh - calc(88px + 40px));
 }

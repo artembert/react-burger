@@ -3,7 +3,7 @@
   grid-template-columns: 320px 480px minmax(min-content, 320px);
   grid-column-gap: 60px;
   max-width: var(--container-width);
-  padding: 0 16px;
+  padding: 0 0 0 16px;
   margin: 0 auto;
 }
 

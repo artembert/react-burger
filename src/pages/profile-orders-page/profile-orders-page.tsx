@@ -12,7 +12,7 @@ export const ProfileOrdersPage = () => {
       pageDescription={"В этом разделе вы можете просмотреть свою историю заказов"}
       navigation={<ProfileNavigation />}
       content={
-        <article className={classNames(styles.root, "mt-10")}>
+        <article className={classNames("mt-10", "pb-10", "pr-2", "custom-scroll", styles.root)}>
           {profileOrdersHistoryMock.map((item) => (
             <OrderHistoryItem item={item} key={item.id} />
           ))}
