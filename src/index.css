@@ -8,7 +8,7 @@
   --colors-drop-hover: #4c4cff44;
 
   /* Sizes */
-  --container-width: 1240px;
+  --container-width: 1280px;
   --profile-page-width-l: 920px;
 
   /* Shadows */
@@ -52,4 +52,8 @@ code {
 
 .constructor-element__image {
   min-width: 80px;
+}
+
+* {
+  box-sizing: border-box;
 }
