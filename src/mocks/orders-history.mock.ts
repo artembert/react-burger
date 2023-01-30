@@ -1,4 +1,4 @@
-import { ProfileOrderDetails } from "../types/profile-order-details";
+import { OrderHistoryDetails } from "../types/order-history-details";
 import { OrderStatusState } from "../types/constants/order-status-state";
 
 const ingredients = [
@@ -9,7 +9,7 @@ const ingredients = [
   "60666c42cc7b410027a1a9b4",
   "60666c42cc7b410027a1a9b9",
 ];
-export const profileOrdersHistoryMock: ProfileOrderDetails[] = [
+export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
   {
     id: 423412,
     date: new Date(2022, 11, 29, 9, 54),
@@ -53,3 +53,5 @@ export const profileOrdersHistoryMock: ProfileOrderDetails[] = [
     status: OrderStatusState.CREATED,
   },
 ];
+
+export const ordersHistoryMock = profileOrdersHistoryMock.map((item) => ({ ...item, status: undefined }));

@@ -1,11 +1,11 @@
 import classNames from "classnames";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { ProfileOrderDetails } from "../../types/profile-order-details";
+import { OrderHistoryDetails } from "../../types/order-history-details";
 import { OrderStatusLabel } from "./order-status-label/order-status-label";
 import styles from "./order-history-item.module.css";
 
 type Props = {
-  item: ProfileOrderDetails;
+  item: OrderHistoryDetails;
 };
 
 export const OrderHistoryItem = (props: Props) => {
@@ -21,9 +21,11 @@ export const OrderHistoryItem = (props: Props) => {
         </div>
       </div>
       <h3 className={classNames("text", "text_type_main-medium", "mt-6")}>{title}</h3>
-      <div className="mt-2">
-        <OrderStatusLabel status={status} />
-      </div>
+      {status ? (
+        <div className="mt-2">
+          <OrderStatusLabel status={status} />
+        </div>
+      ) : null}
       <div className={classNames(styles.footer, "mt-6")}>
         <div className={classNames()}></div>
         <div className={classNames(styles.price, "text", "text_type_digits-default")}>
