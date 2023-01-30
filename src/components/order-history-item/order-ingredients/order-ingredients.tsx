@@ -24,7 +24,7 @@ export const OrderIngredients = (props: Props) => {
           return null;
         }
         return (
-          <div className={styles.ingredient}>
+          <div key={ingredient._id} className={styles.ingredient}>
             <div className={styles.imageWrapper}>
               <img className={styles.image} src={ingredient.image_mobile} alt={ingredient.name} />
             </div>
