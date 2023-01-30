@@ -2,18 +2,27 @@ import { OrderHistoryDetails } from "../types/order-history-details";
 import { OrderStatusState } from "../types/constants/order-status-state";
 
 const ingredients = [
-  "60666c42cc7b410027a1a9b1",
-  "60666c42cc7b410027a1a9b5",
-  "60666c42cc7b410027a1a9b6",
-  "60666c42cc7b410027a1a9b7",
-  "60666c42cc7b410027a1a9b4",
-  "60666c42cc7b410027a1a9b9",
+  "60d3b41abdacab0026a733c6",
+  "60d3b41abdacab0026a733c7",
+  "60d3b41abdacab0026a733c8",
+  "60d3b41abdacab0026a733c9",
+  "60d3b41abdacab0026a733ca",
+  "60d3b41abdacab0026a733cb",
+  "60d3b41abdacab0026a733cc",
+  "60d3b41abdacab0026a733cd",
+  "60d3b41abdacab0026a733ce",
+  "60d3b41abdacab0026a733cf",
+  "60d3b41abdacab0026a733d0",
+  "60d3b41abdacab0026a733d1",
+  "60d3b41abdacab0026a733d2",
+  "60d3b41abdacab0026a733d3",
+  "60d3b41abdacab0026a733d4",
 ];
 export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
   {
     id: 423412,
     date: new Date(2022, 11, 29, 9, 54),
-    ingredientsIds: ingredients,
+    ingredientsIds: ingredients.slice(0, 4),
     price: 320,
     title: "Death Star Starship Main бургер",
     status: OrderStatusState.REJECTED,
@@ -21,7 +30,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
   {
     id: 426422,
     date: new Date(2022, 11, 29, 10, 14),
-    ingredientsIds: ingredients,
+    ingredientsIds: ingredients.slice(0, 7),
     price: 320,
     title: "Death Star Starship Main бургер",
     status: OrderStatusState.DONE,
@@ -30,7 +39,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
   {
     id: 256913,
     date: new Date(2022, 11, 29, 10, 25),
-    ingredientsIds: ingredients,
+    ingredientsIds: ingredients.slice(0, 5),
     price: 320,
     title: "Death Star Starship Main бургер",
     status: OrderStatusState.DONE,
@@ -39,7 +48,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
   {
     id: 133412,
     date: new Date(2022, 11, 29, 10, 34),
-    ingredientsIds: ingredients,
+    ingredientsIds: ingredients.slice(0, 11),
     price: 320,
     title: "Death Star Starship Main бургер",
     status: OrderStatusState.IN_PROGRESS,
@@ -47,7 +56,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
   {
     id: 687444,
     date: new Date(2022, 11, 29, 10, 42),
-    ingredientsIds: ingredients,
+    ingredientsIds: ingredients.slice(0, 14),
     price: 320,
     title: "Death Star Starship Main бургер",
     status: OrderStatusState.CREATED,
