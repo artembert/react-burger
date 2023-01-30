@@ -4,6 +4,7 @@ export const Routes = {
   ProfileOrders: "/profile/orders",
   Register: "/register",
   Login: "/login",
+  Feed: "/feed",
   Ingredients: "/ingredients",
   IngredientWithId: "/ingredients/:ingredientId",
   ForgotPassword: "/forgot-password",

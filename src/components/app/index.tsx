@@ -19,6 +19,7 @@ import { IngredientPage } from "../../pages/ingredient-page/ingredient-page";
 import { fetchIngredients } from "../../services/ingredients";
 import { LocationStateBackground } from "../../types/location-state-background";
 import { IngredientDetailsModalContainer } from "../../containers/ingredient-details-modal-container";
+import { FeedPage } from "../../pages/feed-page/feed-page";
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -59,6 +60,9 @@ export const App = () => {
         </AuthRoute>
         <Route path={Routes.IngredientWithId}>
           <IngredientPage />
+        </Route>
+        <Route path={Routes.Feed}>
+          <FeedPage />
         </Route>
         <Route path="/">
           <ConstructorPage />
