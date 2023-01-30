@@ -64,3 +64,5 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
 ];
 
 export const ordersHistoryMock = profileOrdersHistoryMock.map((item) => ({ ...item, status: undefined }));
+
+export const ordersIds = ["034533", "034532", "034530", "034527", "034525", "034538", "034541", "034542"];
