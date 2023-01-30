@@ -30,7 +30,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
   {
     id: 426422,
     date: new Date(2022, 11, 29, 10, 14),
-    ingredientsIds: ingredients.slice(0, 7),
+    ingredientsIds: ingredients.slice(0, 6),
     price: 320,
     title: "Death Star Starship Main бургер",
     status: OrderStatusState.DONE,
@@ -39,7 +39,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
   {
     id: 256913,
     date: new Date(2022, 11, 29, 10, 25),
-    ingredientsIds: ingredients.slice(0, 5),
+    ingredientsIds: ingredients.slice(0, 7),
     price: 320,
     title: "Death Star Starship Main бургер",
     status: OrderStatusState.DONE,

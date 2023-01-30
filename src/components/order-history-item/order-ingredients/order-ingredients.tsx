@@ -1,20 +1,20 @@
-import { useState } from "react";
+import classNames from "classnames";
 import { useAppSelector } from "../../../services/store";
-import styles from "./order-ingredients.module.css";
 import { selectIngredients } from "../../../services/ingredients/selectors";
+import styles from "./order-ingredients.module.css";
 
 type Props = {
   ingredientsIds: string[];
 };
 
-const visibleIngredientsAmountDefault = 5;
+const visibleIngredientsAmount = 5;
 
 export const OrderIngredients = (props: Props) => {
   const { ingredientsIds } = props;
   const ingredients = useAppSelector(selectIngredients);
-  const [visibleIngredientsAmount, setVisibleIngredientsAmount] = useState(visibleIngredientsAmountDefault);
   const expanded = ingredientsIds.slice(0, visibleIngredientsAmount);
   const collapsed = ingredientsIds.slice(visibleIngredientsAmount);
+  const collapsedIngredient = ingredients.find((item) => item._id === collapsed[0]) ?? null;
 
   return (
     <ul className={styles.root}>
@@ -31,6 +31,18 @@ export const OrderIngredients = (props: Props) => {
           </div>
         );
       })}
+      {collapsedIngredient ? (
+        <div className={classNames(styles.ingredient)}>
+          <div className={styles.imageWrapper}>
+            <img className={styles.image} src={collapsedIngredient.image_mobile} alt={collapsedIngredient.name} />
+            {collapsed.length > 1 ? (
+              <span className={classNames(styles.collapsedCount, "text", "text_type_main-default")}>
+                +{collapsed.length}
+              </span>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
     </ul>
   );
 };
