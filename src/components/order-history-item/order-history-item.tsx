@@ -14,7 +14,7 @@ export const OrderHistoryItem = (props: Props) => {
 
   return (
     <article className={styles.root}>
-      <div className={classNames(styles.header, "mt-6")}>
+      <div className={styles.header}>
         <div className={classNames("text", "text_type_digits-default")}>#{id}</div>
         <div className={classNames(styles.date, "text", "text_type_main-default", "text_color_inactive")}>
           {date.toLocaleString()}
