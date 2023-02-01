@@ -23,7 +23,7 @@ export const FeedPage = () => {
   const orders = useAppSelector(selectFeedOrders);
   const total = useAppSelector(selectFeedTotal);
   const totalToday = useAppSelector(selectFeedTotalToday);
-  const ordersInDone = useAppSelector(selectFeedOrdersInDone);
+  const ordersInDone = useAppSelector(selectFeedOrdersInDone).slice(0, 22);
   const ordersInProgress = useAppSelector(selectFeedOrdersInProgress);
 
   useEffect(() => {
@@ -50,16 +50,26 @@ export const FeedPage = () => {
         <div className={styles.orderNumbersSection}>
           <p className="text text_type_main-medium">Готовы:</p>
           <p className="text text_type_main-medium">В работе:</p>
-          <div className="text">
-            {ordersInDone.map((item) => (
-              <p key={item} className="text text_type_digits-default text_color_success mt-2">
+          <div className="text" style={{ columnCount: Math.ceil(ordersInDone.length / 10) }}>
+            {ordersInDone.map((item, index) => (
+              <p
+                key={item}
+                className={classNames("text", "text_type_digits-default", "text_color_success", {
+                  "mt-2": index,
+                })}
+              >
                 {item.toString(10)}
               </p>
             ))}
           </div>
-          <div className="text">
-            {ordersInProgress.slice(-3).map((item) => (
-              <p key={item} className="text text_type_digits-default mt-2">
+          <div className="text" style={{ columnCount: Math.ceil(ordersInDone.length / 10) }}>
+            {ordersInProgress.slice(-3).map((item, index) => (
+              <p
+                key={item}
+                className={classNames("text", "text_type_digits-default", {
+                  "mt-2": index,
+                })}
+              >
                 {item.toString(10)}
               </p>
             ))}
