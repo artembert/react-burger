@@ -20,7 +20,7 @@ const ingredients = [
 ];
 export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
   {
-    id: 423412,
+    id: "a423412f",
     number: 423412,
     date: new Date(2022, 11, 29, 9, 54),
     ingredientsIds: ingredients.slice(0, 4),
@@ -28,7 +28,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
     status: OrderStatusState.REJECTED,
   },
   {
-    id: 426422,
+    id: "a426422f",
     number: 426422,
     date: new Date(2022, 11, 29, 10, 14),
     ingredientsIds: ingredients.slice(0, 6),
@@ -37,7 +37,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
   },
 
   {
-    id: 256913,
+    id: "a256913f",
     number: 256913,
     date: new Date(2022, 11, 29, 10, 25),
     ingredientsIds: ingredients.slice(0, 7),
@@ -46,7 +46,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
   },
 
   {
-    id: 133412,
+    id: "a133412f",
     number: 133412,
     date: new Date(2022, 11, 29, 10, 34),
     ingredientsIds: ingredients.slice(0, 11),
@@ -54,7 +54,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
     status: OrderStatusState.IN_PROGRESS,
   },
   {
-    id: 687444,
+    id: "a687444f",
     number: 687444,
     date: new Date(2022, 11, 29, 10, 42),
     ingredientsIds: ingredients.slice(0, 14),

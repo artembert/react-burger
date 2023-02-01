@@ -19,14 +19,14 @@ export const FeedPage = () => {
           <div className="text">
             {ordersIds.slice(0, 5).map((item) => (
               <p key={item} className="text text_type_digits-default text_color_success mt-2">
-                {item}
+                {item.toString(10)}
               </p>
             ))}
           </div>
           <div className="text">
             {ordersIds.slice(-3).map((item) => (
               <p key={item} className="text text_type_digits-default mt-2">
-                {item}
+                {item.toString(10)}
               </p>
             ))}
           </div>

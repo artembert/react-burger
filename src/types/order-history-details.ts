@@ -1,7 +1,7 @@
 import { OrderStatus } from "./order-status";
 
 export type OrderHistoryDetails = {
-  id: number;
+  id: string;
   number: number;
   title: string;
   ingredientsIds: string[];
