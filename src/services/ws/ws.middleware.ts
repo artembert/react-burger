@@ -37,6 +37,7 @@ export const webSocketMiddleware = (): Middleware => {
 
         socket.onclose = (event) => {
           dispatch(onCloseConnection(event));
+          socket = null;
         };
 
         if (sendMessage.match(action)) {
