@@ -21,6 +21,7 @@ const ingredients = [
 export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
   {
     id: 423412,
+    number: 423412,
     date: new Date(2022, 11, 29, 9, 54),
     ingredientsIds: ingredients.slice(0, 4),
     title: "Death Star Starship Main бургер",
@@ -28,6 +29,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
   },
   {
     id: 426422,
+    number: 426422,
     date: new Date(2022, 11, 29, 10, 14),
     ingredientsIds: ingredients.slice(0, 6),
     title: "Death Star Starship Main бургер",
@@ -36,6 +38,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
 
   {
     id: 256913,
+    number: 256913,
     date: new Date(2022, 11, 29, 10, 25),
     ingredientsIds: ingredients.slice(0, 7),
     title: "Death Star Starship Main бургер",
@@ -44,6 +47,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
 
   {
     id: 133412,
+    number: 133412,
     date: new Date(2022, 11, 29, 10, 34),
     ingredientsIds: ingredients.slice(0, 11),
     title: "Death Star Starship Main бургер",
@@ -51,6 +55,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
   },
   {
     id: 687444,
+    number: 687444,
     date: new Date(2022, 11, 29, 10, 42),
     ingredientsIds: ingredients.slice(0, 14),
     title: "Death Star Starship Main бургер",

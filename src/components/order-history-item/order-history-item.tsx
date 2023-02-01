@@ -17,7 +17,7 @@ type Props = {
 
 export const OrderHistoryItem = (props: Props) => {
   const { item } = props;
-  const { status, id, date, ingredientsIds, title } = item;
+  const { status, date, ingredientsIds, title, number } = item;
   const ingredients = useAppSelector(selectIngredients);
   const isLoaded = useAppSelector(selectIngredientsLoadingSate) === LoadingState.SUCCESSFUL;
   const price = useMemo(() => getOrderPrice(ingredientsIds, ingredients), [ingredientsIds, ingredients]);
@@ -25,7 +25,7 @@ export const OrderHistoryItem = (props: Props) => {
   return (
     <article className={styles.root}>
       <div className={styles.header}>
-        <div className={classNames("text", "text_type_digits-default")}>#{id}</div>
+        <div className={classNames("text", "text_type_digits-default")}>#{number}</div>
         <div className={classNames(styles.date, "text", "text_type_main-default", "text_color_inactive")}>
           {date.toLocaleString()}
         </div>
