@@ -1,10 +1,12 @@
+import { useMemo } from "react";
 import classNames from "classnames";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { OrderHistoryDetails } from "../../types/order-history-details";
 import { OrderStatusLabel } from "./order-status-label/order-status-label";
 import { OrderIngredients } from "./order-ingredients/order-ingredients";
 import { useAppSelector } from "../../services/store";
-import { selectIngredientsLoadingSate } from "../../services/ingredients/selectors";
+import { selectIngredients, selectIngredientsLoadingSate } from "../../services/ingredients/selectors";
+import { getOrderPrice } from "../../app/helpers/enrich-order-history-with-price";
 import { LoadingState } from "../../types/loading-state";
 import { Skeleton } from "../skeleton";
 import styles from "./order-history-item.module.css";
@@ -15,8 +17,10 @@ type Props = {
 
 export const OrderHistoryItem = (props: Props) => {
   const { item } = props;
-  const { status, id, price, date, ingredientsIds, title } = item;
-  const ingredientsLoadingState = useAppSelector(selectIngredientsLoadingSate);
+  const { status, id, date, ingredientsIds, title } = item;
+  const ingredients = useAppSelector(selectIngredients);
+  const isLoaded = useAppSelector(selectIngredientsLoadingSate) === LoadingState.SUCCESSFUL;
+  const price = useMemo(() => getOrderPrice(ingredientsIds, ingredients), [ingredientsIds, ingredients]);
 
   return (
     <article className={styles.root}>
@@ -34,15 +38,17 @@ export const OrderHistoryItem = (props: Props) => {
       ) : null}
       <div className={classNames(styles.footer, "mt-6")}>
         <div className={classNames()}>
-          {ingredientsLoadingState === LoadingState.SUCCESSFUL ? (
-            <OrderIngredients ingredientsIds={ingredientsIds} />
-          ) : (
-            <Skeleton height={64} borderRadius={32} />
-          )}
+          {isLoaded ? <OrderIngredients ingredientsIds={ingredientsIds} /> : <Skeleton height={64} borderRadius={32} />}
         </div>
         <div className={classNames(styles.price, "text", "text_type_digits-default")}>
-          {price}
-          <CurrencyIcon type="primary" />
+          {isLoaded ? (
+            <>
+              {price}
+              <CurrencyIcon type="primary" />
+            </>
+          ) : (
+            <Skeleton height={24} width={93} />
+          )}
         </div>
       </div>
     </article>
