@@ -1,6 +1,6 @@
 .root {
   display: grid;
-  grid-template-columns: minmax(280px, 580px) minmax(min-content, 580px);
+  grid-template-columns: minmax(280px, 580px) minmax(250px, 580px);
   grid-template-rows: min-content 1fr;
   grid-column-gap: 60px;
   max-width: var(--container-width);
