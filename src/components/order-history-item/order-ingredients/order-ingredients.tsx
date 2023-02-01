@@ -11,9 +11,10 @@ const visibleIngredientsAmount = 5;
 
 export const OrderIngredients = (props: Props) => {
   const { ingredientsIds } = props;
+  const uniqueIngredientsIds = Array.from(new Set(ingredientsIds));
   const ingredients = useAppSelector(selectIngredients);
-  const expanded = ingredientsIds.slice(0, visibleIngredientsAmount);
-  const collapsed = ingredientsIds.slice(visibleIngredientsAmount);
+  const expanded = uniqueIngredientsIds.slice(0, visibleIngredientsAmount);
+  const collapsed = uniqueIngredientsIds.slice(visibleIngredientsAmount);
   const collapsedIngredient = ingredients.find((item) => item._id === collapsed[0]) ?? null;
 
   return (
