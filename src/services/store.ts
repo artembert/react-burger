@@ -7,6 +7,8 @@ import { auth } from "./auth";
 import { resetPassword } from "./reset-password";
 import { webFeedSocketMiddleware } from "./ws/wsFeed.middleware";
 import { feed } from "./feed";
+import { profileOrders } from "./profile-orders";
+import { wsProfileOrdersSocketMiddleware } from "./ws/wsProfileOrders.middleware";
 
 const rootReducer = combineReducers({
   ingredients,
@@ -15,12 +17,16 @@ const rootReducer = combineReducers({
   auth,
   resetPassword,
   feed,
+  profileOrders,
 });
 
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }).concat(webFeedSocketMiddleware()),
+    getDefaultMiddleware({ serializableCheck: false }).concat(
+      webFeedSocketMiddleware(),
+      wsProfileOrdersSocketMiddleware()
+    ),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
