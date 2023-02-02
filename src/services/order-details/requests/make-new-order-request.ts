@@ -19,7 +19,11 @@ type NewOrderRes = NewOrderDto & {
 const newOrderDetailsEndpoint = `${API_ENDPOINT}/orders`;
 
 export const makeNewOrderRequest = async (body: NewOrderReqBody): Promise<NewOrderDto> => {
-  const response = await request<NewOrderRes>(newOrderDetailsEndpoint, { method: HttpMethod.POST, body });
+  const response = await request<NewOrderRes>(newOrderDetailsEndpoint, {
+    method: HttpMethod.POST,
+    body,
+    authorization: true,
+  });
   if (response.success) {
     return {
       name: response.name,
