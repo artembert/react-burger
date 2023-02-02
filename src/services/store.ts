@@ -5,7 +5,7 @@ import { burgerConstructor } from "./burger-constructor";
 import { orderDetails } from "./order-details";
 import { auth } from "./auth";
 import { resetPassword } from "./reset-password";
-import { webSocketMiddleware } from "./ws/ws.middleware";
+import { webFeedSocketMiddleware } from "./ws/wsFeed.middleware";
 import { feed } from "./feed";
 
 const rootReducer = combineReducers({
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }).concat(webSocketMiddleware()),
+    getDefaultMiddleware({ serializableCheck: false }).concat(webFeedSocketMiddleware()),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

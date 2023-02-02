@@ -11,7 +11,7 @@ import {
   getMessage,
 } from "../feed";
 
-export const webSocketMiddleware = (): Middleware => {
+export const webFeedSocketMiddleware = (): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
 
