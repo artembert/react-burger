@@ -1,14 +1,14 @@
 import type { Middleware, MiddlewareAPI } from "redux";
 import { AppDispatch, RootState } from "../store";
 import {
-  onCloseConnection,
-  connectionError,
-  connectionSuccess,
+  onCloseFeedConnection,
+  feedConnectionSuccess,
+  feedConnectionError,
   FeedActions,
-  openConnection,
-  sendMessage,
-  closeConnection,
-  getMessage,
+  openFeedConnection,
+  sendFeedMessage,
+  closeFeedConnection,
+  getFeedMessage,
 } from "../feed";
 
 export const webFeedSocketMiddleware = (): Middleware => {
@@ -18,34 +18,34 @@ export const webFeedSocketMiddleware = (): Middleware => {
     return (next) => (action: FeedActions) => {
       const { dispatch } = store;
 
-      if (openConnection.match(action)) {
-        socket = new WebSocket(action.payload);
+      if (openFeedConnection.match(action)) {
+        socket = new WebSocket(action.payload.url);
       }
       if (socket) {
         socket.onopen = (event) => {
-          dispatch(connectionSuccess(event));
+          dispatch(feedConnectionSuccess(event));
         };
 
         socket.onerror = (event) => {
-          dispatch(connectionError(event));
+          dispatch(feedConnectionError(event));
         };
 
         socket.onmessage = (event) => {
           const { data } = event;
-          dispatch(getMessage(JSON.parse(data)));
+          dispatch(getFeedMessage(JSON.parse(data)));
         };
 
         socket.onclose = (event) => {
-          dispatch(onCloseConnection(event));
+          dispatch(onCloseFeedConnection(event));
           socket = null;
         };
 
-        if (sendMessage.match(action)) {
+        if (sendFeedMessage.match(action)) {
           const message = action.payload;
           socket.send(JSON.stringify(message));
         }
 
-        if (closeConnection.match(action)) {
+        if (closeFeedConnection.match(action)) {
           socket.close();
         }
       }

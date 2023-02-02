@@ -22,18 +22,18 @@ const feedSlice = createSlice({
   name: "feed",
   initialState,
   reducers: {
-    openConnection: (state, action: PayloadAction<string>) => {},
-    closeConnection: () => {},
-    connectionSuccess: (state, action: PayloadAction<Event>) => {
+    openFeedConnection: (state, action: PayloadAction<{ url: string }>) => {},
+    closeFeedConnection: () => {},
+    feedConnectionSuccess: (state, action: PayloadAction<Event>) => {
       state.connectionState = WsConnectionState.CONNECTED;
     },
-    connectionError: (state, action: PayloadAction<Event>) => {
+    feedConnectionError: (state, action: PayloadAction<Event>) => {
       state.connectionState = WsConnectionState.ERROR;
     },
-    onCloseConnection: (state, action: PayloadAction<CloseEvent>) => {
+    onCloseFeedConnection: (state, action: PayloadAction<CloseEvent>) => {
       state.connectionState = WsConnectionState.IDLE;
     },
-    getMessage: (state, action: PayloadAction<OrderHistoryRes>) => {
+    getFeedMessage: (state, action: PayloadAction<OrderHistoryRes>) => {
       const { orders, total, totalToday, ordersInProgress, ordersInDone } = covertOrderHistoryRes(action.payload);
       state.orders = orders;
       state.total = total;
@@ -41,19 +41,19 @@ const feedSlice = createSlice({
       state.ordersInProgress = ordersInProgress;
       state.ordersInDone = ordersInDone;
     },
-    sendMessage: (state, action: PayloadAction<CloseEvent>) => {},
+    sendFeedMessage: (state, action: PayloadAction<CloseEvent>) => {},
   },
 });
 
 export const feed = feedSlice.reducer;
 export const {
-  openConnection,
-  closeConnection,
-  connectionSuccess,
-  connectionError,
-  onCloseConnection,
-  sendMessage,
-  getMessage,
+  openFeedConnection,
+  closeFeedConnection,
+  feedConnectionSuccess,
+  feedConnectionError,
+  onCloseFeedConnection,
+  getFeedMessage,
+  sendFeedMessage,
 } = feedSlice.actions;
 
 export type FeedActions = ValueOf<typeof feedSlice.actions>;

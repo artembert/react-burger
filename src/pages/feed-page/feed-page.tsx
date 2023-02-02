@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "../../services/store";
-import { closeConnection, openConnection } from "../../services/feed";
+import { closeFeedConnection, openFeedConnection } from "../../services/feed";
 import { WS_FEED_ENDPOINT } from "../../app/constants";
 import {
   selectFeedConnectionState,
@@ -27,10 +27,10 @@ export const FeedPage = () => {
   const ordersInProgress = useAppSelector(selectFeedOrdersInProgress);
 
   useEffect(() => {
-    dispatch(openConnection(WS_FEED_ENDPOINT));
+    dispatch(openFeedConnection({ url: WS_FEED_ENDPOINT }));
 
     return () => {
-      dispatch(closeConnection());
+      dispatch(closeFeedConnection());
     };
   }, [dispatch]);
 
