@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import classNames from "classnames";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { OrderHistoryDetails } from "../../types/order-history-details";
@@ -6,6 +7,7 @@ import { OrderStatusLabel } from "./order-status-label/order-status-label";
 import { OrderIngredients } from "./order-ingredients/order-ingredients";
 import { useAppSelector } from "../../services/store";
 import { selectIngredients, selectIngredientsLoadingSate } from "../../services/ingredients/selectors";
+import { Routes } from "../../app/routes/constants";
 import { getOrderPrice } from "../../app/helpers/enrich-order-history-with-price";
 import { LoadingState } from "../../types/loading-state";
 import { Skeleton } from "../skeleton";
@@ -17,13 +19,18 @@ type Props = {
 
 export const OrderHistoryItem = (props: Props) => {
   const { item } = props;
-  const { status, date, ingredientsIds, title, number } = item;
+  const { status, date, ingredientsIds, title, number, id } = item;
+  const location = useLocation();
+  const history = useHistory();
   const ingredients = useAppSelector(selectIngredients);
   const isLoaded = useAppSelector(selectIngredientsLoadingSate) === LoadingState.SUCCESSFUL;
   const price = useMemo(() => getOrderPrice(ingredientsIds, ingredients), [ingredientsIds, ingredients]);
+  const navigateToOrder = () => {
+    history.push(`${Routes.Feed}/${id}`, { background: location });
+  };
 
   return (
-    <article className={styles.root}>
+    <article className={styles.root} onClick={navigateToOrder}>
       <div className={styles.header}>
         <div className={classNames("text", "text_type_digits-default")}>#{number}</div>
         <div className={classNames(styles.date, "text", "text_type_main-default", "text_color_inactive")}>
