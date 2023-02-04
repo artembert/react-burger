@@ -30,7 +30,7 @@ export const ProfileOrdersPage = () => {
       pageDescription={"В этом разделе вы можете просмотреть свою историю заказов"}
       navigation={<ProfileNavigation />}
       content={
-        <article className={classNames("mt-10", "pb-10", "pr-2", "custom-scroll", styles.root)}>
+        <article className={classNames("pt-10", "pb-10", "pr-2", "custom-scroll", styles.root)}>
           {isConnected && orders !== null ? (
             <>
               {orders.map((item) => (
