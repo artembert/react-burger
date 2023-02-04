@@ -1,0 +1,13 @@
+.root {
+  display: grid;
+  grid-template-columns: 64px 1fr max-content;
+  grid-gap: 16px;
+  align-items: center;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
