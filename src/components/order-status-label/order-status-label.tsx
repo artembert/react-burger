@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { OrderStatus } from "../../../types/order-status";
+import { OrderStatus } from "../../types/order-status";
 
 type Props = {
   status: OrderStatus;
