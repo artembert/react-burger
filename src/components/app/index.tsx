@@ -20,6 +20,7 @@ import { fetchIngredients } from "../../services/ingredients";
 import { LocationStateBackground } from "../../types/location-state-background";
 import { IngredientDetailsModalContainer } from "../../containers/ingredient-details-modal-container";
 import { FeedPage } from "../../pages/feed-page/feed-page";
+import { OrderModalContainer } from "../../containers/order-modal-container";
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -72,6 +73,9 @@ export const App = () => {
         <Switch>
           <Route path={Routes.IngredientWithId}>
             <IngredientDetailsModalContainer />
+          </Route>
+          <Route path={Routes.FeedWithId}>
+            <OrderModalContainer />
           </Route>
         </Switch>
       )}
