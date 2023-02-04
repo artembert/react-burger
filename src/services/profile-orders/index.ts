@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ValueOf } from "../../types";
-import { WsConnectionState } from "../../types/ws-connection-state";
+import { TWsConnectionState, WsConnectionState } from "../../types/ws-connection-state";
 import { OrderHistoryRes } from "../../types/order-history-res";
 import { FeedState } from "../../types/feed-state";
 import { covertOrderHistoryRes } from "./helpers/covert-order-history-res.helper";
 
 export type ProfileOrdersSliceState = FeedState & {
-  connectionState: ValueOf<typeof WsConnectionState>;
+  connectionState: TWsConnectionState;
 };
 
 const initialState: ProfileOrdersSliceState = {
