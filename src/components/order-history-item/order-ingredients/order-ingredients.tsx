@@ -1,5 +1,5 @@
-import classNames from "classnames";
 import { useAppSelector } from "../../../services/store";
+import { IngredientPreview } from "../../ingredient-preview/ingredient-preview";
 import { selectIngredients } from "../../../services/ingredients/selectors";
 import styles from "./order-ingredients.module.css";
 
@@ -21,28 +21,18 @@ export const OrderIngredients = (props: Props) => {
     <ul className={styles.root}>
       {expanded.map((id) => {
         const ingredient = ingredients.find((item) => item._id === id);
-        if (!ingredient) {
-          return null;
-        }
-        return (
-          <div key={ingredient._id} className={styles.ingredient}>
-            <div className={styles.imageWrapper}>
-              <img className={styles.image} src={ingredient.image_mobile} alt={ingredient.name} />
-            </div>
-          </div>
-        );
+        return ingredient ? (
+          <IngredientPreview key={ingredient._id} name={ingredient.name} imageSrc={ingredient.image_mobile} stack />
+        ) : null;
       })}
       {collapsedIngredient ? (
-        <div className={classNames(styles.ingredient)}>
-          <div className={styles.imageWrapper}>
-            <img className={styles.image} src={collapsedIngredient.image_mobile} alt={collapsedIngredient.name} />
-            {collapsed.length > 1 ? (
-              <span className={classNames(styles.collapsedCount, "text", "text_type_main-default")}>
-                +{collapsed.length}
-              </span>
-            ) : null}
-          </div>
-        </div>
+        <IngredientPreview
+          key={collapsedIngredient._id}
+          name={collapsedIngredient.name}
+          imageSrc={collapsedIngredient.image_mobile}
+          collapsedAmount={collapsed.length}
+          stack
+        />
       ) : null}
     </ul>
   );
