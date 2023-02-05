@@ -1,4 +1,6 @@
-export const feedAllMock = {
+import { OrderHistoryRes } from "../../../types/order-history-res";
+
+export const feedAllMock: OrderHistoryRes = {
   success: true,
   orders: [
     {
