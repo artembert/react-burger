@@ -7,7 +7,6 @@ import { OrderStatusLabel } from "../order-status-label/order-status-label";
 import { OrderIngredients } from "./order-ingredients/order-ingredients";
 import { useAppSelector } from "../../services/store";
 import { selectIngredients, selectIngredientsLoadingSate } from "../../services/ingredients/selectors";
-import { Routes } from "../../app/routes/constants";
 import { getOrderPrice } from "../../app/helpers/enrich-order-history-with-price";
 import { LoadingState } from "../../types/loading-state";
 import { Skeleton } from "../skeleton";
@@ -26,7 +25,7 @@ export const OrderHistoryItem = (props: Props) => {
   const isLoaded = useAppSelector(selectIngredientsLoadingSate) === LoadingState.SUCCESSFUL;
   const price = useMemo(() => getOrderPrice(ingredientsIds, ingredients), [ingredientsIds, ingredients]);
   const navigateToOrder = () => {
-    history.push(`${Routes.Feed}/${id}`, { background: location });
+    history.push(`${location.pathname}/${id}`, { background: location });
   };
 
   return (

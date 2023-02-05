@@ -9,7 +9,7 @@ import { SpinnerBurger } from "../components/spinner-burger/spinner-burger";
 import { OrderHistoryDetails } from "../types/order-history-details";
 import { Optional } from "../types";
 
-export const OrderModalContainer = () => {
+export const FeedOrderModalContainer = () => {
   const history = useHistory();
   const { orderId } = useParams<any>();
   const connectionState = useAppSelector(selectFeedConnectionState);

@@ -21,7 +21,8 @@ import { LocationStateBackground } from "../../types/location-state-background";
 import { IngredientDetailsModalContainer } from "../../containers/ingredient-details-modal-container";
 import { OrderPage } from "../../pages/order-page/order-page";
 import { FeedPage } from "../../pages/feed-page/feed-page";
-import { OrderModalContainer } from "../../containers/order-modal-container";
+import { FeedOrderModalContainer } from "../../containers/feed-order-modal-container";
+import { ProfileOrderModalContainer } from "../../containers/profile-order-modal-container";
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -66,7 +67,10 @@ export const App = () => {
         <Route path={Routes.Feed} exact>
           <FeedPage />
         </Route>
-        <Route path={Routes.FeedWithId}>
+        <Route path={Routes.FeedWithOrderId}>
+          <OrderPage />
+        </Route>
+        <Route path={Routes.ProfileOrderWithId}>
           <OrderPage />
         </Route>
         <Route path="/">
@@ -78,8 +82,11 @@ export const App = () => {
           <Route path={Routes.IngredientWithId}>
             <IngredientDetailsModalContainer />
           </Route>
-          <Route path={Routes.FeedWithId}>
-            <OrderModalContainer />
+          <Route path={Routes.FeedWithOrderId}>
+            <FeedOrderModalContainer />
+          </Route>
+          <Route path={Routes.ProfileOrderWithId}>
+            <ProfileOrderModalContainer />
           </Route>
         </Switch>
       )}
