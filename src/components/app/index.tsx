@@ -19,6 +19,7 @@ import { IngredientPage } from "../../pages/ingredient-page/ingredient-page";
 import { fetchIngredients } from "../../services/ingredients";
 import { LocationStateBackground } from "../../types/location-state-background";
 import { IngredientDetailsModalContainer } from "../../containers/ingredient-details-modal-container";
+import { OrderPage } from "../../pages/order-page/order-page";
 import { FeedPage } from "../../pages/feed-page/feed-page";
 import { OrderModalContainer } from "../../containers/order-modal-container";
 
@@ -62,8 +63,11 @@ export const App = () => {
         <Route path={Routes.IngredientWithId}>
           <IngredientPage />
         </Route>
-        <Route path={Routes.Feed}>
+        <Route path={Routes.Feed} exact>
           <FeedPage />
+        </Route>
+        <Route path={Routes.FeedWithId}>
+          <OrderPage />
         </Route>
         <Route path="/">
           <ConstructorPage />

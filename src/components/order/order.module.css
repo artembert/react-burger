@@ -1,8 +1,5 @@
 .root {
   padding: 0 24px 60px;
-  border-radius: 40px;
-  background-color: var(--interface_modal-bg);
-  box-shadow: var(--orders-history-item-shadow);
 }
 
 .number {

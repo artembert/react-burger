@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  max-height: calc(100vh - 88px);
+}
+
+.orderContainer {
+  max-width: 720px;
+}
+
+.spinnerContainer {
+  height: 440px;
+}
