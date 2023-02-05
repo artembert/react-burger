@@ -7,7 +7,6 @@ import { mapWsToToLoadingStatus } from "../app/helpers/map-ws-to-loading-status"
 import { LoadingState } from "../types/loading-state";
 import { SpinnerBurger } from "../components/spinner-burger/spinner-burger";
 import { OrderHistoryDetails } from "../types/order-history-details";
-import { Optional } from "../types";
 
 export const FeedOrderModalContainer = () => {
   const history = useHistory();
@@ -18,8 +17,7 @@ export const FeedOrderModalContainer = () => {
   const ingredientsLoadingState = mapWsToToLoadingStatus(connectionState);
   const order = orders.find((item) => item.id === orderId) as OrderHistoryDetails;
   const isLoaded = ingredientsLoadingState === LoadingState.SUCCESSFUL && feedLoadingState === LoadingState.SUCCESSFUL;
-  const item: Optional<OrderHistoryDetails, "number"> = { ...order };
-  delete item.number;
+  const { number, ...item } = order;
   const closePopup = () => {
     history.goBack();
   };
