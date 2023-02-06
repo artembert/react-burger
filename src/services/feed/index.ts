@@ -3,7 +3,7 @@ import { ValueOf } from "../../types";
 import { TWsConnectionState, WsConnectionState } from "../../types/ws-connection-state";
 import { OrderHistoryRes } from "../../types/order-history-res";
 import { FeedState } from "../../types/feed-state";
-import { covertOrderHistoryRes } from "./helpers/covert-order-history-res.helper";
+import { covertOrderHistoryRes } from "../../app/helpers/covert-order-history-res.helper";
 
 export type FeedSliceState = FeedState & {
   connectionState: TWsConnectionState;

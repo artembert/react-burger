@@ -2,7 +2,7 @@ import { request } from "../../../app/helpers/request";
 import { API_ENDPOINT } from "../../../app/constants";
 import { ORDERS } from "./constants";
 import { OrderHistoryDetails } from "../../../types/order-history-details";
-import { mapOrderFromHistoryRes } from "../../feed/helpers/covert-order-history-res.helper";
+import { mapOrderFromHistoryRes } from "../../../app/helpers/covert-order-history-res.helper";
 import { OrderHistoryRes } from "../../../types/order-history-res";
 
 type OrderRes = {

@@ -25,7 +25,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
     date: new Date(2022, 11, 29, 9, 54),
     ingredientsIds: ingredients.slice(0, 4),
     title: "Death Star Starship Main бургер",
-    status: OrderStatusState.REJECTED,
+    status: OrderStatusState.PENDING,
   },
   {
     id: "a426422f",
@@ -51,7 +51,7 @@ export const profileOrdersHistoryMock: OrderHistoryDetails[] = [
     date: new Date(2022, 11, 29, 10, 34),
     ingredientsIds: ingredients.slice(0, 11),
     title: "Death Star Starship Main бургер",
-    status: OrderStatusState.IN_PROGRESS,
+    status: OrderStatusState.PENDING,
   },
   {
     id: "a687444f",
