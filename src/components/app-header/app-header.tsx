@@ -18,7 +18,7 @@ export const AppHeader = (props: Props) => {
             <BurgerIcon type="primary" />
             Конструктор
           </NavigationButton>
-          <NavigationButton href={Routes.ProfileOrders} exact>
+          <NavigationButton href={Routes.Feed} exact>
             <ListIcon type="primary" />
             Лента заказов
           </NavigationButton>

@@ -19,6 +19,10 @@ import { IngredientPage } from "../../pages/ingredient-page/ingredient-page";
 import { fetchIngredients } from "../../services/ingredients";
 import { LocationStateBackground } from "../../types/location-state-background";
 import { IngredientDetailsModalContainer } from "../../containers/ingredient-details-modal-container";
+import { OrderPage } from "../../pages/order-page/order-page";
+import { FeedPage } from "../../pages/feed-page/feed-page";
+import { FeedOrderModalContainer } from "../../containers/feed-order-modal-container";
+import { ProfileOrderModalContainer } from "../../containers/profile-order-modal-container";
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -60,6 +64,15 @@ export const App = () => {
         <Route path={Routes.IngredientWithId}>
           <IngredientPage />
         </Route>
+        <Route path={Routes.Feed} exact>
+          <FeedPage />
+        </Route>
+        <Route path={Routes.FeedWithOrderId}>
+          <OrderPage />
+        </Route>
+        <Route path={Routes.ProfileOrderWithId}>
+          <OrderPage />
+        </Route>
         <Route path="/">
           <ConstructorPage />
         </Route>
@@ -68,6 +81,12 @@ export const App = () => {
         <Switch>
           <Route path={Routes.IngredientWithId}>
             <IngredientDetailsModalContainer />
+          </Route>
+          <Route path={Routes.FeedWithOrderId}>
+            <FeedOrderModalContainer />
+          </Route>
+          <Route path={Routes.ProfileOrderWithId}>
+            <ProfileOrderModalContainer />
           </Route>
         </Switch>
       )}

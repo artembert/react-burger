@@ -1,10 +1,10 @@
 import { OrderStatus } from "./order-status";
 
-export type ProfileOrderDetails = {
-  id: number;
+export type OrderHistoryDetails = {
+  id: string;
+  number: number;
   title: string;
-  status: OrderStatus;
   ingredientsIds: string[];
-  price: number;
   date: Date;
+  status?: OrderStatus;
 };

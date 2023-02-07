@@ -1,4 +1,14 @@
 .root {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 24px;
+  overflow-y: scroll;
+  max-height: calc(100vh - 88px);
+}
+
+/* var(--profile-page-width-l) */
+@media screen and (max-width: 920px) {
+  .root {
+    max-height: calc(100vh - calc(88px + 104px));
+  }
 }

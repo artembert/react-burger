@@ -1,0 +1,24 @@
+.root {
+  padding: 0 24px 60px;
+}
+
+.number {
+  text-align: center;
+}
+
+.ingredientsList {
+  overflow-y: scroll;
+  max-height: calc(calc(4 * 64px) + calc(3 * 16px));
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
