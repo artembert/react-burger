@@ -2,14 +2,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { LoadingState } from "../../types/loading-state";
 import { makeNewOrderRequest, NewOrderReqBody } from "./requests/make-new-order-request";
 import { LoadingStatus } from "../../types/loading-status";
+import { NewOrderMetadata } from "../../types/new-order-metadata";
 
 export type OrderDetailsSliceState = {
   isPopupOpen: boolean;
   loadingState: LoadingStatus;
-  details: null | {
-    name: string;
-    number: number;
-  };
+  details: null | NewOrderMetadata;
 };
 
 const initialState: OrderDetailsSliceState = {
