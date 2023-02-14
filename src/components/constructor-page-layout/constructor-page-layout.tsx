@@ -10,7 +10,9 @@ export const ConstructorPageLayout = (props: Props) => {
   const { leftColumn, rightColumn } = props;
   return (
     <main className={styles.main}>
-      <h1 className={`${styles.title} text text_type_main-large`}>Соберите бургер</h1>
+      <h1 data-testid="page-heading" className={`${styles.title} text text_type_main-large`}>
+        Соберите бургер
+      </h1>
       <div className={styles.leftColumn}>{leftColumn}</div>
       <div className={styles.rightColumn}>{rightColumn}</div>
     </main>
