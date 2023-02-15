@@ -1,5 +1,6 @@
 describe("service is available", () => {
   beforeEach(() => {
+    cy.intercept("GET", "**/api/ingredients", { fixture: "ingredients.json" }).as("getIngredients");
     cy.visit("http://localhost:3000");
   });
 
