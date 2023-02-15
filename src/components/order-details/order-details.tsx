@@ -35,9 +35,11 @@ export const OrderDetails = (props: Props) => {
 
   const { number, name } = details;
   return (
-    <div className={`${styles.orderAccepted} pb-20 pt-4 pr-20 pl-20`}>
+    <div className={`${styles.orderAccepted} pb-20 pt-4 pr-20 pl-20`} data-testid="order-details">
       <p className={`${styles.title} text text_type_main-large`}>{name}</p>
-      <p className={`${styles.orderNumber} text text_type_digits-large mt-8`}>{number}</p>
+      <p className={`${styles.orderNumber} text text_type_digits-large mt-8`} data-testid="order-id">
+        {number}
+      </p>
       <p className="text text_type_main-medium mt-8">идентификатор заказа</p>
       <img className={`${styles.markDoneImg} mt-10`} src={markDoneImgSrc} alt="done" />
       <p className="text text_type_main-default mt-10">Ваш заказ начали готовить</p>

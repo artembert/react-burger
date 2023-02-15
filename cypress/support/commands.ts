@@ -16,6 +16,33 @@ import "@4tw/cypress-drag-drop";
 Cypress.Commands.add("getByTestId", (selector, ...args) => {
   return cy.get(`[data-testid=${selector}]`, ...args);
 });
+
+Cypress.Commands.add("login", (login = "my-email@custom.mail", password = "FHGJHGgj$%^&&9426") => {
+  cy.visit("http://localhost:3000/login");
+  cy.getByTestId("login-filed").type(login);
+  cy.getByTestId("password-filed").type(password);
+  cy.getByTestId("login-button").click();
+  cy.location("pathname").should("equal", "/");
+});
+
+Cypress.Commands.add("createBurger", () => {
+  cy.getByTestId("burger-ingredients-group").contains("Булки").getByTestId("burger-ingredient").first().as("bun");
+  cy.getByTestId("burger-ingredients-group")
+    .filter(":contains('Соусы')")
+    .find('[data-testid="burger-ingredient"]')
+    .first()
+    .as("souse");
+  cy.getByTestId("burger-ingredients-group")
+    .contains("Начинки")
+    .getByTestId("burger-ingredient")
+    .last()
+    .as("mainIngredient");
+  cy.getByTestId("make-order-button").as("makeOrderButton");
+
+  cy.get("@bun").drag('[data-testid="burger-constructor-drop-target"]');
+  cy.get("@souse").drag('[data-testid="burger-constructor-drop-target"]');
+  cy.get("@mainIngredient").drag('[data-testid="burger-constructor-drop-target"]');
+});
 //
 //
 // -- This is a child command --
