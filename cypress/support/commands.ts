@@ -18,7 +18,7 @@ Cypress.Commands.add("getByTestId", (selector, ...args) => {
 });
 
 Cypress.Commands.add("login", (login = "my-email@custom.mail", password = "FHGJHGgj$%^&&9426") => {
-  cy.visit("http://localhost:3000/login");
+  cy.visit(`${Cypress.env("host")}/login`);
   cy.getByTestId("login-filed").type(login);
   cy.getByTestId("password-filed").type(password);
   cy.getByTestId("login-button").click();

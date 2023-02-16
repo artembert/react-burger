@@ -3,7 +3,7 @@ describe("service is available", () => {
     cy.intercept("GET", "**/api/ingredients", { fixture: "ingredients.json" }).as("getIngredients");
     cy.intercept("POST", "**/api/auth/login", { fixture: "login.json" }).as("postLogin");
     cy.intercept("POST", "**/api/orders", { fixture: "orders.json" }).as("postOrders");
-    cy.visit("http://localhost:3000");
+    cy.visit(Cypress.env("host"));
   });
 
   it("should have correct page heading", () => {
