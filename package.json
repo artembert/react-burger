@@ -2,6 +2,7 @@
   "name": "react-burger",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://artembert.github.io/react-burger",
   "dependencies": {
     "@reduxjs/toolkit": "1.9.0",
     "@ya.praktikum/react-developer-burger-ui-components": "1.13.5",
