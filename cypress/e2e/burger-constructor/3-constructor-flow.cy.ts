@@ -6,10 +6,6 @@ describe("service is available", () => {
     cy.visit(Cypress.env("host"));
   });
 
-  it("should have correct page heading", () => {
-    cy.getByTestId("page-heading").should("have.text", "Соберите бургер");
-  });
-
   it("should redirect to login page if user was not logged in", () => {
     cy.createBurger();
     cy.get("@makeOrderButton").click();

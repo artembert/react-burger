@@ -28,6 +28,12 @@ Cypress.Commands.add("login", (login = defaultEmail, password = defaultPassword)
   cy.location("pathname").should("equal", "/");
 });
 
+Cypress.Commands.add("closeModal", () => {
+  cy.getByTestId("modal").as("modal");
+  cy.get("@modal").getByTestId("close-modal-button").click();
+  cy.get("@modal").should("not.exist");
+});
+
 Cypress.Commands.add("createBurger", () => {
   cy.getByTestId("burger-ingredients-group").contains("Булки").getByTestId("burger-ingredient").first().as("bun");
   cy.getByTestId("burger-ingredients-group")
