@@ -13,11 +13,14 @@ import "@4tw/cypress-drag-drop";
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
+const defaultEmail = "my-email@custom.mail";
+const defaultPassword = "FHGJHGgj$%^&&9426";
+
 Cypress.Commands.add("getByTestId", (selector, ...args) => {
   return cy.get(`[data-testid=${selector}]`, ...args);
 });
 
-Cypress.Commands.add("login", (login = "my-email@custom.mail", password = "FHGJHGgj$%^&&9426") => {
+Cypress.Commands.add("login", (login = defaultEmail, password = defaultPassword) => {
   cy.visit(`${Cypress.env("host")}/login`);
   cy.getByTestId("login-filed").type(login);
   cy.getByTestId("password-filed").type(password);
