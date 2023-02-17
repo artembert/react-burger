@@ -1,4 +1,4 @@
-export const ingredients = {
+export const ingredientsMock = {
   success: true,
   data: [
     {

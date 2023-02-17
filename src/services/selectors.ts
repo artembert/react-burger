@@ -2,6 +2,7 @@ import { createSelector } from "reselect";
 import { selectConstructorBun, selectConstructorIngredients } from "./burger-constructor/selectors";
 import { selectIngredients } from "./ingredients/selectors";
 import { BurgerParts } from "../types/burger-parts";
+import { MenuIngredient } from "../types/menu-ingredient";
 
 export const selectMenuIngredients = createSelector(
   selectIngredients,
@@ -20,6 +21,6 @@ export const selectMenuIngredients = createSelector(
         return { ...ingredient, amount };
       }
       return ingredient;
-    });
+    }) as MenuIngredient[];
   }
 );

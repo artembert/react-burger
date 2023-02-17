@@ -11,9 +11,11 @@ export const IngredientDetails = (props: Props) => {
   const { name, image_large, proteins, fat, carbohydrates, calories } = ingredient;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="ingredient-details">
       <img src={image_large} alt={name} className={styles.image} />
-      <p className="text text_type_main-medium mt-4">{name}</p>
+      <p className="text text_type_main-medium mt-4" data-testid="name">
+        {name}
+      </p>
       <div className={`${styles.specs} mt-8 mb-15`}>
         <div className={styles.specItem}>
           <p className="text text_type_main-default text_color_inactive">Калории,ккал</p>

@@ -41,11 +41,16 @@ export const Modal = (props: Props) => {
 
   return ReactDOM.createPortal(
     <ModalOverlay onClick={onRequestClose}>
-      <div className={styles.window} onClick={handleModalClick}>
+      <div className={styles.window} data-testid="modal" onClick={handleModalClick}>
         <div>
           <div className={`${styles.header} pt-10 pr-9 pl-10`}>
             <h2 className={`${styles.title} text text_type_main-large`}>{title}</h2>
-            <button className={styles.closeButton} type="button" onClick={onRequestClose}>
+            <button
+              className={styles.closeButton}
+              type="button"
+              data-testid="close-modal-button"
+              onClick={onRequestClose}
+            >
               <CloseIcon type="primary" />
             </button>
           </div>

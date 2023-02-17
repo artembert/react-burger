@@ -38,6 +38,7 @@ const Component = (props: Props) => {
       className={classnames(styles.ingredient, {
         [styles.draggable]: isDrag,
       })}
+      data-testid="burger-ingredient"
       onClick={handleClick}
     >
       <div className={styles.imageContainer}>

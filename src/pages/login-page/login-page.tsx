@@ -72,6 +72,7 @@ export const LoginPage = () => {
           required
           errorText="Ошибка"
           size="default"
+          data-testid="login-filed"
         />
         <Input
           type={inputPasswordType}
@@ -87,9 +88,10 @@ export const LoginPage = () => {
           required
           errorText="Ошибка"
           size="default"
+          data-testid="password-filed"
         />
         <div className={styles.buttonWrapper}>
-          <Button htmlType="submit" type="primary" size="medium" disabled={isLoading}>
+          <Button htmlType="submit" type="primary" size="medium" disabled={isLoading} data-testid="login-button">
             <ButtonSpinnerInsert isLoading={isLoading}>Войти</ButtonSpinnerInsert>
           </Button>
         </div>

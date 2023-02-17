@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZDZiZTI4OTM2YjE3MDAxYmU1NWQwZCIsImlhdCI6MTY3NjQ0ODQ4MiwiZXhwIjoxNjc2NDQ5NjgyfQ.Z-lI4AQR_iU3BGsQlKhesb_D4LYcRsyumpZ9iYmL7ko",
+  "refreshToken": "fed5d1fc542da6f26d42dd54831d453090bb53545252e84b57c06d6955861bdbccaa217c01ef1d35",
+  "user": {
+    "email": "div-div@mailchamp.com",
+    "name": "div-div"
+  }
+}

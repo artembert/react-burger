@@ -4,7 +4,7 @@ import styles from "./burger-ingredients-navigation.module.css";
 
 type Props = {
   current: BurgerPart;
-  onChange: (group: BurgerPart) => void;
+  onChange: (group: string) => void;
 };
 
 export const BurgerIngredientsNavigation = (props: Props) => {

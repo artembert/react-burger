@@ -62,6 +62,7 @@ export const BurgerConstructor = (props: Props) => {
           [styles.dropTarget]: availableToDrop,
           [styles.dropHover]: isHover,
         })}
+        data-testid="burger-constructor-drop-target"
       >
         <div className={`${styles.fixedElement} mb-4 pr-4 pl-4`}>
           <Bun bun={bun} placement="top" />
@@ -84,7 +85,14 @@ export const BurgerConstructor = (props: Props) => {
       </div>
       <div className={styles.orderSummaryContainer}>
         <OrderSummary price={totalPrice}>
-          <Button disabled={!isOrderEnabled} type="primary" size="large" htmlType="button" onClick={onMakeOrder}>
+          <Button
+            disabled={!isOrderEnabled}
+            type="primary"
+            size="large"
+            htmlType="button"
+            onClick={onMakeOrder}
+            data-testid="make-order-button"
+          >
             Оформить заказ
           </Button>
         </OrderSummary>
