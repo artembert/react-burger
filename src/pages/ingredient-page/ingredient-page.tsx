@@ -13,7 +13,7 @@ export const IngredientPage = () => {
 
   return (
     <section className={styles.root}>
-      <h1 className={classNames("text", "text_type_main-large", "mt-30")}>Детали ингредиента</h1>
+      <h1 className={classNames("text", "text_type_main-large", "mt-30")}>Ingredient</h1>
       {ingredientPreview ? (
         <IngredientDetails ingredient={ingredientPreview} />
       ) : (
