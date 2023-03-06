@@ -41,14 +41,14 @@ export const RegisterPage = () => {
   return (
     <FormPageWrapper>
       <FormWrapper
-        title="Регистрация"
+        title="Register"
         footer={
           <>
             <div>
-              <span className="text text_type_main-default text_color_inactive">Уже зарегистрированы?</span>
+              <span className="text text_type_main-default text_color_inactive">Don't you have an account?</span>
               {NBSP}
               <Link to="/login">
-                <TextLink>Войти</TextLink>
+                <TextLink>Login</TextLink>
               </Link>
             </div>
           </>
@@ -57,7 +57,7 @@ export const RegisterPage = () => {
       >
         <Input
           type="text"
-          placeholder="Имя"
+          placeholder="Name"
           onChange={handleFieldChange}
           value={formFields.name}
           autoComplete="full-name"
@@ -65,7 +65,7 @@ export const RegisterPage = () => {
           error={false}
           ref={inputNameRef}
           required
-          errorText="Ошибка"
+          errorText="Error"
           size="default"
         />
         <Input
@@ -78,12 +78,12 @@ export const RegisterPage = () => {
           error={false}
           ref={inputEmailRef}
           required
-          errorText="Ошибка"
+          errorText="Error"
           size="default"
         />
         <Input
           type={inputPasswordType}
-          placeholder="Пароль"
+          placeholder="Password"
           onChange={handleFieldChange}
           icon="ShowIcon"
           value={formFields.password}
@@ -93,12 +93,12 @@ export const RegisterPage = () => {
           ref={inputPasswordRef}
           onIconClick={onPasswordIconClick}
           required
-          errorText="Ошибка"
+          errorText="Error"
           size="default"
         />
         <div className={styles.buttonWrapper}>
           <Button htmlType="submit" type="primary" size="medium" disabled={isLoading}>
-            <ButtonSpinnerInsert isLoading={isLoading}>Зарегистрироваться</ButtonSpinnerInsert>
+            <ButtonSpinnerInsert isLoading={isLoading}>Create account</ButtonSpinnerInsert>
           </Button>
         </div>
       </FormWrapper>
