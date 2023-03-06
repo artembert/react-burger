@@ -43,14 +43,14 @@ export const ForgotPasswordPage = () => {
   return (
     <FormPageWrapper>
       <FormWrapper
-        title="Восстановление пароля"
+        title="Forgot password?"
         footer={
           <>
             <div>
-              <span className="text text_type_main-default text_color_inactive">Вспомнили пароль?</span>
+              <span className="text text_type_main-default text_color_inactive">I remembered my password</span>
               {NBSP}
               <Link to="/login">
-                <TextLink>Войти</TextLink>
+                <TextLink>Login</TextLink>
               </Link>
             </div>
           </>
@@ -59,7 +59,7 @@ export const ForgotPasswordPage = () => {
       >
         <Input
           type="email"
-          placeholder="Укажите e-mail"
+          placeholder="Enter your email"
           onChange={handleFieldChange}
           value={formFields.email}
           autoComplete="email"
@@ -67,12 +67,12 @@ export const ForgotPasswordPage = () => {
           error={false}
           ref={inputEmailRef}
           required
-          errorText="Ошибка"
+          errorText="Error"
           size="default"
         />
         <div className={styles.buttonWrapper}>
           <Button htmlType="submit" type="primary" size="medium" disabled={isLoading}>
-            <ButtonSpinnerInsert isLoading={isLoading}>Восстановить</ButtonSpinnerInsert>
+            <ButtonSpinnerInsert isLoading={isLoading}>Reset password</ButtonSpinnerInsert>
           </Button>
         </div>
       </FormWrapper>
