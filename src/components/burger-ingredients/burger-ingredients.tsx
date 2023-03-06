@@ -91,9 +91,9 @@ export const BurgerIngredients = (props: Props) => {
   if (loadingState === LoadingState.ERROR) {
     return (
       <div className={`${styles.error} text text_type_main-default`}>
-        ⚠️ Не удалось загрузить меню.
+        ⚠️ Failed to load menu.
         <br />
-        Перезагрузите страницу
+        Please, refresh the page
       </div>
     );
   }
@@ -108,19 +108,19 @@ export const BurgerIngredients = (props: Props) => {
       <div className={`${styles.list} custom-scroll pb-10`}>
         <BurgerIngredientsGroup
           ref={setBunsRefs}
-          title="Булки"
+          title="Buns"
           ingredients={bunIngredients}
           loadingState={loadingState}
         />
         <BurgerIngredientsGroup
           ref={setSaucesRefs}
-          title="Соусы"
+          title="Sauces"
           ingredients={sauceIngredients}
           loadingState={loadingState}
         />
         <BurgerIngredientsGroup
           ref={setMainRefs}
-          title="Начинки"
+          title="Fillings"
           ingredients={mainIngredients}
           loadingState={loadingState}
         />

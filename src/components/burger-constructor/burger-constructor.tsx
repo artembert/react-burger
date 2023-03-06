@@ -52,7 +52,7 @@ export const BurgerConstructor = (props: Props) => {
     return <BurgerConstructorSkeleton />;
   }
   if (loadingState === LoadingState.ERROR) {
-    return <div>Не удалось загрузить меню. Перезагрузите страницу</div>;
+    return <div>Failed to load menu. Please, refresh the page</div>;
   }
   return (
     <div className={`${styles.burgerConstructor} pl-4`}>
@@ -93,7 +93,7 @@ export const BurgerConstructor = (props: Props) => {
             onClick={onMakeOrder}
             data-testid="make-order-button"
           >
-            Оформить заказ
+            Make order
           </Button>
         </OrderSummary>
       </div>

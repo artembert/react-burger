@@ -11,7 +11,7 @@ export const ConstructorPageLayout = (props: Props) => {
   return (
     <main className={styles.main}>
       <h1 data-testid="page-heading" className={`${styles.title} text text_type_main-large`}>
-        Соберите бургер
+        Make your burger
       </h1>
       <div className={styles.leftColumn}>{leftColumn}</div>
       <div className={styles.rightColumn}>{rightColumn}</div>

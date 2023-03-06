@@ -16,11 +16,11 @@ export const AppHeader = (props: Props) => {
         <div className={styles.startActions}>
           <NavigationButton href={Routes.Index} exact>
             <BurgerIcon type="primary" />
-            Конструктор
+            Constructor
           </NavigationButton>
           <NavigationButton href={Routes.Feed} exact>
             <ListIcon type="primary" />
-            Лента заказов
+            Orders history
           </NavigationButton>
         </div>
         <div className="m-24">
@@ -33,7 +33,7 @@ export const AppHeader = (props: Props) => {
         <div className={styles.endActions}>
           <NavigationButton href={Routes.Profile} exact>
             <ProfileIcon type="primary" />
-            {userName ?? "Личный кабинет"}
+            {userName ?? "Account"}
           </NavigationButton>
         </div>
       </nav>

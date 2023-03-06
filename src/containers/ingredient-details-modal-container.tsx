@@ -15,7 +15,7 @@ export const IngredientDetailsModalContainer = () => {
   };
 
   return ingredientPreview ? (
-    <Modal title="Детали ингредиента" onRequestClose={closePopup}>
+    <Modal title="Ingredient" onRequestClose={closePopup}>
       <IngredientDetails ingredient={ingredientPreview} />
     </Modal>
   ) : null;

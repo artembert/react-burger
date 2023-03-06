@@ -27,7 +27,7 @@ export const ProfileNavigation = () => {
             className={classNames(styles.link, "text_color_inactive")}
             activeClassName={styles.linkActive}
           >
-            <p className={classNames(styles.text, "text", "text_type_main-medium")}>Профиль</p>
+            <p className={classNames(styles.text, "text", "text_type_main-medium")}>Account</p>
           </NavLink>
         </li>
         <li className={classNames(styles.listItem)}>
@@ -37,7 +37,7 @@ export const ProfileNavigation = () => {
             className={classNames(styles.link, "text_color_inactive")}
             activeClassName={styles.linkActive}
           >
-            <p className={classNames(styles.text, "text", "text_type_main-medium")}>История заказов</p>
+            <p className={classNames(styles.text, "text", "text_type_main-medium")}>Orders history</p>
           </NavLink>
         </li>
         <li className={classNames(styles.listItem)}>
@@ -47,7 +47,7 @@ export const ProfileNavigation = () => {
             className={classNames(styles.link, "text_color_inactive", { [styles.linkLoading]: isLoading })}
           >
             {isLoading ? <Spinner size="s" /> : <LogoutIcon type="secondary" />}
-            <p className={classNames(styles.text, "text", "text_type_main-medium", "ml-2")}>Выход</p>
+            <p className={classNames(styles.text, "text", "text_type_main-medium", "ml-2")}>Log out</p>
           </button>
         </li>
       </ul>
