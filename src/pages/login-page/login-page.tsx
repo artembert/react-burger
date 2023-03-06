@@ -39,21 +39,21 @@ export const LoginPage = () => {
   return (
     <FormPageWrapper>
       <FormWrapper
-        title="Вход"
+        title="Login"
         footer={
           <>
             <div>
-              <span className="text text_type_main-default text_color_inactive">Вы — новый пользователь?</span>
+              <span className="text text_type_main-default text_color_inactive">Don't have an account?</span>
               {NBSP}
               <Link to="/register">
-                <TextLink>Зарегистрироваться</TextLink>
+                <TextLink>Register</TextLink>
               </Link>
             </div>
             <div>
-              <span className="text text_type_main-default text_color_inactive">Забыли пароль?</span>
+              <span className="text text_type_main-default text_color_inactive">Forgot password?</span>
               {NBSP}
               <Link to="/forgot-password">
-                <TextLink>Восстановить пароль</TextLink>
+                <TextLink>Reset password</TextLink>
               </Link>
             </div>
           </>
@@ -70,13 +70,13 @@ export const LoginPage = () => {
           error={false}
           ref={inputEmailRef}
           required
-          errorText="Ошибка"
+          errorText="Error"
           size="default"
           data-testid="login-filed"
         />
         <Input
           type={inputPasswordType}
-          placeholder="Пароль"
+          placeholder="Password"
           onChange={handleFieldChange}
           icon="ShowIcon"
           value={formFields.password}
@@ -86,13 +86,13 @@ export const LoginPage = () => {
           ref={inputPasswordRef}
           onIconClick={onPasswordIconClick}
           required
-          errorText="Ошибка"
+          errorText="Error"
           size="default"
           data-testid="password-filed"
         />
         <div className={styles.buttonWrapper}>
           <Button htmlType="submit" type="primary" size="medium" disabled={isLoading} data-testid="login-button">
-            <ButtonSpinnerInsert isLoading={isLoading}>Войти</ButtonSpinnerInsert>
+            <ButtonSpinnerInsert isLoading={isLoading}>Login</ButtonSpinnerInsert>
           </Button>
         </div>
       </FormWrapper>

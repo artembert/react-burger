@@ -13,17 +13,17 @@ export const BurgerIngredientsNavigation = (props: Props) => {
     <div className={styles.root}>
       <div className={styles.tagContainer}>
         <Tab value={BurgerParts.BUN} active={current === BurgerParts.BUN} onClick={onChange}>
-          Булки
+          Buns
         </Tab>
       </div>
       <div className={styles.tagContainer}>
         <Tab value={BurgerParts.SAUCE} active={current === BurgerParts.SAUCE} onClick={onChange}>
-          Соусы
+          Sauces
         </Tab>
       </div>
       <div className={styles.tagContainer}>
         <Tab value={BurgerParts.MAIN} active={current === BurgerParts.MAIN} onClick={onChange}>
-          Начинки
+          Fillings
         </Tab>
       </div>
     </div>

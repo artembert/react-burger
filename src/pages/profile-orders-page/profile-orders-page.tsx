@@ -27,7 +27,7 @@ export const ProfileOrdersPage = () => {
   return (
     <ProfilePageWrapper
       isContentFillWidth
-      pageDescription={"В этом разделе вы можете просмотреть свою историю заказов"}
+      pageDescription="Here you will find the history of orders"
       navigation={<ProfileNavigation />}
       content={
         <article className={classNames("pt-10", "pb-10", "pr-2", "custom-scroll", styles.root)}>

@@ -36,7 +36,7 @@ export const FeedPage = () => {
 
   return (
     <div className={styles.root}>
-      <h1 className={`${styles.title} text text_type_main-large`}>Лента заказов</h1>
+      <h1 className={`${styles.title} text text_type_main-large`}>Orders list</h1>
       <section className={classNames("pb-10", "pr-2", "custom-scroll", styles.orderList)}>
         {isConnected && orders !== null ? (
           <>
@@ -48,8 +48,8 @@ export const FeedPage = () => {
       </section>
       <section className={classNames("custom-scroll", styles.stats)}>
         <div className={styles.orderNumbersSection}>
-          <p className="text text_type_main-medium">Готовы:</p>
-          <p className="text text_type_main-medium">В работе:</p>
+          <p className="text text_type_main-medium">Completed:</p>
+          <p className="text text_type_main-medium">In-Progress:</p>
           <div className="text" style={{ columnCount: Math.ceil(ordersInDone.length / 10) }}>
             {ordersInDone.map((item, index) => (
               <p
@@ -76,11 +76,11 @@ export const FeedPage = () => {
           </div>
         </div>
         <div className="mt-15">
-          <p className="text text_type_main-medium">Выполнено за все время:</p>
+          <p className="text text_type_main-medium">Completed during all time:</p>
           <p className="text text_type_digits-large">{total ? numberFormat.format(total) : 0}</p>
         </div>
         <div className="mt-15">
-          <p className="text text_type_main-medium">Выполнено за сегодня:</p>
+          <p className="text text_type_main-medium">Completed today:</p>
           <p className="text text_type_digits-large">{totalToday ? numberFormat.format(totalToday) : 0}</p>
         </div>
       </section>

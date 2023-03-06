@@ -18,19 +18,19 @@ export const IngredientDetails = (props: Props) => {
       </p>
       <div className={`${styles.specs} mt-8 mb-15`}>
         <div className={styles.specItem}>
-          <p className="text text_type_main-default text_color_inactive">Калории,ккал</p>
+          <p className="text text_type_main-default text_color_inactive">Energy,kcal</p>
           <p className="mt-2 text text_type_digits-default text_color_inactive">{calories}</p>
         </div>
         <div className={styles.specItem}>
-          <p className="text text_type_main-default text_color_inactive">Белки, г</p>
+          <p className="text text_type_main-default text_color_inactive">Protein, g</p>
           <p className="mt-2 text text_type_digits-default text_color_inactive">{proteins}</p>
         </div>
         <div className={styles.specItem}>
-          <p className="text text_type_main-default text_color_inactive">Жиры, г</p>
+          <p className="text text_type_main-default text_color_inactive">Fat, g</p>
           <p className="mt-2 text text_type_digits-default text_color_inactive">{fat}</p>
         </div>
         <div className={styles.specItem}>
-          <p className="text text_type_main-default text_color_inactive">Углеводы, г</p>
+          <p className="text text_type_main-default text_color_inactive">Carbohydrates, g</p>
           <p className="mt-2 text text_type_digits-default text_color_inactive">{carbohydrates}</p>
         </div>
       </div>

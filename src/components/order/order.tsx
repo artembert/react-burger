@@ -43,7 +43,7 @@ export const Order = (props: Props) => {
           <OrderStatusLabel status={status} />
         </div>
       ) : null}
-      <h3 className={classNames("text", "text_type_main-medium", "mt-10")}>Состав:</h3>
+      <h3 className={classNames("text", "text_type_main-medium", "mt-10")}>Content:</h3>
       <div className={classNames("mt-6", "pr-6", "custom-scroll", styles.ingredientsList)}>
         {values.map(({ amount, ingredient }, index) => (
           <div className={classNames({ "mt-4": index })} key={ingredient._id}>

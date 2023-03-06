@@ -26,9 +26,9 @@ export const OrderDetails = (props: Props) => {
   if (loadingStatus === LoadingState.ERROR || !details) {
     return (
       <div className={`${styles.error} pb-20 pt-4 pr-20 pl-20 text text_type_main-default`}>
-        ⚠️ Не удалось оформить заказ.
+        ⚠️ Failed to make an order.
         <br />
-        Перезагрузите страницу и попробуйте снова
+        Please, refresh the page and try again
       </div>
     );
   }
@@ -40,11 +40,11 @@ export const OrderDetails = (props: Props) => {
       <p className={`${styles.orderNumber} text text_type_digits-large mt-8`} data-testid="order-id">
         {number}
       </p>
-      <p className="text text_type_main-medium mt-8">идентификатор заказа</p>
+      <p className="text text_type_main-medium mt-8">order id</p>
       <img className={`${styles.markDoneImg} mt-10`} src={markDoneImgSrc} alt="done" />
-      <p className="text text_type_main-default mt-10">Ваш заказ начали готовить</p>
+      <p className="text text_type_main-default mt-10">We started cooking your order</p>
       <p className={`${styles.description} text text_type_main-default mt-2`}>
-        Дождитесь готовности на орбитальной станции
+        Wait for readiness at the orbital station
       </p>
     </div>
   );

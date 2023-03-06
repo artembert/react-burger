@@ -23,7 +23,7 @@ export const Component = (props: Props) => {
     );
   }
 
-  const label = placement === "top" ? " (верх)" : " (низ)";
+  const label = placement === "top" ? " (top)" : " (bottom)";
   return (
     <ConstructorElement
       key={bun._id}
