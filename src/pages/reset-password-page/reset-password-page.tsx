@@ -51,14 +51,14 @@ export const ResetPasswordPage = () => {
   return (
     <FormPageWrapper>
       <FormWrapper
-        title="Восстановление пароля"
+        title="Set new password"
         footer={
           <>
             <div>
-              <span className="text text_type_main-default text_color_inactive">Вспомнили пароль?</span>
+              <span className="text text_type_main-default text_color_inactive">Remember your password?</span>
               {NBSP}
               <Link to="/login">
-                <TextLink>Войти</TextLink>
+                <TextLink>Login</TextLink>
               </Link>
             </div>
           </>
@@ -67,7 +67,7 @@ export const ResetPasswordPage = () => {
       >
         <Input
           type={inputPasswordType}
-          placeholder="Введите новый пароль"
+          placeholder="New password"
           onChange={handleFieldChange}
           icon="ShowIcon"
           value={formFields.password}
@@ -76,23 +76,23 @@ export const ResetPasswordPage = () => {
           error={false}
           ref={inputPasswordRef}
           onIconClick={onPasswordIconClick}
-          errorText="Ошибка"
+          errorText="Error"
           size="default"
         />
         <Input
           type="text"
-          placeholder="Введите код из письма"
+          placeholder="Code from email"
           onChange={handleFieldChange}
           value={formFields.confirmationCode}
           autoComplete="off"
           name="confirmationCode"
           error={false}
-          errorText="Ошибка"
+          errorText="Error"
           size="default"
         />
         <div className={styles.buttonWrapper}>
           <Button htmlType="submit" type="primary" size="medium">
-            Сохранить
+            Confirm password changes
           </Button>
         </div>
       </FormWrapper>
