@@ -89,7 +89,6 @@ export const ProfilePage = () => {
 
   return (
     <ProfilePageWrapper
-      pageDescription={"В этом разделе вы можете изменить свои персональные данные"}
       navigation={<ProfileNavigation />}
       content={
         <div className="mt-30">

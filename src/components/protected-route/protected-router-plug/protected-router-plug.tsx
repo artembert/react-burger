@@ -10,7 +10,6 @@ export const ProtectedRouterPlug = () => {
   return (
     <ProfilePageWrapper
       isContentFillWidth
-      pageDescription=""
       navigation={
         <article className={classNames(styles.root)}>
           {navigationPlaceholders.map((id) => (
