@@ -95,7 +95,7 @@ export const ProfilePage = () => {
           <FormWrapper onSubmit={updateUser} onReset={resetForm}>
             <Input
               type="text"
-              placeholder="Имя"
+              placeholder="Name"
               onChange={handleChange}
               icon={editable["name"] ? "CheckMarkIcon" : "EditIcon"}
               readOnly={!editable["name"]}
@@ -105,7 +105,7 @@ export const ProfilePage = () => {
               error={false}
               ref={refs.name}
               onIconClick={onEditIconClick("name")}
-              errorText="Ошибка"
+              errorText="Error"
               size="default"
             />
             <Input
@@ -120,12 +120,12 @@ export const ProfilePage = () => {
               error={false}
               ref={refs.email}
               onIconClick={onEditIconClick("email")}
-              errorText="Ошибка"
+              errorText="Error"
               size="default"
             />
             <Input
               type={inputPasswordType}
-              placeholder="Пароль"
+              placeholder="Password"
               onChange={handleChange}
               icon={editable["password"] ? "CheckMarkIcon" : "EditIcon"}
               readOnly={!editable["password"]}
@@ -135,16 +135,16 @@ export const ProfilePage = () => {
               error={false}
               ref={refs.password}
               onIconClick={onEditIconClick("password")}
-              errorText="Ошибка"
+              errorText="Error"
               size="default"
             />
             {isEditMode ? (
               <div className={styles.buttonWrapper}>
                 <Button htmlType="reset" type="secondary" size="medium" disabled={isLoading}>
-                  Отменить
+                  Cancel
                 </Button>
                 <Button htmlType="submit" type="primary" size="medium" disabled={isLoading}>
-                  Сохранить
+                  Save changes
                 </Button>
               </div>
             ) : null}
